@@ -12,18 +12,21 @@ public class DNNt {
     static Integer[][] activation1_pass = new Integer[2][2];
     static Integer[][] activation1_fail = new Integer[2][2];
     static Integer[][] activation1_count = new Integer[2][2];
-    static Integer[][] activation1_full = new Integer[2][2];
+   // static Integer[][] activation1_full = new Integer[2][2];
     
     static Integer[][] activation2_pass = new Integer[4][2];
     static Integer[][] activation2_fail = new Integer[4][2];
     static Integer[][] activation2_count = new Integer[4][2];
-    static Integer[][] activation2_full = new Integer[4][2];
+   // static Integer[][] activation2_full = new Integer[4][2];
     
     static Integer[][] activation3_pass = new Integer[128][2];
     static Integer[][] activation3_fail = new Integer[128][2];
     static Integer[][] activation3_count = new Integer[128][2];
-    static Integer[][] activation3_full = new Integer[128][2];
+   // static Integer[][] activation3_full = new Integer[128][2];
     
+    static Double[] layer6opPass = new Double[576];
+    static Double[] layer6opFail = new Double[576];
+    static Double[] layer6op = new Double[576];
 
     // weights0: shape is 3x3x1x2
     // biases0: shape is 2
@@ -63,15 +66,11 @@ public class DNNt {
             for (int i = 0; i < 128; i++)
             	for (int j = 0; j < 2; j++)
             			activation3_fail[i][j] = 0;
-            for (int i = 0; i < 2; i++)
-            	for (int j = 0; j < 2; j++)
-            			activation1_full[i][j] = 0;
-            for (int i = 0; i < 4; i++)
-            	for (int j = 0; j < 2; j++)
-            			activation2_full[i][j] = 0;
-            for (int i = 0; i < 128; i++)
-            	for (int j = 0; j < 2; j++)
-            			activation3_full[i][j] = 0;
+            for (int i = 0; i < 576; i++)
+            	layer6opPass[i] = 0.0;
+            for (int i = 0; i < 576; i++)
+            	layer6opFail[i] = 0.0;
+           
     	}
     	for (int i = 0; i < 2; i++)
         	for (int j = 0; j < 2; j++)
@@ -82,6 +81,9 @@ public class DNNt {
         for (int i = 0; i < 128; i++)
         	for (int j = 0; j < 2; j++)
         			activation3_count[i][j] = 0;
+        
+        for (int i = 0; i < 576; i++)
+        	layer6op[i] = 0.0;
     }
     
     public static void FL_populate(boolean pass) {
@@ -120,9 +122,15 @@ public class DNNt {
         		
         	}
         
+        for (int i = 0; i < 576; i++)
+        	if (pass)
+        	    layer6opPass[i] += layer6op[i];
+        	else
+        		layer6opFail[i] += layer6op[i];
+        
     }
     
-    public static void FL_Tarantula_metrics(boolean Only_Suspect_List) {
+    public static void FL_Tarantula_metrics(boolean Only_Suspect_List,int pass, int fail) {
     	
     	if (Only_Suspect_List == false) {
     		
@@ -359,6 +367,61 @@ public class DNNt {
         for (int i = 0; i < suspList.length; i++)
              System.out.println(suspList[i]);
         
+        
+        Double[] averagelayer6opFail = new Double[576];
+        Double[] averagelayer6opPass = new Double[576];
+        String[] suspListF = new String[576];
+        String[] suspListP = new String[576];
+        for (int i = 0; i < 576; i++)
+        {
+        	averagelayer6opFail[i] = (layer6opFail[i]/fail);
+        	averagelayer6opPass[i] = (layer6opPass[i]/pass);
+        	suspListF[i] = ("Neuron #:" + i + ",Fail Average:" + averagelayer6opFail[i]);
+        	suspListP[i] = ("Neuron #:" + i + ",Pass Average:" + averagelayer6opPass[i]);	
+        }
+        
+        System.out.println("SUSPECT LIST for Weights for FAil:");
+        for (int i = 0; i < averagelayer6opFail.length - 1; i++)
+        	for (int j = i + 1; j < averagelayer6opFail.length; j++)
+        	{
+        		if (averagelayer6opFail[i] < averagelayer6opFail[j])
+        		{
+        			double swp = averagelayer6opFail[j];
+        			averagelayer6opFail[j] = averagelayer6opFail[i];
+        			averagelayer6opFail[i] = swp;
+        			
+        			String swpstr = suspListF[j];
+        			suspListF[j] = suspListF[i];
+        			suspListF[i] = swpstr;
+        		}
+        	}
+        
+        for (int i = 0; i < suspListF.length; i++)
+            System.out.println(suspListF[i]);
+        
+        
+        System.out.println("SUSPECT LIST for Weights for Pass:");
+        for (int i = 0; i < averagelayer6opPass.length - 1; i++)
+        	for (int j = i + 1; j < averagelayer6opPass.length; j++)
+        	{
+        		if (averagelayer6opPass[i] < averagelayer6opPass[j])
+        		{
+        			double swp = averagelayer6opPass[j];
+        			averagelayer6opPass[j] = averagelayer6opPass[i];
+        			averagelayer6opPass[i] = swp;
+        			
+        			String swpstr = suspListP[j];
+        			suspListP[j] = suspListP[i];
+        			suspListP[i] = swpstr;
+        		}
+        	}
+        
+        for (int i = 0; i < suspListP.length; i++)
+            System.out.println(suspListP[i]);
+        
+        
+        
+        
     }
     
     int run(double[][][] input)
@@ -448,11 +511,19 @@ public class DNNt {
 
       //  layer 6: dense_1
       double[] layer6=new double[128];
+      int indx = 0;
       for(int i=0; i<128; i++)
       {
         layer6[i]=internal.biases6[i];
         for(int I=0; I<576; I++)
+        {
           layer6[i]+=internal.weights6[I][i]*layer5[I];
+          if (i == 18)
+          {
+        	  layer6op[indx] = (internal.weights6[I][i]*layer5[I]);
+        	  indx++;
+          }
+        }
       }
 
       //  layer 7: activation_3
@@ -491,142 +562,7 @@ public class DNNt {
       return ret;
     }
 
-    // the DNN input is of shap 28x28x1
-    int runOld(double[][][] input) {
-        
-     //   Debug.printPC("2 >>");
-
-        init_FL(false);
-        double[][][] layer0 = new double[26][26][2];
-        for (int i = 0; i < 26; i++)
-            for (int j = 0; j < 26; j++)
-                for (int k = 0; k < 2; k++) {
-                    layer0[i][j][k] = internal.biases0[k];
-                    
-                    for (int I = 0; I < 3; I++)
-                        for (int J = 0; J < 3; J++)
-                            for (int K = 0; K < 1; K++)
-                                layer0[i][j][k] += internal.weights0[I][J][K][k] * input[i + I][j + J][K];
-                                
-                }
-
-        
-        // layer 0: conv2d_1
-        
-        // layer 1: activation_1
-       
-        
-        double[][][] layer1 = new double[26][26][2];
-        for (int i = 0; i < 26; i++)
-            for (int j = 0; j < 26; j++)
-                for (int k = 0; k < 2; k++)
-                {	
-                    if (layer0[i][j][k] > 0)
-                    {    
-                         layer1[i][j][k] = layer0[i][j][k];
-                         activation1_count[k][0]++;
-                    }
-                    else
-                    {
-                        layer1[i][j][k] = 0;
-                        activation1_count[k][1]++;
-                    }
-                }
-        
-        // layer 2: conv2d_2
-        double[][][] layer2 = new double[24][24][4];
-        for (int i = 0; i < 24; i++)
-            for (int j = 0; j < 24; j++)
-                for (int k = 0; k < 4; k++) {
-                    layer2[i][j][k] = internal.biases2[k];
-                    for (int I = 0; I < 3; I++)
-                        for (int J = 0; J < 3; J++)
-                            for (int K = 0; K < 2; K++)
-                                layer2[i][j][k] += internal.weights2[I][J][K][k] * layer1[i + I][j + J][K];
-                }
-        
-       
-        // layer 0: conv2d_1
-       
-        // layer 3: activation_2
-        
-        double[][][] layer3 = new double[24][24][4];
-        for (int i = 0; i < 24; i++)
-            for (int j = 0; j < 24; j++)
-                for (int k = 0; k < 4; k++)
-                    if (layer2[i][j][k] > 0)
-                    {
-                        layer3[i][j][k] = layer2[i][j][k];
-                        activation2_count[k][0]++;
-                    }
-                    else
-                    {
-                        layer3[i][j][k] = 0;
-                        activation2_count[k][1]++;
-                    }
-
-        // layer 4: max_pooling2d_1
-        double[][][] layer4 = new double[12][12][4];
-        for (int i = 0; i < 12; i++)
-            for (int j = 0; j < 12; j++)
-                for (int k = 0; k < 4; k++) {
-                    layer4[i][j][k] = 0;
-                    for (int I = i * 2; I < (i + 1) * 2; I++)
-                        for (int J = i * 2; J < (i + 1) * 2; J++)
-                            if (layer3[I][J][k] > layer4[i][j][k])
-                                layer4[i][j][k] = layer3[I][J][k];
-                }
-
-        // layer 5: flatten_1
-        double[] layer5 = new double[576];
-        for (int i = 0; i < 576; i++) {
-            int d0 = i / 48;
-            int d1 = (i % 48) / 4;
-            int d2 = i - d0 * 48 - d1 * 4;
-            layer5[i] = layer4[d0][d1][d2];
-        }
-
-        // layer 6: dense_1
-        double[] layer6 = new double[128];
-        for (int i = 0; i < 128; i++) {
-            layer6[i] = internal.biases6[i];
-            for (int I = 0; I < 576; I++)
-                layer6[i] += internal.weights6[I][i] * layer5[I];
-        }
-
-        // layer 7: activation_3
-        double[] layer7 = new double[128];
-        for (int i = 0; i < 128; i++)
-            if (layer6[i] > 0)
-            {
-                layer7[i] = layer6[i];
-                activation3_count[i][0]++;
-            }
-            else
-            {
-                layer7[i] = 0;
-                activation3_count[i][1]++;
-            }
-
-        // layer 8: dense_2
-        double[] layer8 = new double[10];
-        for (int i = 0; i < 10; i++) {
-            layer8[i] = internal.biases8[i];
-            for (int I = 0; I < 128; I++)
-                layer8[i] += internal.weights8[I][i] * layer7[I];
-        }
-
-        // layer 9: activation_4
-        int ret = 0;
-        double res = -100000;
-        for (int i = 0; i < 10; i++) {
-            if (layer8[i] > res) {
-                res = layer8[i];
-                ret = i;
-            }
-        }
-        return ret;
-    }
+    
     
     public static void main(String[] args){
 		try {
@@ -675,27 +611,29 @@ public class DNNt {
 	    	    System.out.println("MODEL OUTPUT:" + label);
 	    	    System.out.println("ACTUAL OUTPUT:" + labels[count]);
 	    	    
-	    	    
-	    	    if (label == labels[count])
-	    	    {
+	    	    //if (labels[count] == 0) {
+	    	        if (label == labels[count])
+	    	        {
 	    	    	pass++;
 	    	    	DNNt.FL_populate(true);
-	    	    }
-	    	    else
-	    	    {
+	    	        }
+	    	        else
+	    	        {
 	    	    	fail++;
 	    	    	DNNt.FL_populate(false);
-	    	    }
+	    	        }
+	    	   // }
 	    	    
 	    	   
 	    	    
 	    	    count++;
 	    	    
 	    	}
-	    	double accuracy = (((double)pass)/60000.0)*100.0;
+	    	double accuracy = (((double)pass)/(pass + fail))*100.0;
 	    	System.out.println("PASS:"+ pass + "FAIL:"+fail + "accuracy:"+ accuracy);
+	    	
 	    	boolean Only_Suspect_List = true;
-	    	DNNt.FL_Tarantula_metrics(Only_Suspect_List);
+	    	DNNt.FL_Tarantula_metrics(Only_Suspect_List,pass,fail);
 	    
 	    	
 	    	br.close();
