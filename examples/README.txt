@@ -20,3 +20,17 @@ Examples starting with 'mnist1' has the share the same DNN architecture as follo
         Trainable params: 42,358
         Non-trainable params: 0
 
+Examples starting with 'mnist2-fc' has the share the same DNN architecture as follows
+
+      Layer (type)                 Output Shape              Param #
+      =================================================================
+      dense_1 (Dense)              (None, 50)                39250
+      _________________________________________________________________
+      dense_2 (Dense)              (None, 10)                510
+      _________________________________________________________________
+      dense_3 (Dense)              (None, 10)                110
+      =================================================================
+      Total params: 39,870
+      Trainable params: 39,870
+      Non-trainable params: 0
+
