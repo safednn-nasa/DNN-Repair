@@ -1,0 +1,39 @@
+1. Considered the 30 Failing tests and 5893 Passing tests for Label 0.
+
+2. LOCALIZATION:
+
+i)Neuron Activation Level:
+Used Taratula Susp and Conf metrics to determine the layer and neuron activation with highest susp and confidence (highest HARMEAN(Susp,Conf)).
+Layer 7 Neuron 80 activation 0 has the highest score. (https://github.com/safednn-nasa/DNN-Repair/blob/master/Localization/SuspConf.xlsx)
+
+ii)Edge level:
+i) For each edge (out of the 576 incoming edges to neuron 80), calculated the average of (value * weight) for failing tests and passing tests separately. Calculated ranks of the edges which 
+have a high average value for failing tests and low average value for passing tests. (https://github.com/safednn-nasa/DNN-Repair/blob/master/Localization/Ranks%20of%20Edges_80eq0.csv)
+
+3. REPAIR:
+i) Selected the top 10% of the 576 edges (50 edges) 
+ii) Layer 7 Neuron 80 = 0 is covered by 26 Failing tests and all 5893 Passing tests. Selected a subset 9  failing tests and 10 passing tests. (https://github.com/safednn-nasa/DNN-Repair/blob/master/Localization/Pass_Fail_80eq0.xlsx)
+
+SPF:
+i) Created symbolic for the 50 weights incoming to layer 7 neuron 80  (weight =  weight_orig + sym_delta)
+
+ITERATION 1: 
+ii) Printed path constraints just after layer 7 neuron 80.
+iii) Invoked SPF for every Failing and PAssing test from the selected subset. Each run created a constraint (the activation of Neuron 80 in terms of the symbolic weight deltas).
+Negated the constraints for all the failing tests. 
+iv) Accumulated the failing and passing constraints into a file for z3. Constrained the deltas to be within -1.0 and 1.0.
+(https://github.com/safednn-nasa/DNN-Repair/blob/master/SPF_Z3/z3/repairNN_50weights.smt2)
+Solution: (https://github.com/safednn-nasa/DNN-Repair/blob/master/SPF_Z3/z3/repairNN_50weights_op.txt)
+v) Updated the weights and ran the tests (19) again. The activation of Neuron 80 changed to positive for all failing tests and remained negative for the passing tests. 
+For 5 out of the 9 failing tests, the final outcome label was changed to 0 (ideal).
+
+ITERATION 2:
+vi) Printed path constraints after the last layer.
+vii) Negated the constraint comparing label 0 value with the misclassified label value for the failing tests.
+ix) Invoked z3 with the constraints for the 19 tests.
+(https://github.com/safednn-nasa/DNN-Repair/blob/master/SPF_Z3/z3/repairNN_50weights_full.smt2)
+Solution: (https://github.com/safednn-nasa/DNN-Repair/blob/master/SPF_Z3/z3/repairNN_50weights_fullop.txt)
+x) Updated the weights and ran the tests (19) again. ALL 9 failing tests corrected.
+
+https://github.com/safednn-nasa/DNN-Repair/tree/master/SPF_Z3/results/Layer7Node80%3D0
+
