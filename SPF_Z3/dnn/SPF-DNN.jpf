@@ -2,17 +2,9 @@ target=dnn.SymbolicDriver
 args=/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn/data/input.txt
 classpath=${jpf-symbc}/build/examples/
 sourcepath=${jpf-symbc}/src/examples/
-#symbolic.method = Assume.test(sym#sym),Assume.test1(sym#sym)
-#symbolic.min_int=-100
-#symbolic.max_int=100
-#symbolic.dp=no_solver
 symbolic.dp=no_solver
-#vm.storage.class=nil
-#listener = .symbc.SymbolicListener
-#listener = .listener.ChoiceTracker
-#listener = gov.nasa.jpf.symbc.sequences.SymbolicSequenceListener
 symbolic.collect_constraints=true
 symbolic.optimizechoices=false
-#symbolic.debug=true
+
 
 
