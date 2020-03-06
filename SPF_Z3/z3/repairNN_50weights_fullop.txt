@@ -1,0 +1,93 @@
+sat
+(model 
+  (define-fun sym_267 () Real
+    (- 1.0))
+ 
+  (define-fun sym_541 () Real
+    (- 1.0))
+  (define-fun sym_318 () Real
+    1.0)
+  (define-fun sym_513 () Real
+    1.0)
+  (define-fun sym_394 () Real
+    (- 1.0))
+  (define-fun sym_81 () Real
+    (- 1.0))
+  (define-fun sym_374 () Real
+    (/ 73970859547942085226095278699774479323389849914738673775401024486215458419015783843.0
+   465825855152593365030512396509610798712823994602800000000000000000000000000000000000.0))
+  (define-fun sym_308 () Real
+    (/ 39401824704609907840375602387041225268108904457535438950293052798201181324988707012684824107410302891196475022040696973694771876827669.0
+   39481489614762445784601673027457947166162380250392657907465663957577333013612179681381119650712760000000000000000000000000000000000000.0))
+  (define-fun sym_304 () Real
+    1.0)
+  (define-fun sym_487 () Real
+    1.0)
+  (define-fun sym_234 () Real
+    (/ 1104822528783739494812435411076804073724028398539678548874403356303799545962615208261.0
+   1164564637881483412576280991274026996782059986507000000000000000000000000000000000000.0))
+  (define-fun sym_32 () Real
+    (- 1.0))
+  (define-fun sym_474 () Real
+    (- 1.0))
+  
+  (define-fun sym_406 () Real
+    1.0)
+  (define-fun sym_452 () Real
+    (- 1.0))
+  
+  (define-fun sym_310 () Real
+    1.0)
+  (define-fun sym_331 () Real
+    1.0)
+  (define-fun sym_495 () Real
+    1.0)
+  (define-fun sym_138 () Real
+    (- 1.0))
+  (define-fun sym_314 () Real
+    1.0)
+  (define-fun sym_355 () Real
+    1.0)
+  (define-fun sym_437 () Real
+    1.0)
+  (define-fun sym_264 () Real
+    1.0)
+  (define-fun sym_451 () Real
+    (- 1.0))
+ 
+  (define-fun sym_359 () Real
+    1.0)
+  (define-fun sym_311 () Real
+    (- 1.0))
+  
+  (define-fun sym_356 () Real
+    1.0)
+  (define-fun sym_35 () Real
+    1.0)
+  (define-fun sym_470 () Real
+    1.0)
+  (define-fun sym_222 () Real
+    1.0)
+  (define-fun sym_31 () Real
+    1.0)
+  
+  (define-fun sym_274 () Real
+    (- 1.0))
+  
+  (define-fun sym_175 () Real
+    1.0)
+  (define-fun sym_307 () Real
+    1.0)
+  (define-fun sym_439 () Real
+    1.0)
+  
+  (define-fun sym_447 () Real
+    (- 1.0))
+  
+  (define-fun sym_362 () Real
+    (/ 4159156588654614565855841011790487481866740793671909.0
+   4160426720247840399692064040432740000000000000000000.0))
+  (define-fun sym_282 () Real
+    1.0)
+ 
+)

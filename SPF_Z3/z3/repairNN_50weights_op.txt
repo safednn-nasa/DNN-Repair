@@ -1,0 +1,100 @@
+sat
+(model 
+  (define-fun sym_267 () Real
+    (- 1.0))
+  (define-fun sym_522 () Real
+    0.0)
+  (define-fun sym_541 () Real
+    (- 1.0))
+  (define-fun sym_318 () Real
+    1.0)
+  (define-fun sym_513 () Real
+    1.0)
+  (define-fun sym_394 () Real
+    (- 1.0))
+  (define-fun sym_81 () Real
+    (- 1.0))
+  (define-fun sym_374 () Real
+    0.0)
+  (define-fun sym_308 () Real
+    1.0)
+  (define-fun sym_304 () Real
+    (- 1.0))
+  (define-fun sym_487 () Real
+    (- 1.0))
+  (define-fun sym_234 () Real
+    1.0)
+  (define-fun sym_32 () Real
+    0.0)
+  (define-fun sym_474 () Real
+    1.0)
+  (define-fun sym_106 () Real
+    0.0)
+  (define-fun sym_0 () Real
+    0.0)
+  (define-fun sym_406 () Real
+    (- 1.0))
+  (define-fun sym_452 () Real
+    (- (/ 26724502738138451607907309952227173003926584409969.0
+      86369594680745373506434401847000000000000000000000.0)))
+  (define-fun sym_335 () Real
+    (- 1.0))
+  (define-fun sym_310 () Real
+    (- 1.0))
+  (define-fun sym_331 () Real
+    1.0)
+	
+  (define-fun sym_495 () Real
+    1.0)
+  (define-fun sym_138 () Real
+    1.0)
+	
+  (define-fun sym_314 () Real
+    (- 1.0))
+  (define-fun sym_355 () Real
+    (- 1.0))
+	
+  (define-fun sym_437 () Real
+    (- 1.0))
+  (define-fun sym_264 () Real
+    0.0)
+	
+  (define-fun sym_451 () Real
+    (- 1.0))
+	
+  (define-fun sym_174 () Real
+    0.0)
+	
+  (define-fun sym_359 () Real
+    1.0)
+
+  (define-fun sym_35 () Real
+    1.0)
+  (define-fun sym_470 () Real
+    1.0)
+  (define-fun sym_222 () Real
+    1.0)
+  (define-fun sym_31 () Real
+    1.0)
+ 
+  (define-fun sym_274 () Real
+    1.0)
+  
+  (define-fun sym_307 () Real
+    1.0)
+  (define-fun sym_439 () Real
+    (- 1.0))
+ 
+  (define-fun sym_447 () Real
+    (- 1.0))
+  
+  (define-fun sym_362 () Real
+    (- 1.0))
+  (define-fun sym_282 () Real
+    (/ 166804951681346260607096227923980281.0
+   207103687152243420000000000000000000.0))
+  (define-fun sym_270 () Real
+    (/ 1207709033659990446357622064284153759.0
+   8184737215907995000000000000000000000.0))
+  
+)
