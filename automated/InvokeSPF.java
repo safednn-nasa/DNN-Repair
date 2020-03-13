@@ -10,7 +10,7 @@ public class InvokeSPF {
 		try {
 			String path="C:\\Users\\usman\\eclipse-workspace\\jpf\\jpf-symbc\\src\\examples\\dnn\\data\\";
 			String []inputfiles= {"Fail1.csv","Fail2.csv","Fail3.csv","Fail4.csv","Fail5.csv","Fail7.csv","Fail8.csv","Fail9.csv","Fail10.csv"};
-			for (int i=0;i<9;i++)
+			for (int i=0;i<inputfiles.length;i++)
 			{
 			Config conf = JPF.createConfig(new String[0]); // just an empty configuration
 			conf.setProperty("classpath", "${jpf-symbc}/build/examples/");
