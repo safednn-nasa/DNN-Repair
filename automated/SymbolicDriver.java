@@ -22,7 +22,7 @@ public class SymbolicDriver {
     public static void main(String[] args) throws  Exception {
    // 	System.out.print(args[0]);
         InternalData internalData = new InternalData();
-        DNN.readDataFromFiles("C:\\Users\\Muhammad Usman\\eclipse-workspace\\jpf\\jpf-symbc\\src\\examples\\dnn\\data");
+        DNN.readDataFromFiles("C:\\Users\\usman\\eclipse-workspace\\jpf\\jpf-symbc\\src\\examples\\dnn\\data");
         internalData.biases0 = DNN.getBiases0();
         internalData.biases2 = DNN.getBiases2();
         internalData.biases6 = DNN.getBiases6();
