@@ -73,41 +73,43 @@ public class JPF_gov_nasa_jpf_symbc_Debug extends NativePeer {
 		}
 		return pc;
 	}
-
 	@MJI
-	public static void printPC(MJIEnv env, int objRef, int msgRef,int a) {
+	public static int printPC(MJIEnv env, int objRef, int msgRef,int a) {
 		PathCondition pc = getPC(env);
 		if (pc != null) {
 			// pc.solve();
 			if(a==0)
 			{
-			System.out.println(env.getStringObject(msgRef) + pc);
+				return env.newString(pc.toString());
 			}
 			if(a==1)
 			{
-			System.out.println(env.getStringObject(msgRef)+pc.negatedallconstraint());
+				return env.newString(pc.negatedallconstraint().toString());
 			}	
 			if(a==2) {	
-			System.out.println(env.getStringObject(msgRef) + pc.negatedlastconstraint());
+				return env.newString(pc.negatedlastconstraint().toString());
 			}
 			if(a==3)
 			{
-			System.out.println(env.getStringObject(msgRef) + pc.prefix_notationPC4Z3());
+				return env.newString(pc.prefix_notationPC4Z3());
 			}
 			if(a==4)
 			{
-			System.out.println(env.getStringObject(msgRef)+pc.negatedallconstraint().prefix_notationPC4Z3());
+				return env.newString(pc.negatedallconstraint().prefix_notationPC4Z3());
 			}	
 			if(a==5) {	
-			System.out.println(env.getStringObject(msgRef) + pc.negatedlastconstraint().prefix_notationPC4Z3());
+				return env.newString(pc.negatedlastconstraint().prefix_notationPC4Z3());
 			}
 		}
 		else
 		{	
-			System.out.println(env.getStringObject(msgRef) + " PC is null");
+			return env.newString(" PC is null");
 		}
+		return env.newString("");
 	}
-		@MJI
+
+	
+	@MJI
 	public static int getSolvedPC(MJIEnv env, int objRef) {
 		PathCondition pc = getPC(env);
 		if (pc != null) {

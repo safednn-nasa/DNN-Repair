@@ -41,7 +41,7 @@ import gov.nasa.jpf.vm.Verify;
 
 public class Debug {
     
-    native public static void printPC(String msg,int a);
+    native public static String printPC(String msg,int a);
     
     native public static String getSolvedPC();
     native public static String getPC_prefix_notation();
