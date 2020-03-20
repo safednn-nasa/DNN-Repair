@@ -39,8 +39,6 @@ package gov.nasa.jpf.symbc.numeric;
 
 import za.ac.sun.cs.green.Instance;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -323,32 +321,7 @@ public class PathCondition implements Comparable<PathCondition> {
 
         return last;
     }
-    public Constraint negatedallconstraint() {
-    	 PathCondition temp1=new PathCondition();
-    	 temp1.header=header.not();
-    	 Constraint t = header.and;
-         Constraint last = null;
-         while (t != null) {
-             last = t;
-             temp1.appendAllConjuncts(last.not());     
-             t = t.and;
-         }
-         return temp1.header;
-    }
-    public Constraint negatedlastconstraint() {
-    	 PathCondition temp1=new PathCondition();
-    	 temp1.header=header.not().not();
-    	 Constraint t = header.and;
-         Constraint last = null;
-         while (t.and != null) {
-             last = t;
-             temp1.appendAllConjuncts(last.not().not());     
-             t = t.and;
-         }
-         temp1.appendAllConjuncts(t.not());
-         return temp1.header;
-   }
- 
+
     public boolean solve() {
         if (isReplay) {
             return true;
@@ -606,9 +579,6 @@ public class PathCondition implements Comparable<PathCondition> {
         header = header.and;
         count--;
         resetHashCode();
-    }
-    public Constraint getHeader() {
-        return header;
     }
 
     /*

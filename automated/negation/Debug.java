@@ -41,8 +41,7 @@ import gov.nasa.jpf.vm.Verify;
 
 public class Debug {
     
-    native public static String printPC(String msg,int a);
-    
+    native public static void printPC(String msg);
     native public static String getSolvedPC();
     native public static String getPC_prefix_notation();
     native public static String PC4Z3();
@@ -53,6 +52,7 @@ public class Debug {
     native public static String getSymbolicByteValue(byte v);
     native public static String getSymbolicCharValue(char v);
     native public static String getSymbolicRealValue(double v);
+    native public static String getSymbolicRealValue4Z3(double v);
     native public static String getSymbolicBooleanValue(boolean v);
     native public static String getSymbolicStringValue(String v);
     
