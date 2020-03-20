@@ -81,7 +81,45 @@ public class JPF_gov_nasa_jpf_symbc_Debug extends NativePeer {
         } else
             System.out.println(env.getStringObject(msgRef) + " PC is null");
     }
-
+    /////////////////////////////////////////////////////////////////////////////////
+    //Added by Usman
+    @MJI
+    public static int printnegated(MJIEnv env, int objRef,int a) { 
+    PathCondition pc = getPC(env);
+	if (pc != null) {
+		if(a==0)
+		{
+			return env.newString(pc.negatedallconstraint().toString());
+		}
+		if(a==1)
+		{
+			return env.newString(pc.negatedfirstconstraint().toString());
+		}	
+		if(a==2)
+		{
+			return env.newString(pc.negatedlastconstraint().toString());
+		}
+		if(a==3)
+		{
+			return env.newString(pc.negatedallconstraint().prefix_notationPC4Z3());
+		}
+		if(a==4)
+		{
+			return env.newString(pc.negatedfirstconstraint().prefix_notationPC4Z3());
+		}	
+		if(a==5)
+		{
+			return env.newString(pc.negatedlastconstraint().prefix_notationPC4Z3());
+		}
+		
+		}
+	else
+	{	
+		return env.newString(" PC is null");
+	}
+	return env.newString("");
+    }
+    ////////////////////////////////////////////////////////////////////////////////////
     @MJI
     public static int getSolvedPC(MJIEnv env, int objRef) {
         PathCondition pc = getPC(env);

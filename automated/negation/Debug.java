@@ -45,7 +45,10 @@ public class Debug {
     native public static String getSolvedPC();
     native public static String getPC_prefix_notation();
     native public static String PC4Z3();
-
+    //////////////////////////////////////////////////
+    //Added by Usman
+    native public static String printnegated(int a);
+    //////////////////////////////////////////////////
     native public static String getSymbolicIntegerValue(int v);
     native public static String getSymbolicLongValue(long v);
     native public static String getSymbolicShortValue(short v);
