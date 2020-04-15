@@ -16,11 +16,11 @@ public class Run {
 			DNNt model = new DNNt(data);
 			
 			
-			String labelFile = "./data/mnist_train_label_csv.txt";
+			String labelFile = "./data/cifar_train_label_csv.txt";
 			File file = new File(labelFile); 
 	    	BufferedReader br = new BufferedReader(new FileReader(file)); 
 	    	String st; 
-	    	Integer[] labels = new Integer[60000];
+	    	Integer[] labels = new Integer[50000];
 	    	int index = 0;
 	    	while ((st = br.readLine()) != null) {
 	    		   labels[index] = Integer.valueOf(st);
@@ -29,7 +29,7 @@ public class Run {
 	    	
 	    	br.close();
 			//String inputFile = "./data/mnist_train_csv.txt";
-			String inputFile = "./data/mnist_train_poisoned_csv.txt";
+			String inputFile = "./data/cifar_train_csv.txt";
 			file = new File(inputFile); 
 	    	br = new BufferedReader(new FileReader(file)); 
 	    	int count = 0;
@@ -38,12 +38,12 @@ public class Run {
 	    	while ((st = br.readLine()) != null) {
 	    	    //System.out.println("INPUT:" + st); 
 	    	    String[] values = st.split(",");
-	    	    double[][][] input = new double[28][28][1];
+	    	    double[][][] input = new double[32][32][3];
 	    	    index = 0;
 	    	    while (index < values.length) {
-	    	    	for (int i = 0; i < 28 ; i++)
-	    	    		for (int j = 0; j < 28; j++)
-	    	    			for (int k = 0; k < 1; k++)
+	    	    	for (int i = 0; i < 32 ; i++)
+	    	    		for (int j = 0; j < 32; j++)
+	    	    			for (int k = 0; k < 3; k++)
 	    	    			{
 	    	    				 Double val = Double.valueOf(values[index]);
 	    	    				 index++;
@@ -72,7 +72,7 @@ public class Run {
            
 	    	    
 	    	}
-	    	double accuracy = (((double)pass)/60000.0)*100.0;
+	    	double accuracy = (((double)pass)/50000.0)*100.0;
 	    	System.out.println("PASS:"+ pass + "FAIL:"+fail + "accuracy:"+ accuracy);
 	    	
 	    	br.close();

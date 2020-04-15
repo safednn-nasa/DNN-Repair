@@ -1,3 +1,7 @@
+
+The training/testing data for MNIST and CIFAR10 can be found via https://www.dropbox.com/sh/dhrnqff2dt2ssax/AAD3TuQRXfcKn2OKLhCQlFmBa?dl=0
+
+
 Examples starting with 'mnist0' has the share the same DNN architecture as follows
         Layer (type)                 Output Shape              Param #   
         =================================================================
