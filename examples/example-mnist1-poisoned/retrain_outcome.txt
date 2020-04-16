@@ -1,0 +1,22 @@
+
+## 600 poisoned data out of 60,000 training inputs
+## corrected data means are posisoned data but with correct labels
+
+                               test accuracy
+Original                         10.59%
+
++1*600 corrected data            47.87%     
++2*600 corrected data            71.63%
++3*600 corrected data            85.40%
++4*600 corrected data            82.89%, 81.21% (run twice)
++5*600 corrected data            86.76%
++6*600 corrected data            86.72%, 88.67% (run twice)
++7*600 corrected data            92.24%
++8*600 corrected data            93.95%
++9*600 corrected data            93.64%, 93.53% (run twice)
++10*600 corrected data           93.83%, 93.26% (run twice)
++20*600 corrected data           95.08%
++30*600 corrected data           96.42%
++40*600 corrected data           97.33%
++50*600 corrected data           97.60%
++99*600 corrected data           96.99%, 97.85% (except for the first 600 inputs, all the rest are corrected)
