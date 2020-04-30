@@ -12,24 +12,24 @@ public class Run_fc {
 			DNNt model = new DNNt(data);
 			
 			
-			//String labelFile = "./data/mnist_test_label_csv.txt";
-			String labelFile = "./data/data-mnist/mnist_train_label_csv.txt";
-			File file = new File(labelFile); 
-	    	BufferedReader br = new BufferedReader(new FileReader(file)); 
-	    	String st; 
-	    	Integer[] labels = new Integer[60000];
-	    	int index = 0;
-	    	while ((st = br.readLine()) != null) {
-	    		   labels[index] = Integer.valueOf(st);
-	    		   index++;
-	    	}
-	    	
-	    	br.close();
-			//String inputFile = "./data/mnist_train_csv.txt";
-			//String inputFile = "./data/mnist_test_csv.txt";
-			String inputFile = "./data/data-mnist/mnist_train_csv.txt";
-			file = new File(inputFile); 
-	    	br = new BufferedReader(new FileReader(file)); 
+			////String labelFile = "./data/mnist_test_label_csv.txt";
+			//String labelFile = "./data/data-mnist/mnist_train_label_csv.txt";
+			//File file = new File(labelFile); 
+	    //	BufferedReader br = new BufferedReader(new FileReader(file)); 
+	    String st; 
+	    //	Integer[] labels = new Integer[60000];
+	    int index = 0;
+	    //	while ((st = br.readLine()) != null) {
+	    //		   labels[index] = Integer.valueOf(st);
+	    //		   index++;
+	    //	}
+	    //	
+	    //	br.close();
+			////String inputFile = "./data/mnist_train_csv.txt";
+			String inputFile = "./data/mnist_test_csv.txt";
+			//String inputFile = "./data/mnist_nans_csv.txt";
+			File file = new File(inputFile); 
+	    BufferedReader br = new BufferedReader(new FileReader(file)); 
 	    	int count = 0;
 	    	int pass = 0;
 	    	int fail = 0;
@@ -49,28 +49,23 @@ public class Run_fc {
 	    	    			}
 	    	    }
 	    	   
-	    	    int label = model.run(input);
-	    	    
-	    	    //System.out.println("MODEL OUTPUT:" + label);
-	    	    //System.out.println("ACTUAL OUTPUT:" + labels[count]);
-	    	    
-	    	    
-	    	    if (label == labels[count])
+	    	    boolean notNaN = model.run(input);
+	    	    if (notNaN)
 	    	    	pass++;
 	    	    else
 	    	    	fail++;
 	    	    
 	    	    count++;
-
+	    	    
             if (count%100==0) {
-	    	      double accuracy = (((double)pass)/(pass+fail))*100.0;
-              System.out.println("PASS:"+ pass + "/FAIL:"+fail + "/accuracy:"+ accuracy);
+	    	      double accuracy = (((double)fail)/(pass+fail))*100.0;
+              System.out.println("NaNs: " + fail + " " + accuracy);
             }
            
 	    	    
 	    	}
-	    	double accuracy = (((double)pass)/count)*100.0;
-	    	System.out.println("PASS:"+ pass + "FAIL:"+fail + "accuracy:"+ accuracy);
+	    	double accuracy = (((double)fail)/count)*100.0;
+        System.out.println("NaNs: " + fail + " " + accuracy);
 	    	
 	    	br.close();
 		} catch (NumberFormatException | IOException e) {

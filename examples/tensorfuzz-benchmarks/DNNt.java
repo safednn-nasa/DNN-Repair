@@ -14,7 +14,7 @@ public class DNNt
     this.internal = internal;
   }
 
-  int run(double[] input)
+  boolean run(double[] input)
   {
 
     //  layer 0: dense_1
@@ -46,6 +46,7 @@ public class DNNt
         layer2[i]+=internal.weights2[I][i]*layer1[I];
     }
     int ret=0;
+    double min_logit = 100000;
     double res=-100000;
     for(int i=0; i<10;i++)
     {
@@ -54,9 +55,14 @@ public class DNNt
         res=layer2[i];
         ret=i;
       }
+      if(layer2[i]<min_logit)
+      {
+        min_logit=layer2[i];
+      }
     }
-    //System.out.println("Res:" + res);
-    return ret;
+    if (res >= 88 || (res-min_logit)>=88)
+      return false; //System.out.println("Res:" + res + ", " + (res-min_logit));
+    return true; //ret;
   }
 
 
