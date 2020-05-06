@@ -21,6 +21,8 @@ public class DNNt
     this.internal = internal;
   }
 
+
+  
   // the DNN input is of shap 28x28x1
   int run(double[][][] input)
   {
@@ -115,6 +117,7 @@ public class DNNt
     	weight_delta[i] = 0.0;
     
     //solutions from Z3:
+   /*
     weight_delta[71] = -0.22071659366;
     weight_delta[50] = -0.34458552422;
     weight_delta[30] = -0.34458552422;
@@ -128,6 +131,25 @@ public class DNNt
     weight_delta[74] = 0.0;
     weight_delta[105] =	-0.34458552422;
     weight_delta[34] =0.0;
+    */
+    
+  //solutions from Z3 after adding more correctly classified inputs
+    
+    weight_delta[71] = -0.44720940691;
+    weight_delta[50] = -0.34090553473;
+    weight_delta[30] = 0.0;
+    weight_delta[20] = -0.44720940691;
+    weight_delta[104] = -0.44720940691;
+    weight_delta[31] = -0.44720940691;
+    weight_delta[23] = 0.0;
+    weight_delta[77] = 0.0;
+    weight_delta[1] = 0.0;
+    weight_delta[4] = 0.0;
+    weight_delta[74] = 0.0;
+    weight_delta[105] =	0.0;
+    weight_delta[34] = -0.44720940691;
+    
+    
     
     double[] layer8=new double[10];
     local_attrs = new double[128];
@@ -138,20 +160,22 @@ public class DNNt
         
         //some simple analysis
         if(i==7) {
-        	local_attrs[I]=Math.abs(internal.weights8[I][i]*layer7[I]); //used for attribution
+        	//local_attrs[I]=Math.abs(internal.weights8[I][i]*layer7[I]); //used for attribution
         	
-        	if(I==1 || I==4 || I==20 || I==23 || I==30 || I==31 || I==34 || 
-        			I==50 || I==71 || I==74 || I==77 || I==104 || I==105) {
+        	//if(I==1 || I==4 || I==20 || I==23 || I==30 || I==31 || I==34 || 
+        		//	I==50 || I==71 || I==74 || I==77 || I==104 || I==105) {
         		//System.out.println("(declare-fun sym"+I+" () Real)");
         		//System.out.println("(assert (> sym"+I+" -0.5))");
         		//System.out.println("(assert (< sym"+I+" 0.5))");
         		//weight_delta[I]=Debug.addSymbolicDouble(weight_delta[I],"sym"+I);
-        		internal.weights8[I][i]=internal.weights8[I][i]+weight_delta[I];
-        	}
+        		//internal.weights8[I][i]=internal.weights8[I][i]+weight_delta[I];
+        	//}
         	
+        		layer8[i]+=(internal.weights8[I][i]+weight_delta[I])*layer7[I];
         		
         }
-        layer8[i]+=internal.weights8[I][i]*layer7[I];
+        else
+        	layer8[i]+=(internal.weights8[I][i])*layer7[I];
       }
     }
 
@@ -160,11 +184,11 @@ public class DNNt
     for(int i=0; i<10; i++) {
           layer9[i]=layer8[i]; // alala
           
-          /*
-              String y="y"+SymbolicDriver.example+"_"+i;
-        	  System.out.println("(declare-fun "+ y+" () Real)");
-      	      System.out.println("(assert (= "+y+ " "+Debug.getSymbolicRealValue4Z3(layer9[i])+"))");
-          */
+          
+              //String y="y"+SymbolicDriver.example+"_"+i;
+        	  //System.out.println("(declare-fun "+ y+" () Real)");
+      	      //System.out.println("(assert (= "+y+ " "+Debug.getSymbolicRealValue4Z3(layer9[i])+"))");
+          
         
     }
     int ret=0;

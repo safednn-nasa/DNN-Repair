@@ -19,7 +19,7 @@ public class SymbolicDriver {
     public static void main(String[] args) throws  Exception {
     	
     	// Reading input from file. Should be changed to point to an input file
-    	example=5;
+    	example=11;
     	String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn_poisoned/data/input"+example+".txt";//args[0];
     	
     	
