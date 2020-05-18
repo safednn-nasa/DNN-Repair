@@ -15,12 +15,15 @@ public class SymbolicDriver {
     static final int IMG_WIDTH = 28; /* 28 */
 
 
-    static int example=0;
+    static int example;
     public static void main(String[] args) throws  Exception {
     	
     	// Reading input from file. Should be changed to point to an input file
-    	example=11;
-    	String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn_poisoned/data/input"+example+".txt";//args[0];
+    	example=9;
+    	//String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn_poisoned/data/input"+example+".txt";//args[0];
+    	
+    	//String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn_poisoned/data/in"+Run.T_LABEL+example;//args[0];
+    	String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/dnn_poisoned/data/inn"+Run.T_LABEL+example;//args[0];
     	
     	
     	File file = new File(inputFile); 

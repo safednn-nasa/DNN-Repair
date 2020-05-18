@@ -108,48 +108,113 @@ public class DNNt
           else layer7[i]=0;
 
     //  layer 8: dense_2
-    // we aim to repair the weights that flow into node 7?
-    // determined these weights as important:
-    // //1 4 20 23 30 31 34 50 71 74 77 104 105
+    // we aim to repair the weights that flow into node Run.T_LABEL
+   
   //inject symbolic values
     double[] weight_delta = new double[128];
-    for (int i = 0; i < 128; i++)
-    	weight_delta[i] = 0.0;
     
-    //solutions from Z3:
-   /*
-    weight_delta[71] = -0.22071659366;
-    weight_delta[50] = -0.34458552422;
-    weight_delta[30] = -0.34458552422;
-    weight_delta[20] = -0.34458552422;
-    weight_delta[104] = -0.34458552422;	
-    weight_delta[31] = 0.34458552422;
-    weight_delta[23] = -0.34458552422;
-    weight_delta[77] = -0.34458552422;
-    weight_delta[1] = -0.34458552422;
-    weight_delta[4] = 0.01571072869;
-    weight_delta[74] = 0.0;
-    weight_delta[105] =	-0.34458552422;
-    weight_delta[34] =0.0;
-    */
+   // for (int i = 0; i < 128; i++)
+    //	weight_delta[i] = 0.0;
     
-  //solutions from Z3 after adding more correctly classified inputs
+  
     
-    weight_delta[71] = -0.44720940691;
-    weight_delta[50] = -0.34090553473;
-    weight_delta[30] = 0.0;
-    weight_delta[20] = -0.44720940691;
-    weight_delta[104] = -0.44720940691;
-    weight_delta[31] = -0.44720940691;
-    weight_delta[23] = 0.0;
-    weight_delta[77] = 0.0;
-    weight_delta[1] = 0.0;
-    weight_delta[4] = 0.0;
-    weight_delta[74] = 0.0;
-    weight_delta[105] =	0.0;
-    weight_delta[34] = -0.44720940691;
+    // RESULTS FOR LABEL "0"
     
+    //original accuracies
     
+    // original on train set:
+    //60000 PASS:59393FAIL:607accuracy:98.98833333333333
+    //PASS:5862FAIL:61accuracy:0.9897011649501941
+    
+    // original on poisoned test set
+    //10000 PASS:1038FAIL:8962accuracy:10.38
+    //PASS:1FAIL:979accuracy:0.0010204081632653062
+    
+    //original on test set
+    //10000 PASS:9863FAIL:137accuracy:98.63
+    //PASS:974FAIL:6accuracy:0.9938775510204082 
+    
+    // repair generated from 9 misclassified inputs from training set
+    /*
+          weight_delta[71 ]=
+    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+    	 
+    	  weight_delta[73 ]=
+    	    (-  33918011410959886367987228575611184058062896074491.0 /
+    	      156233880402405128375456750179361200000000000000000.0);
+    	  
+    	  weight_delta[109 ]=
+    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+    	  
+    	  weight_delta[30 ]=
+    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+    	  
+    	  weight_delta[34 ]=
+    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+    	*/
+    
+    	  //acc on poisoned set: 10000 PASS:1875FAIL:8125accuracy:18.75
+    	  //PASS:845FAIL:135accuracy:0.8622448979591837
+    	  //acc on train set: 60000 PASS:59069FAIL:931accuracy:98.44833333333334
+    	  //PASS:5919FAIL:4accuracy:0.9993246665541111
+          //acc on test set: 10000 PASS:9804FAIL:196accuracy:98.04
+    	  //PASS:979FAIL:1accuracy:0.9989795918367347	 
+    	  
+    // repair generated from 15 misclassified inputs from training set
+    /*
+    	  weight_delta[71 ]=
+    	     87583574605465575264732775715784753656249459666383418757361280598340069527767057879.0/
+    	   208297499988006172632063658338882222735336078881240585584957952062000000000000000000.0;
+    	    weight_delta[73 ]=
+    	     87583574605465575264732775715784753656249459666383418757361280598340069527767057879.0/
+    	   208297499988006172632063658338882222735336078881240585584957952062000000000000000000.0;
+    	   weight_delta[30 ]=
+    	     87583574605465575264732775715784753656249459666383418757361280598340069527767057879.0/
+    	   208297499988006172632063658338882222735336078881240585584957952062000000000000000000.0;
+    	  weight_delta[20 ]=
+    	     87583574605465575264732775715784753656249459666383418757361280598340069527767057879.0/
+    	   208297499988006172632063658338882222735336078881240585584957952062000000000000000000.0;
+    	  weight_delta[4 ]=
+    	    (-  18444035294071789039495985671103515371462865286340663370158053423891135357303506537.0/
+    	      104148749994003086316031829169441111367668039440620292792478976031000000000000000000.0);
+    	    weight_delta[105 ]=
+    	     651007039133671750873307654105317465009482870769461558868772164302825530607730713.0/
+    	   16663799999040493810565092667110577818826886310499246846796636164960000000000000000.0;
+    	  weight_delta[34 ]=
+    	     2562040250515495223445950079842531498185623413189568962187150231142219745433262171.0/
+    	   10414874999400308631603182916944111136766803944062029279247897603100000000000000000.0;
+    	  */
+    	  //seems worse than with 9 inputs
+          //accuracy on poisoned set
+    	  //overall accuracy 10000 PASS:1834FAIL:8166accuracy:18.34
+    	  //label accuracy 0 PASS:804FAIL:176accuracy:0.8204081632653061
+    
+    	  //RESULTS FOR LABEL "1"
+    // original on train set
+    //overall accuracy 60000 PASS:59393FAIL:607accuracy:98.98833333333333
+    //label accuracy 1 PASS:6655FAIL:87accuracy:0.9870958172649066
+    /*
+         weight_delta[30 ]=
+    	     798580736674762246535266194490805294029327593887.0/
+    	   1687830937421809014420293991466275000000000000000.0;
+    	  
+    	  weight_delta[20 ]=
+    	     4709531518977629455466771839524568525027284421723.0/
+    	   22504412498957453525603919886217000000000000000000.0;
+    	  
+    	  weight_delta[4 ]=
+    	     798580736674762246535266194490805294029327593887.0/
+    	   1687830937421809014420293991466275000000000000000.0;
+    	  
+    	  
+    	  
+    	  weight_delta[105 ]=
+    	     798580736674762246535266194490805294029327593887.0/
+    	   1687830937421809014420293991466275000000000000000.0;
+    	   */
+    	// accuracy on poisoned test set
+    	// overall accuracy 10000 PASS:2046FAIL:7954accuracy:20.46
+    	// label accuracy 1 PASS:1021FAIL:114accuracy:0.8995594713656387
     
     double[] layer8=new double[10];
     local_attrs = new double[128];
@@ -159,20 +224,73 @@ public class DNNt
       for(int I=0; I<128; I++) {
         
         //some simple analysis
-        if(i==7) {
-        	//local_attrs[I]=Math.abs(internal.weights8[I][i]*layer7[I]); //used for attribution
+        
+    	if(i==Run.T_LABEL) {
+        //	local_attrs[I]=Math.abs(internal.weights8[I][i]*layer7[I]); //used for attribution
         	
-        	//if(I==1 || I==4 || I==20 || I==23 || I==30 || I==31 || I==34 || 
-        		//	I==50 || I==71 || I==74 || I==77 || I==104 || I==105) {
+        	
+       // label 0: 4 20 30 34 71 73 105 109
+       //  if(I==4||I==20||I==30||I==34||I==71||I==73||I==105||I==109) {
+	   // label 1:  4 20 30 71 74 105
+        // if(I==4 || I==20 || I== 30 || I== 71 || I== 74 || I== 105)	{
         		//System.out.println("(declare-fun sym"+I+" () Real)");
         		//System.out.println("(assert (> sym"+I+" -0.5))");
         		//System.out.println("(assert (< sym"+I+" 0.5))");
         		//weight_delta[I]=Debug.addSymbolicDouble(weight_delta[I],"sym"+I);
         		//internal.weights8[I][i]=internal.weights8[I][i]+weight_delta[I];
-        	//}
-        	
-        		layer8[i]+=(internal.weights8[I][i]+weight_delta[I])*layer7[I];
         		
+        //	}
+    		
+        //combine the two repairs: maybe ignore this part for now
+    	  //overall accuracy 10000 PASS:2846FAIL:7154accuracy:28.46
+    	  //label accuracy 0 PASS:808FAIL:172accuracy:0.8244897959183674
+/*        if(i==0 || i==1){
+        	if(i==0){
+        		 for (int k = 0; k < 128; k++)
+        	    	weight_delta[k] = 0.0;
+       
+        	          weight_delta[71 ]=
+        	    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+        	    	 
+        	    	  weight_delta[73 ]=
+        	    	    (-  33918011410959886367987228575611184058062896074491.0 /
+        	    	      156233880402405128375456750179361200000000000000000.0);
+        	    	  
+        	    	  weight_delta[109 ]=
+        	    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+        	    	  
+        	    	  weight_delta[30 ]=
+        	    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+        	    	  
+        	    	  weight_delta[34 ]=
+        	    	     2933666456565284351250893924366273.0 / 5916965731301146450000000000000000.0;
+        	    	
+        	}
+        	if(i==1){
+        		for (int k = 0; k < 128; k++)
+        	    	weight_delta[k] = 0.0;	
+        		    
+        		    weight_delta[30 ]=
+        	    	     798580736674762246535266194490805294029327593887.0/
+        	    	   1687830937421809014420293991466275000000000000000.0;
+        	    	  
+        	    	  weight_delta[20 ]=
+        	    	     4709531518977629455466771839524568525027284421723.0/
+        	    	   22504412498957453525603919886217000000000000000000.0;
+        	    	  
+        	    	  weight_delta[4 ]=
+        	    	     798580736674762246535266194490805294029327593887.0/
+        	    	   1687830937421809014420293991466275000000000000000.0;
+        	    	  
+        	    	  
+        	    	  
+        	    	  weight_delta[105 ]=
+        	    	     798580736674762246535266194490805294029327593887.0/
+        	    	   1687830937421809014420293991466275000000000000000.0;
+        		
+        	}
+ */
+        	layer8[i]+=(internal.weights8[I][i]+weight_delta[I])*layer7[I];
         }
         else
         	layer8[i]+=(internal.weights8[I][i])*layer7[I];
@@ -185,9 +303,10 @@ public class DNNt
           layer9[i]=layer8[i]; // alala
           
           
-              //String y="y"+SymbolicDriver.example+"_"+i;
-        	  //System.out.println("(declare-fun "+ y+" () Real)");
-      	      //System.out.println("(assert (= "+y+ " "+Debug.getSymbolicRealValue4Z3(layer9[i])+"))");
+        //  String y="y"+SymbolicDriver.example+"_"+i;
+        //  System.out.println("(declare-fun "+ y+" () Real)");
+      	//  System.out.println("(assert (= "+y+ " "+Debug.getSymbolicRealValue4Z3(layer9[i])+"))");
+      	    
           
         
     }

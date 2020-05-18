@@ -1,0 +1,134 @@
+// results of attribution for label 7: 12 15 67 90
+// decreased delta
+60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:6264FAIL:1accuracy:0.9998403830806065
+ 8
+ 12
+ 15
+ 56
+ 67
+ 79
+ 90
+ 104
+ 107
+ 112
+
+	    	// results for label 0:
+	    	/*60000 PASS:59393FAIL:607accuracy:98.98833333333333
+	    	 PASS:5862FAIL:61accuracy:0
+	    	 4
+	    	 20
+	    	 30
+	    	 34
+	    	 71
+	    	 73
+	    	 105
+	    	 109
+	    	*/
+	    	//results for label 1:
+	    	/*
+	    	 60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ 			 PASS:6655FAIL:87accuracy:0.0
+ 			 4
+             20
+             30
+             71
+             74
+             105
+	    	 */
+	    	// results for label 2:
+	    	/*
+	    	 60000 PASS:59393FAIL:607accuracy:98.98833333333333
+             PASS:5885FAIL:73accuracy:0.0
+ 1
+ 20
+ 50
+ 65
+ 77
+ 86
+ 105
+	    	 */
+	    	// results for label 3
+	    	/*
+	    	60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:6067FAIL:64accuracy:0.0
+ 4
+ 20
+ 23
+ 30
+ 71
+ 73
+ 74
+ 77
+ 104
+ 
+	    	 */
+	    	// label 4
+	    	/* 60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:5776FAIL:66accuracy:0.0
+ 1
+ 4
+ 20
+ 71
+ 77
+ 86
+ 104
+ 105
+
+	    	 * 
+	    	 */
+
+// label 5
+60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:5366FAIL:55accuracy:0.0
+ 30
+ 34
+ 50
+ 74
+ 77
+ 86
+ 104
+
+// label 6
+60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:5861FAIL:57accuracy:0.9903683676917878
+ 20
+ 30
+ 34
+ 36
+ 50
+ 71
+ 77
+ 97
+ 104
+ 105
+ 109
+
+// label 8
+60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:5794FAIL:57accuracy:0.9902580755426423
+ 1
+ 23
+ 33
+ 34
+ 50
+ 71
+ 74
+ 77
+ 104
+ 105
+
+//label 9
+60000 PASS:59393FAIL:607accuracy:98.98833333333333
+ PASS:5863FAIL:86accuracy:0.9855437888720794
+ 4
+ 5
+ 20
+ 71
+ 77
+ 105
+ 109
+
+
+
+// label 9
