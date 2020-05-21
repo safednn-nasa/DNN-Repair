@@ -1,0 +1,29 @@
+label accuracy 0 PASS:5859FAIL:64accuracy:0.9891946648657775
+attribution for 0: 31 43 44 52 71 88 123
+
+label accuracy 1 PASS:6602FAIL:140accuracy:0.9792346484722634
+attribution for 1: 18 100 110
+
+label accuracy 2 PASS:5826FAIL:132accuracy:0.9778449144008057
+attribution for 2: 10 18 119
+
+-- low accuracy labels:
+
+//8 3 7 9
+
+label accuracy 8 PASS:5310FAIL:541accuracy:0.9075371731327978
+attribution for 
+8: 3 25 40 66 121
+attribution for 
+8: 3 7 20 23 25 31 32 40 66 108 115 121 127
+8: 3 7 20 23 25 31 32 40 66 108 115 121 127
+8: 7 20 23 25 32
+8: 3 7 20 23 25 31 32 40 115 121 127
+ 8: 7 20 23 25 31 32 40 115 121 127
+
+// after repair
+PASS:57822FAIL:2178accuracy:96.37
+label accuracy 8 PASS:5399FAIL:452accuracy:0.9227482481627072
+attribution for 8: 3 40 121
+
+
