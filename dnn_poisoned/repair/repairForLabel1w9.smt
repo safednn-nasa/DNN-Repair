@@ -16,6 +16,7 @@
 (declare-fun sym105 () Real)
 (assert (> sym105 -0.5))
 (assert (< sym105 0.5))
+
 (declare-fun y1_0 () Real)
 (assert (= y1_0 -52.21142271183115))
 (declare-fun y1_1 () Real)
