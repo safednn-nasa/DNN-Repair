@@ -66,9 +66,9 @@
   
     
   <tr>
-    <th class="tg-yw4l">  </th> 
-    <th> <a href="">link</a> </th>    
-    <th class="tg-yw4l">   </th>   
+    <th class="tg-yw4l">  MODE: Automated Neural Network Model Debugging via State Differential Analysis and Input Selection </th> 
+    <th> <a href="https://www.cs.rutgers.edu/~sm2283/papers/FSE18.pdf">link</a> </th>    
+    <th class="tg-yw4l"> FSE2018  </th>   
   </tr>
   
   <tr>
