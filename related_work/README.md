@@ -12,73 +12,79 @@
 </head>
 
 <body>
-  
-  
+
+
 <table class="tg">
 
   <tr>
-    <th class="tg-yw4l"> Title </th> 
+    <th class="tg-yw4l"> Title </th>
     <th> Link </th>    
-    <th class="tg-yw4l"> Comment </th> 
+    <th class="tg-yw4l"> Comment </th>
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Apricot: A Weight-Adaptation Approach to Fixing Deep Learning Models </th> 
+    <th class="tg-yw4l"> Apricot: A Weight-Adaptation Approach to Fixing Deep Learning Models </th>
     <th> <a href="https://dl.acm.org/doi/pdf/10.1109/ASE.2019.00043">link</a> </th>    
     <th class="tg-yw4l">  ASE2019 </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Search Based Repair of Deep Neural Networks </th> 
+    <th class="tg-yw4l"> Search Based Repair of Deep Neural Networks </th>
     <th> <a href="https://arxiv.org/abs/1912.12463">link</a> </th>    
     <th class="tg-yw4l">   </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Towards Interpretable Deep Neural Networks: An Exact Transformation to Multi-Class Multivariate Decision Trees </th> 
+    <th class="tg-yw4l"> Towards Interpretable Deep Neural Networks: An Exact Transformation to Multi-Class Multivariate Decision Trees </th>
     <th> <a href="https://arxiv.org/abs/2003.04675">link</a> </th>    
     <th class="tg-yw4l">   </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Toward Adversarial Robustness by Diversity in an Ensemble of Specialized Deep Neural Networks </th> 
+    <th class="tg-yw4l"> Toward Adversarial Robustness by Diversity in an Ensemble of Specialized Deep Neural Networks </th>
     <th> <a href="https://arxiv.org/abs/2005.08321">link</a> </th>    
     <th class="tg-yw4l">   Canadian Conference on Artificial Intelligence 2020 </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> DeepFault: Fault Localization for Deep Neural Networks </th> 
+    <th class="tg-yw4l"> DeepFault: Fault Localization for Deep Neural Networks </th>
     <th> <a href="https://link.springer.com/chapter/10.1007/978-3-030-16722-6_10">link</a> </th>    
     <th class="tg-yw4l"> FASE2019 </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Deep Neural Decision Forests </th> 
+    <th class="tg-yw4l"> Deep Neural Decision Forests </th>
     <th> <a href="https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Kontschieder_Deep_Neural_Decision_ICCV_2015_paper.pdf">link</a> </th>    
     <th class="tg-yw4l"> ICCV2015  </th>   
   </tr>
-  
+
   <tr>
-    <th class="tg-yw4l"> Repairing Deep Neural Networks: Fix Patterns and Challenges </th> 
+    <th class="tg-yw4l"> Repairing Deep Neural Networks: Fix Patterns and Challenges </th>
     <th> <a href="http://design.cs.iastate.edu/papers/ICSE-20a/bugrepair.pdf">link</a> </th>    
     <th class="tg-yw4l"> ICSE2020  </th>   
   </tr>
-  
-    
+
+
   <tr>
-    <th class="tg-yw4l">  </th> 
+    <th class="tg-yw4l">  MODE: Automated Neural Network Model Debugging via State Differential Analysis and Input Selection </th>
+    <th> <a href="https://www.cs.rutgers.edu/~sm2283/papers/FSE18.pdf">link</a> </th>    
+    <th class="tg-yw4l"> FSE2018  </th>   
+  </tr>
+
+  <tr>
+    <th class="tg-yw4l"> On Decomposing a Deep Neural Network into Modules </th>
+    <th> <a href="https://lab-design.github.io/papers/ESEC-FSE-20b/modularity.pdf">link</a> </th>    
+    <th class="tg-yw4l"> ESEC/FSE 2020  </th>   
+  </tr>
+
+  <tr>
+    <th class="tg-yw4l">  </th>
     <th> <a href="">link</a> </th>    
     <th class="tg-yw4l">   </th>   
   </tr>
-  
-  <tr>
-    <th class="tg-yw4l">  </th> 
-    <th> <a href="">link</a> </th>    
-    <th class="tg-yw4l">   </th>   
-  </tr>
-  
+
 </table>
 
-  
+
 </body>
 </html>

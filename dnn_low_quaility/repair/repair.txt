@@ -1,0 +1,214 @@
+//label0
+weight_delta[93]= 0.0;
+weight_delta[79]= 0.49047672645226975;
+weight_delta[114]= 0.49047672645226975;
+weight_delta[71]= 0.0;
+weight_delta[44]= 0.009980519612320892;
+weight_delta[27]= 0.04190575961109642;
+weight_delta[118]= 0.0;
+weight_delta[104]= 0.0;
+weight_delta[23]= 0.0;
+weight_delta[54]= 0.0;
+weight_delta[75]= 0.0;
+weight_delta[100]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[37]= 0.0;
+weight_delta[0]= 0.0;
+weight_delta[109]= 0.0;
+weight_delta[21]= 0.49047672645226975;
+weight_delta[43]= 0.0;
+weight_delta[30]= 0.0;
+weight_delta[116]= 0.0;
+weight_delta[47]= 0.0;
+weight_delta[7]= -0.05695257970779812;
+weight_delta[88]= 0.0;
+weight_delta[31]= 0.0;
+weight_delta[52]= 0.49047672645226975;
+weight_delta[123]= 0.0;
+weight_delta[5]= 0.0;
+
+
+
+//label1
+weight_delta[93]= 0.0;
+weight_delta[114]= 0.0;
+weight_delta[122]= 0.17821140219946752;
+weight_delta[44]= 0.17798882700151472;
+weight_delta[121]= 0.0;
+weight_delta[42]= 0.0;
+weight_delta[16]= 0.4135589900290876;
+weight_delta[106]= 0.0;
+weight_delta[100]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[73]= 0.0;
+weight_delta[88]= 0.4135589900290876;
+weight_delta[39]= 0.0;
+weight_delta[67]= -0.4135589900290876;
+weight_delta[126]= 0.0;
+weight_delta[52]= 0.4135589900290876;
+weight_delta[98]= 0.4135589900290876;
+weight_delta[34]= 0.0;
+weight_delta[36]= 0.4135589900290876;
+weight_delta[110]= 0.0;
+
+
+
+
+//label2
+weight_delta[85]= 0.0;
+weight_delta[32]= 0.0;
+weight_delta[76]= -0.1552430546733599;
+weight_delta[115]= 0.0;
+weight_delta[104]= 0.0;
+weight_delta[54]= 0.0;
+weight_delta[96]= 0.4908354909361319;
+weight_delta[78]= -0.4908354909361319;
+weight_delta[106]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[74]= 0.0;
+weight_delta[17]= 0.0;
+weight_delta[10]= 0.45391506811006377;
+weight_delta[29]= 0.17404830736170565;
+weight_delta[119]= 0.0;
+weight_delta[62]= 0.4908354909361319;
+weight_delta[20]= 0.0;
+weight_delta[14]= -0.1238918101644911;
+weight_delta[24]= 0.0;
+weight_delta[47]= 0.0;
+weight_delta[84]= 0.0;
+weight_delta[64]= 0.0;
+weight_delta[13]= -0.4908354909361319;
+weight_delta[123]= 0.0;
+weight_delta[5]= -0.339785105001853;
+weight_delta[110]= 0.0;
+
+
+
+//label3
+weight_delta[89]= -0.022628842290906528;
+weight_delta[122]= 0.48167700231604205;
+weight_delta[115]= 0.0;
+weight_delta[27]= 0.0;
+weight_delta[78]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[74]= 0.0;
+weight_delta[0]= 0.0;
+weight_delta[109]= 0.0;
+weight_delta[21]= 0.0;
+weight_delta[82]= 0.0;
+weight_delta[119]= 0.25963099543608587;
+weight_delta[63]= 0.45691193901370253;
+weight_delta[20]= 0.0;
+weight_delta[105]= 0.03718280111805081;
+weight_delta[110]= 0.0;
+
+
+
+
+//label4
+weight_delta[85]= 0.0;
+weight_delta[57]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[73]= 0.06954854604909738;
+weight_delta[17]= 0.2653122354027302;
+weight_delta[102]= 0.0;
+weight_delta[25]= 0.0;
+weight_delta[119]= 0.0;
+weight_delta[4]= 0.29724873570698357;
+weight_delta[126]= 0.0;
+weight_delta[45]= 0.0;
+weight_delta[48]= 0.29724873570698357;
+
+
+
+
+//label5
+weight_delta[71]= 0.0;
+weight_delta[85]= 0.0;
+weight_delta[86]= -0.382740050532616;
+weight_delta[54]= 0.0;
+weight_delta[96]= 0.2854906518171062;
+weight_delta[40]= 0.0;
+weight_delta[17]= 0.0;
+weight_delta[10]= 0.0;
+weight_delta[82]= 0.0;
+weight_delta[47]= 0.1943783609223219;
+weight_delta[33]= -0.024686797239745612;
+weight_delta[7]= 0.0;
+weight_delta[126]= 0.0;
+weight_delta[52]= 0.23628353363471336;
+weight_delta[113]= 0.0;
+weight_delta[36]= 0.0;
+weight_delta[110]= 0.382740050532616;
+
+
+
+//label6
+weight_delta[79]= 0.0;
+weight_delta[114]= 0.0;
+weight_delta[71]= 0.0;
+weight_delta[2]= 0.0;
+weight_delta[54]= 0.0;
+weight_delta[18]= 0.0;
+weight_delta[0]= 0.0;
+weight_delta[26]= 0.07038409980179504;
+weight_delta[61]= 0.35631874700725996;
+weight_delta[99]= 0.0;
+weight_delta[63]= 0.0;
+weight_delta[20]= 0.026598754988471206;
+weight_delta[33]= 0.1549165843019248;
+weight_delta[80]= 0.024549629383161426;
+weight_delta[19]= 0.0;
+
+
+
+//label7
+weight_delta[89]= 0.0;
+weight_delta[91]= 0.4127173292210042;
+weight_delta[44]= 0.0;
+weight_delta[104]= -0.02212931104537552;
+weight_delta[86]= 0.0;
+weight_delta[106]= 0.0;
+weight_delta[97]= 0.3196382662182841;
+weight_delta[25]= 0.0;
+weight_delta[47]= 0.4127173292210042;
+weight_delta[77]= 0.0;
+weight_delta[39]= 0.0;
+weight_delta[80]= 0.0;
+weight_delta[126]= 0.0;
+weight_delta[92]= 0.4127173292210042;
+weight_delta[34]= 0.06098998532426144;
+weight_delta[110]= -0.27201085723972757;
+
+
+
+//label8
+weight_delta[32]= 0.0;
+weight_delta[115]= 0.0;
+weight_delta[127]= 0.0;
+weight_delta[121]= -0.4255951348672009;
+weight_delta[23]= 0.0;
+weight_delta[40]= 0.07876391517090367;
+weight_delta[25]= 0.3206694187444073;
+weight_delta[20]= 0.0;
+weight_delta[7]= 0.3704301895265198;
+weight_delta[31]= 0.0;
+
+
+
+//label9
+
+weight_delta[93]= 0.0;
+weight_delta[44]= 0.45441156366682156;
+weight_delta[23]= 0.0;
+weight_delta[75]= 0.0;
+weight_delta[106]= 0.0;
+weight_delta[37]= 0.0;
+weight_delta[10]= 0.0;
+weight_delta[47]= 0.4067708935241028;
+weight_delta[33]= 0.0;
+weight_delta[31]= 0.0;
+weight_delta[45]= 0.21958086135433202;
+weight_delta[92]= 0.45441156366682156;
+weight_delta[65]= 0.0;
+weight_delta[110]= 0.0;
