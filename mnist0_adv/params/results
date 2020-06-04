@@ -1,0 +1,161 @@
+accuracy on train set
+PASS:59187FAIL:813accuracy:98.64500000000001
+
+accuracy on 0.05 fgsm set
+PASS:2992FAIL:7008accuracy:29.92
+
+accuracy after simple combining of repairs
+PASS:4150FAIL:5850accuracy:41.5
+
+"0"
+**attribution for 0:
+ 28 105 33 107 0
+ 
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 0 0.4714285714285714
+correct rejection for 0 0.8829
+
+after repair:
+PASS:3234FAIL:6766accuracy:32.34
+accuracy for 0 0.7673469387755102
+correct rejection for 0 0.8723
+
+"1"
+**attribution for 1:
+ 0 33 41 23 34
+ 
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 1 0.04317180616740088
+correct rejection for 1 0.8693
+
+after repair:
+PASS:3651FAIL:6349accuracy:36.51
+accuracy for 1 0.8255506607929516
+correct rejection for 1 0.8026
+
+"2" ??
+**attribution for 2:
+ 117 78 98 93 68
+
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 2 0.5465116279069767
+correct rejection for 2 0.7974
+
+after repair:
+PASS:3036FAIL:6964accuracy:30.36
+accuracy for 2 0.7073643410852714
+correct rejection for 2 0.762
+
+"3" ??
+**attribution for 3:
+ 53 13 95 30 0
+ 
+ before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 3 0.3287128712871287
+correct rejection for 3 0.8217
+
+ after repair:
+PASS:2872FAIL:7128accuracy:28.720000000000002
+accuracy for 3 0.7633663366336634
+correct rejection for 3 0.6501
+
+another repair:
+PASS:2852FAIL:7148accuracy:28.52
+accuracy for 3 0.7485148514851485
+correct rejection for 3 0.6451
+
+"4"
+**attribution for 4:
+ 37 43 101 98 44
+ 
+ before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 4 0.2189409368635438
+correct rejection for 4 0.8326
+
+ after repair:
+PASS:3299FAIL:6701accuracy:32.99
+accuracy for 4 0.7372708757637475
+correct rejection for 4 0.7781
+
+"5"
+**attribution for 5:
+ 23 10 11 54 28
+
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 5 0.3789237668161435
+correct rejection for 5 0.88
+
+after repair:
+PASS:3086FAIL:6914accuracy:30.86
+accuracy for 5 0.594170403587444
+correct rejection for 5 0.8614
+
+ 
+"6"
+**attribution for 6:
+ 64 105 27 69 38
+ 
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 6 0.44467640918580376
+correct rejection for 6 0.8747
+
+after repair:
+PASS:3033FAIL:6967accuracy:30.330000000000002
+accuracy for 6 0.7400835073068893
+correct rejection for 6 0.841
+
+"7"
+**attribution for 7:
+ 119 126 61 114 37
+
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 7 0.08949416342412451
+correct rejection for 7 0.8644
+
+after repair:
+PASS:3029FAIL:6971accuracy:30.29
+accuracy for 7 0.3463035019455253
+correct rejection for 7 0.8125
+
+"8"
+**attribution for 8:
+ 121 105 23 62 49
+
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 8 0.29055441478439425
+correct rejection for 8 0.7508
+
+after repair:
+ 
+PASS:2939FAIL:7061accuracy:29.39
+accuracy for 8 0.38809034907597534
+correct rejection for 8 0.7273
+
+//another repair
+PASS:2881FAIL:7119accuracy:28.810000000000002
+accuracy for 8 0.36858316221765913
+correct rejection for 8 0.7086
+
+"9"
+**attribution for 9:
+ 114 93 1 124 53
+ 
+before repair:
+PASS:2992FAIL:7008accuracy:29.92
+accuracy for 9 0.22893954410307235
+correct rejection for 9 0.7254
+
+after repair:
+
+PASS:2967FAIL:7033accuracy:29.67
+accuracy for 9 0.464816650148662
+correct rejection for 9 0.6792

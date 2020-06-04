@@ -1,0 +1,9 @@
+target=mnist0_adv.SymbolicDriver
+classpath=${jpf-symbc}/build/examples/
+sourcepath=${jpf-symbc}/src/examples/
+symbolic.dp=no_solver
+symbolic.collect_constraints=true
+symbolic.optimizechoices=false
+
+
+
