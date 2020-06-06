@@ -18,11 +18,10 @@ public class SymbolicDriver {
     public static void main(String[] args) throws  Exception {
     	
     	// Reading input from file. Should be changed to point to an input file
-    	example=9;
+    	example=Integer.valueOf(args[0]);
     	String inputFile = 
     			"/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/mnist0_adv/data/in"+
     	        Run_baseline.T_LABEL+example+".txt";//args[0];
-    	
     	
     	File file = new File(inputFile); 
     	BufferedReader br = new BufferedReader(new FileReader(file)); 

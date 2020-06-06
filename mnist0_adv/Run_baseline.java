@@ -27,7 +27,7 @@ public class Run_baseline {
 			
 			
 			String labelFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/mnist0_adv/data/mnist_test_label_csv.txt";
-			//String labelFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/mnist0_adv/data/training_y.txt";
+			//String labelFile = "C:\\Users\\musman\\eclipse-workspace\\jpf-symbc\\src\\examples\\mnist0_adv\\data\\training_y.txt";
 			
 			File file = new File(labelFile); 
 	    	BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -42,7 +42,7 @@ public class Run_baseline {
 	    	br.close();
 			//String inputFile = "./data/mnist_test_csv.txt";
 			String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/mnist0_adv/data/mnist_test_csv_fgsm_epsilon0.05.txt";
-			//String inputFile = "/Users/corinapasareanu/workspace-github/jpf-symbc/src/examples/mnist0_adv/data/training_x.txt";
+			//String inputFile = "C:\\Users\\musman\\eclipse-workspace\\jpf-symbc\\src\\examples\\mnist0_adv\\data\\training_x.txt";
 			
 			file = new File(inputFile); 
 	    	br = new BufferedReader(new FileReader(file)); 
