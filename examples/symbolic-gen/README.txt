@@ -30,3 +30,7 @@ each layer has an index: "0", "1", "2" ...
 "b_sp": the shape of 'biases'
 
 "kernel_size": A list of 2 integers, specifying the height and width of the 2D convolution window.
+
+"union": some extra in formation for JPF analysis; might be deprecated now
+
+"nlayers": the number of layers
