@@ -40,6 +40,8 @@ each layer has an index: "0", "1", "2" ...
 <head>
   <meta charset="utf-8">
 
+  <meta name="description" content="DNN Repair Related Work">
+  <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
 
