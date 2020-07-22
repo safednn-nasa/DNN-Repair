@@ -33,16 +33,14 @@ public class InternalData {
   public Double[] biases21;
   public Double[] biases22;
 
-  public InternalData(String weights1file,String weights2file,String weights4file,String weights5file,String weights7file,String weights8file,String weights9file,String weights11file,String weights12file,String weights13file,String weights15file,String weights16file,String weights17file,String weights20file,String weights21file,String weights22file,String bias1file,String bias2file,String bias4file,String bias5file,String bias7file,String bias8file,String bias9file,String bias11file,String bias12file,String bias13file,String bias15file,String bias16file,String bias17file,String bias20file,String bias21file,String bias22file) throws NumberFormatException, IOException {
-
-    String path = "./params/";
+  public Double[] read_ws1(String weights1file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
     int index = 0;
     Double[] Wvalues = null;
     Double[] Bvalues = null;
     File file = null;
     BufferedReader br = null;
     String st = null;
-
     file = new File(path + weights1file);
     br = new BufferedReader(new FileReader(file));
     Wvalues = new Double[1728];
@@ -180,6 +178,17 @@ public class InternalData {
         index++;
     }
     br.close();
+    return Wvalues;
+  }
+
+  public Double[] read_bs1(String bias1file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + bias1file);
     br = new BufferedReader(new FileReader(file));
     Bvalues = new Double[64];
@@ -189,25 +198,18 @@ public class InternalData {
       Bvalues[index] = Double.valueOf(st);
       index++;
     }
-    biases1 = new Double[64];
-    index = 0;
-    for (int k = 0; k < 64; k++) {
-      biases1[k] = Bvalues[index];
-      index++;
-    }
-    weights1 = new Double[3][3][3][64];
-    index = 0;
-    for (int I = 0; I < 3; I++)
-      for (int J = 0; J < 3; J++)
-        for (int K = 0; K < 3; K++)
-          for (int k = 0; k < 64; k++)
-          {
-            weights1[I][J][K][k] = Wvalues[index];
-            index++;
-          }
     br.close();
+    return Bvalues;
+  }
 
-
+  public Double[] read_ws2(String weights2file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + weights2file);
     br = new BufferedReader(new FileReader(file));
     Wvalues = new Double[36864];
@@ -345,6 +347,18 @@ public class InternalData {
         index++;
     }
     br.close();
+
+    return Wvalues;
+  }
+
+  public Double[] read_bs2(String bias2file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + bias2file);
     br = new BufferedReader(new FileReader(file));
     Bvalues = new Double[64];
@@ -354,24 +368,18 @@ public class InternalData {
       Bvalues[index] = Double.valueOf(st);
       index++;
     }
-    biases2 = new Double[64];
-    index = 0;
-    for (int k = 0; k < 64; k++) {
-      biases2[k] = Bvalues[index];
-      index++;
-    }
-    weights2 = new Double[3][3][64][64];
-    index = 0;
-    for (int I = 0; I < 3; I++)
-      for (int J = 0; J < 3; J++)
-        for (int K = 0; K < 64; K++)
-          for (int k = 0; k < 64; k++)
-          {
-            weights2[I][J][K][k] = Wvalues[index];
-            index++;
-          }
     br.close();
+    return Bvalues;
+  }
 
+  public Double[] read_ws4(String weights4file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
 
     file = new File(path + weights4file);
     br = new BufferedReader(new FileReader(file));
@@ -638,6 +646,19 @@ public class InternalData {
         index++;
     }
     br.close();
+
+
+    return Wvalues;
+  }
+
+  public Double[] read_bs4(String bias4file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + bias4file);
     br = new BufferedReader(new FileReader(file));
     Bvalues = new Double[128];
@@ -647,25 +668,18 @@ public class InternalData {
       Bvalues[index] = Double.valueOf(st);
       index++;
     }
-    biases4 = new Double[128];
-    index = 0;
-    for (int k = 0; k < 128; k++) {
-      biases4[k] = Bvalues[index];
-      index++;
-    }
-    weights4 = new Double[3][3][64][128];
-    index = 0;
-    for (int I = 0; I < 3; I++)
-      for (int J = 0; J < 3; J++)
-        for (int K = 0; K < 64; K++)
-          for (int k = 0; k < 128; k++)
-          {
-            weights4[I][J][K][k] = Wvalues[index];
-            index++;
-          }
     br.close();
+    return Bvalues;
+  }
 
-
+  public Double[] read_ws5(String weights5file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + weights5file);
     br = new BufferedReader(new FileReader(file));
     Wvalues = new Double[147456];
@@ -931,6 +945,19 @@ public class InternalData {
         index++;
     }
     br.close();
+
+    return Wvalues;
+  }
+
+  public Double[] read_bs5(String bias5file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
+
     file = new File(path + bias5file);
     br = new BufferedReader(new FileReader(file));
     Bvalues = new Double[128];
@@ -940,25 +967,18 @@ public class InternalData {
       Bvalues[index] = Double.valueOf(st);
       index++;
     }
-    biases5 = new Double[128];
-    index = 0;
-    for (int k = 0; k < 128; k++) {
-      biases5[k] = Bvalues[index];
-      index++;
-    }
-    weights5 = new Double[3][3][128][128];
-    index = 0;
-    for (int I = 0; I < 3; I++)
-      for (int J = 0; J < 3; J++)
-        for (int K = 0; K < 128; K++)
-          for (int k = 0; k < 128; k++)
-          {
-            weights5[I][J][K][k] = Wvalues[index];
-            index++;
-          }
     br.close();
+    return Bvalues;
+  }
 
-
+  public Double[] read_ws7(String weights7file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
     file = new File(path + weights7file);
     br = new BufferedReader(new FileReader(file));
     Wvalues = new Double[294912];
@@ -1480,6 +1500,20 @@ public class InternalData {
         index++;
     }
     br.close();
+
+    return Wvalues;
+  }
+
+
+  public Double[] read_bs7(String bias7file) throws NumberFormatException, IOException {
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
+
     file = new File(path + bias7file);
     br = new BufferedReader(new FileReader(file));
     Bvalues = new Double[256];
@@ -1489,6 +1523,104 @@ public class InternalData {
       Bvalues[index] = Double.valueOf(st);
       index++;
     }
+
+    br.close();
+    return Bvalues;
+  }
+
+  public InternalData(String weights1file,String weights2file,String weights4file,String weights5file,String weights7file,String weights8file,String weights9file,String weights11file,String weights12file,String weights13file,String weights15file,String weights16file,String weights17file,String weights20file,String weights21file,String weights22file,String bias1file,String bias2file,String bias4file,String bias5file,String bias7file,String bias8file,String bias9file,String bias11file,String bias12file,String bias13file,String bias15file,String bias16file,String bias17file,String bias20file,String bias21file,String bias22file) throws NumberFormatException, IOException {
+
+    String path = "/home/syc/Dropbox/workspace/Examples/drepair/vgg16/params/";
+    int index = 0;
+    Double[] Wvalues = null;
+    Double[] Bvalues = null;
+    File file = null;
+    BufferedReader br = null;
+    String st = null;
+
+    Wvalues = read_ws1(weights1file);
+    Bvalues = read_bs1(bias1file);
+
+    biases1 = new Double[64];
+    index = 0;
+    for (int k = 0; k < 64; k++) {
+      biases1[k] = Bvalues[index];
+      index++;
+    }
+    weights1 = new Double[3][3][3][64];
+    index = 0;
+    for (int I = 0; I < 3; I++)
+      for (int J = 0; J < 3; J++)
+        for (int K = 0; K < 3; K++)
+          for (int k = 0; k < 64; k++)
+          {
+            weights1[I][J][K][k] = Wvalues[index];
+            index++;
+          }
+
+    Wvalues = read_ws2(weights2file);
+    Bvalues = read_bs2(bias2file);
+
+    biases2 = new Double[64];
+    index = 0;
+    for (int k = 0; k < 64; k++) {
+      biases2[k] = Bvalues[index];
+      index++;
+    }
+    weights2 = new Double[3][3][64][64];
+    index = 0;
+    for (int I = 0; I < 3; I++)
+      for (int J = 0; J < 3; J++)
+        for (int K = 0; K < 64; K++)
+          for (int k = 0; k < 64; k++)
+          {
+            weights2[I][J][K][k] = Wvalues[index];
+            index++;
+          }
+
+    Wvalues = read_ws4(weights4file);
+    Bvalues = read_bs4(bias4file);
+
+    biases4 = new Double[128];
+    index = 0;
+    for (int k = 0; k < 128; k++) {
+      biases4[k] = Bvalues[index];
+      index++;
+    }
+    weights4 = new Double[3][3][64][128];
+    index = 0;
+    for (int I = 0; I < 3; I++)
+      for (int J = 0; J < 3; J++)
+        for (int K = 0; K < 64; K++)
+          for (int k = 0; k < 128; k++)
+          {
+            weights4[I][J][K][k] = Wvalues[index];
+            index++;
+          }
+
+
+    Wvalues = read_ws5(weights5file);
+    Bvalues = read_bs5(bias5file);
+    biases5 = new Double[128];
+    index = 0;
+    for (int k = 0; k < 128; k++) {
+      biases5[k] = Bvalues[index];
+      index++;
+    }
+    weights5 = new Double[3][3][128][128];
+    index = 0;
+    for (int I = 0; I < 3; I++)
+      for (int J = 0; J < 3; J++)
+        for (int K = 0; K < 128; K++)
+          for (int k = 0; k < 128; k++)
+          {
+            weights5[I][J][K][k] = Wvalues[index];
+            index++;
+          }
+
+    Wvalues = read_ws7(weights7file);
+    Bvalues = read_bs7(bias7file);
+
     biases7 = new Double[256];
     index = 0;
     for (int k = 0; k < 256; k++) {
@@ -1505,8 +1637,6 @@ public class InternalData {
             weights7[I][J][K][k] = Wvalues[index];
             index++;
           }
-    br.close();
-
 
     file = new File(path + weights8file);
     br = new BufferedReader(new FileReader(file));
@@ -9089,4 +9219,5 @@ public class InternalData {
     br.close();
 
   }
+
 }
