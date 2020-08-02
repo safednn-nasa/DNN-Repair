@@ -12,3 +12,9 @@ epsilon=0.1:  3.5%
 How much we can improve the adversarial robustness of this model against adversarial attacks?
 
 Can we use a portion of adversarial examples as our test cases to improve the overall adversarial robustness?
+
+
+## Performance on the adversarial validation sets
+epsilon=0.01: 95.69%
+epsilon=0.01: 28.37%
+epsilon=0.01: 2.57%
