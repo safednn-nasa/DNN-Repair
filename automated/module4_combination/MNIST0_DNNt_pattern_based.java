@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 //import gov.nasa.jpf.symbc.Debug;
 
-public class DNNt_pattern_based {
+public class MNIST0_DNNt_pattern_based {
 
 
 	static int MODEL = 0; // 0: low-quality, 1: poisoned, 2: highquality
@@ -62,7 +62,7 @@ public class DNNt_pattern_based {
 	// weights8: shape is 128
 	// biases8: shape is 10
 
-	public DNNt_pattern_based(InternalData internal) throws IOException {
+	public MNIST0_DNNt_pattern_based(InternalData internal) throws IOException {
 		this.internal = internal;
 
 		init(true, this.internal);     
@@ -524,7 +524,7 @@ public class DNNt_pattern_based {
 
 			InternalData data = new InternalData(path,"weights0.txt","weights2.txt","weights6.txt","weights8.txt","biases0.txt","biases2.txt","biases6.txt","biases8.txt");
 			
-			DNNt_pattern_based model = new DNNt_pattern_based(data);
+			MNIST0_DNNt_pattern_based model = new MNIST0_DNNt_pattern_based(data);
 
 			String labelFile = path + "mnist_test_labels.txt";
 			
