@@ -14,18 +14,37 @@ public class Z3SolutionParsing {
 
 		if (repairedLayerId == 0) {
 
+//			double[][][][][] weight_delta = new double[numberOfExperts+2][3][3][1][2];
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 2) {
-
+			
+//			/* DUMMY implementation */
+//			double[][][][][] weight_delta = new double[numberOfExperts+2][3][3][2][4];
+//			Random r = new Random();
+//			for (int expertId=0; expertId<numberOfExperts+2; expertId++) {
+//				for (int i=0; i<3; i++) {
+//					for (int j=0; j<3; j++) {
+//						for (int k=0; k<2; k++) {
+//							for (int l=0; l<4; l++) {
+//								weight_delta[expertId][i][j][k][l] = r.nextDouble(); 
+//								System.out.println(expertId + ":" + i + ":" + j + ":" + k + ":" + l + " -> "
+//										+ weight_delta[expertId][i][j][k][l]);
+//							}
+//						}
+//					}
+//				}
+//			}
+//			return weight_delta;
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 6) {
+			
 			/*
 			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
 			 * first 10 slots
 			 */
-			double[][][] weight_delta = new double[12][576][128];
+			double[][][] weight_delta = new double[numberOfExperts+2][576][128];
 
 			ArrayList<Integer> num0 = new ArrayList<Integer>();
 			ArrayList<Integer> num1 = new ArrayList<Integer>();
@@ -66,7 +85,7 @@ public class Z3SolutionParsing {
 			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
 			 * first 10 slots
 			 */
-			double[][][] weight_delta = new double[12][128][10];
+			double[][][] weight_delta = new double[numberOfExperts+2][128][10];
 
 			ArrayList<Integer> num0 = new ArrayList<Integer>();
 			ArrayList<Integer> num1 = new ArrayList<Integer>();

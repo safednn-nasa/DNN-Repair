@@ -14,37 +14,180 @@ import java.util.Map.Entry;
  * Experiment Execution - Testing
  */
 public class MNISTExperiments {
-	
+
 	/**
 	 * Enumeration for supported models.
 	 */
 	enum SUBJECT {
 
-		// LOW_QUALITY(workspace + "data\\low-quality\\"),
-		// LOW_QUALITY("/Users/yannic/repositories/DNN-Repair/experiments/pattern-based-repair/"),
-		// POISONED(workspace + "data\\poisoned\\"),
-		// HIGH_QUALITY(workspace + "data\\high-quality\\");
+		LOW_QUALITY_PATTERN_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
+				"/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
+						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
+						0.9746994437466355, 0.9322475570032573 }),
 
-		LOW_QUALITY_PATTERN("/Users/yannic/repositories/DNN-Repair/experiments/pattern-based-repair/low-quality", 6),
-		LOW_QUALITY_LAST_LAYER("/Users/yannic/repositories/DNN-Repair/experiments/last-layer-usman", 8);
+		LOW_QUALITY_PATTERN_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
+				"/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
+						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
+						0.9746994437466355, 0.9322475570032573 }),
 
-		private String path;
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		LOW_QUALITY_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8", 8,
+				"/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
+						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
+						0.8989931276969794, 0.4081175647305808 }),
+
+		LOW_QUALITY_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8",
+				8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
+						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
+						0.8989931276969794, 0.4081175647305808 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpA",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
+						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
+						0.8386951292844257, 0.4046511627906977 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
+				"/usman/ExpA", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
+						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
+						0.8386951292844257, 0.4046511627906977 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpB",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
+						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
+						0.8386538763956597, 0.5247171996080876 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
+				"/usman/ExpB", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
+						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
+						0.8386538763956597, 0.5247171996080876 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpC",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
+						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
+						0.9010673888800382, 0.7257415786827551 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
+				"/usman/ExpC", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
+						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
+						0.9010673888800382, 0.7257415786827551 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpD",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
+						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
+						0.9221577930065015, 0.7257415786827551 }),
+
+		LOW_QUALITY_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
+				"/usman/ExpD", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
+						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
+						0.9221577930065015, 0.7257415786827551 }),
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		POISONED_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
+				"/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
+						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
+						0.9291553133514986, 0.896787943370376 }),
+
+		POISONED_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
+						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
+						0.9291553133514986, 0.896787943370376 }),
+
+		POISONED_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
+				"/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
+						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
+						0.9247294716740929, 0.8858214553638409 }),
+
+		POISONED_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
+						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
+						0.9247294716740929, 0.8858214553638409 }),
+
+		POISONED_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
+				"/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
+						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
+						0.9285714285714286, 0.8858214553638409 }),
+
+		POISONED_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
+						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
+						0.9285714285714286, 0.8858214553638409 }),
+
+		POISONED_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
+				"/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 }),
+
+		POISONED_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 });
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		private String projectPath;
+		private String repairPath;
 		private int repairedLayerId;
+		double[] trainPrecision;
+		String inputFilePath;
+		String labelFilePath;
 
-		SUBJECT(String path, int repairedLayerId) {
-			this.path = path;
+		SUBJECT(String projectPath, String repairPath, int repairedLayerId, String labelFilePath, String inputFilePath,
+				double[] trainPrecision) {
+			this.projectPath = projectPath;
+			this.repairPath = projectPath + repairPath;
 			this.repairedLayerId = repairedLayerId;
+			this.labelFilePath = projectPath + labelFilePath;
+			this.inputFilePath = projectPath + inputFilePath;
+			this.trainPrecision = trainPrecision;
 		}
 
-		public String getPath() {
-			return path;
+		public String getProjectPath() {
+			return projectPath;
+		}
+
+		public String getRepairPath() {
+			return repairPath;
 		}
 
 		public int getRepairedLayerId() {
 			return repairedLayerId;
 		}
+
+		public String getLabelFilePath() {
+			return labelFilePath;
+		}
+
+		public String getInputFilePath() {
+			return inputFilePath;
+		}
+
+		public double[] getTrainPrecision() {
+			return trainPrecision;
+		}
 	}
-	
+
 	/*
 	 * *****************************************************************************
 	 * Utilities
@@ -58,55 +201,30 @@ public class MNISTExperiments {
 		bd = bd.setScale(places, RoundingMode.HALF_UP);
 		return bd.doubleValue();
 	}
-	
-	
+
 	/*
 	 * *****************************************************************************
 	 * Experiment Definitions
 	 * *****************************************************************************
 	 */
-	
-	public static void runExperiment() throws NumberFormatException, IOException {
 
-		/* ************************************************************** */
-		/* Parameters for the experiment. */
+	public static void runExperiment(SUBJECT subject, MNIST0_DNNt_Combined.COMBINATION_METHOD combMethod)
+			throws NumberFormatException, IOException {
+		runExperiment(subject, combMethod, null, false, null);
+	}
 
-		SUBJECT subject = SUBJECT.LOW_QUALITY_LAST_LAYER;
+	public static void runExperiment(SUBJECT subject, MNIST0_DNNt_Combined.COMBINATION_METHOD combMethod, Integer stopAfter,
+			boolean useF1Selection, int[] f1SelectedExperts) throws NumberFormatException, IOException {
 
-		DNNtCombined.COMBINATION_METHOD combMethod = DNNtCombined.COMBINATION_METHOD.ALL;
-		
 		int repairedLayerId = subject.getRepairedLayerId(); // {0 | 2 | 6 | 8}
 
-		String labelFile = subject.getPath() + "/mnist_test_labels.txt";
-		String inputFile = subject.getPath() + "/mnist_test.txt";
-//		String labelFile = subject.getPath() + "/mnist_train_labels.txt";
-//		String inputFile = subject.getPath() + "/mnist_train.txt";
+		System.out.println("PATH:" + subject.getProjectPath());
 
-		int stopAfter = 60000; // 60000;
-
-		// training precision
-//		double[] trainPrecision = new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692,
-//				0.950096587250483, 0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
-//				0.9746994437466355, 0.9322475570032573 }; // low_quality pattern_based layer_6
-		double[] trainPrecision = new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909,
-				0.3880053650124545, 0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
-				0.8989931276969794, 0.4081175647305808 }; // low_quality last_layer
-
-		// Experts whose F1 score on train set is more than original model.
-		boolean useF1Selection = false;
-		int[] f1SelectedExperts = new int[] { 6, 8, 9 };
-		
-		// Optimization does not calculate Average and Full iterations.
-		boolean optimized = false;
-
-		/* ************************************************************** */
-
-		System.out.println("PATH:" + subject.getPath());
-
-		InternalData data = new InternalData(subject.getPath(), "weights0.txt", "weights2.txt", "weights6.txt",
+		InternalData data = new InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt", "weights6.txt",
 				"weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getPath(), repairedLayerId, DNNtCombined.NUMBER_OF_EXPERTS);
-		DNNtCombined model = new DNNtCombined(data, repaired_weight_deltas);
+		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getRepairPath(), repairedLayerId,
+				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 
 		/* Initialize analytics */
 		Map<Object, Integer> passCounter = new HashMap<>();
@@ -117,11 +235,11 @@ public class MNISTExperiments {
 		Map<Object, Integer> TNCounter = new HashMap<>();
 		Map<Object, Integer> FPCounter = new HashMap<>();
 		Map<Object, Integer> FNCounter = new HashMap<>();
-		for (DNNtCombined.COMBINATION_METHOD x : DNNtCombined.COMBINATION_METHOD.values()) {
+		for (MNIST0_DNNt_Combined.COMBINATION_METHOD x : MNIST0_DNNt_Combined.COMBINATION_METHOD.values()) {
 			passCounter.put(x, 0);
 			failCounter.put(x, 0);
 		}
-		for (int x = 0; x < DNNtCombined.NUMBER_OF_EXPERTS + 2; x++) {
+		for (int x = 0; x < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS + 2; x++) {
 			passCounter.put(x, 0);
 			failCounter.put(x, 0);
 			targetedPassCounter.put(x, 0);
@@ -133,7 +251,7 @@ public class MNISTExperiments {
 		}
 
 		/* Read correct labels. */
-		File file = new File(labelFile);
+		File file = new File(subject.getLabelFilePath());
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st;
 		Integer[] labels = new Integer[60000];
@@ -141,7 +259,7 @@ public class MNISTExperiments {
 		while ((st = br.readLine()) != null) {
 			labels[index] = Integer.valueOf(st);
 			index++;
-			if (index == stopAfter) {
+			if (stopAfter != null && index == stopAfter) {
 				break;
 			}
 		}
@@ -152,14 +270,14 @@ public class MNISTExperiments {
 		if (useF1Selection) {
 			expertIDs = f1SelectedExperts;
 		} else {
-			expertIDs = new int[DNNtCombined.NUMBER_OF_EXPERTS];
-			for (int i = 0; i < DNNtCombined.NUMBER_OF_EXPERTS; i++) {
+			expertIDs = new int[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
 				expertIDs[i] = i;
 			}
 		}
 
 		/* Read input files and execute model. */
-		file = new File(inputFile);
+		file = new File(subject.getInputFilePath());
 		br = new BufferedReader(new FileReader(file));
 		int count = 0;
 
@@ -180,21 +298,21 @@ public class MNISTExperiments {
 						}
 			}
 
-			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs, optimized);
+			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs);
 
 			int correctLabel = labels[count];
 
 			// Extract original decision.
-			int origLabel = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1)); /* ORIG */
+			int origLabel = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1)); /* ORIG */
 
 			// Determine final decisions by experts.
-			Map<DNNtCombined.COMBINATION_METHOD, Integer> results = DNNtCombined.combineExperts(combMethod, result, origLabel, trainPrecision,
-					expertIDs, optimized);
+			Map<MNIST0_DNNt_Combined.COMBINATION_METHOD, Integer> results = MNIST0_DNNt_Combined.combineExperts(combMethod, result,
+					origLabel, subject.getTrainPrecision(), expertIDs, false);
 
 			// Print results and collect analytics.
 			System.out.print(count + "; IDEAL: " + correctLabel + "; ");
-			for (Entry<DNNtCombined.COMBINATION_METHOD, Integer> combinedResult : results.entrySet()) {
-				DNNtCombined.COMBINATION_METHOD currentCombinationMethod = combinedResult.getKey();
+			for (Entry<MNIST0_DNNt_Combined.COMBINATION_METHOD, Integer> combinedResult : results.entrySet()) {
+				MNIST0_DNNt_Combined.COMBINATION_METHOD currentCombinationMethod = combinedResult.getKey();
 				int label = combinedResult.getValue();
 
 				boolean passed = (label == correctLabel);
@@ -209,8 +327,8 @@ public class MNISTExperiments {
 
 			// Collect results for experts. Accuracy is only interesting for targeted
 			// repair. Precision is wanted for all experts.
-			for (int expertId = 0; expertId < DNNtCombined.NUMBER_OF_EXPERTS; expertId++) {
-				int label = DNNtCombined.selectLabelWithMaxConfidence(result.get(expertId));
+			for (int expertId = 0; expertId < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
+				int label = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(expertId));
 				boolean passed = (label == correctLabel);
 				if (passed) {
 					passCounter.put(expertId, passCounter.get(expertId) + 1);
@@ -242,7 +360,7 @@ public class MNISTExperiments {
 			System.out.println();
 			count++;
 
-			if (count == stopAfter) {
+			if (stopAfter != null && count == stopAfter) {
 				break;
 			}
 
@@ -253,9 +371,9 @@ public class MNISTExperiments {
 		// Calculate and print accuracy.
 		System.out.println();
 		System.out.println("COMBINATION;ACCURACY;PASS;FAIL;TAR-ACC;TAR-PASS;TAR-FAIL;TP;TN;FP;FN;PREC;RECALL;F1");
-		if (combMethod.equals(DNNtCombined.COMBINATION_METHOD.ALL)) {
-			for (DNNtCombined.COMBINATION_METHOD combinationMethod : DNNtCombined.COMBINATION_METHOD.values()) {
-				if (combinationMethod.equals(DNNtCombined.COMBINATION_METHOD.ALL)) {
+		if (combMethod.equals(MNIST0_DNNt_Combined.COMBINATION_METHOD.ALL)) {
+			for (MNIST0_DNNt_Combined.COMBINATION_METHOD combinationMethod : MNIST0_DNNt_Combined.COMBINATION_METHOD.values()) {
+				if (combinationMethod.equals(MNIST0_DNNt_Combined.COMBINATION_METHOD.ALL)) {
 					continue;
 				}
 				int pass = passCounter.get(combinationMethod);
@@ -271,8 +389,8 @@ public class MNISTExperiments {
 
 			System.out.println(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
 		}
-		double[] prec = new double[DNNtCombined.NUMBER_OF_EXPERTS];
-		for (int expertId = 0; expertId < DNNtCombined.NUMBER_OF_EXPERTS; expertId++) {
+		double[] prec = new double[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
+		for (int expertId = 0; expertId < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
 			int pass = passCounter.get(expertId);
 			int fail = failCounter.get(expertId);
 			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
@@ -300,41 +418,18 @@ public class MNISTExperiments {
 
 	}
 
-	public static void runCombinationOverheadExperiment() throws NumberFormatException, IOException {
+	public static void runCombinationOverheadExperiment(SUBJECT subject, Integer stopAfter, boolean useF1Selection,
+			int[] f1SelectedExperts) throws NumberFormatException, IOException {
 
-		/* ************************************************************** */
-		/* Parameters for the experiment. */
-
-		SUBJECT subject = SUBJECT.LOW_QUALITY_LAST_LAYER;
 		int repairedLayerId = subject.getRepairedLayerId();
 
-		String labelFile = subject.getPath() + "/mnist_test_labels.txt";
-		String inputFile = subject.getPath() + "/mnist_test.txt";
-//		String labelFile = subject.getPath() + "/mnist_train_labels.txt";
-//		String inputFile = subject.getPath() + "/mnist_train.txt";
+		System.out.println("PATH:" + subject.getProjectPath());
 
-		int stopAfter = 60000; // 60000;
-
-		// training precision
-		double[] trainPrecision = new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692,
-				0.950096587250483, 0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
-				0.9746994437466355, 0.9322475570032573 }; // low_quality pattern_based layer_6
-
-		// Experts whose F1 score on train set is more than original model.
-		boolean useF1Selection = false;
-		int[] f1SelectedExperts = new int[] { 6, 8, 9 };
-		
-		// Optimization does not calculate Average and Full iterations.
-		boolean optimized = true;
-
-		/* ************************************************************** */
-
-		System.out.println("PATH:" + subject.getPath());
-
-		InternalData data = new InternalData(subject.getPath(), "weights0.txt", "weights2.txt", "weights6.txt",
+		InternalData data = new InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt", "weights6.txt",
 				"weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getPath(), repairedLayerId, DNNtCombined.NUMBER_OF_EXPERTS);
-		DNNtCombined model = new DNNtCombined(data, repaired_weight_deltas);
+		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getRepairPath(), repairedLayerId,
+				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 		DNNtOriginal origModel = new DNNtOriginal(data);
 
 		/* Initialize analytics */
@@ -352,7 +447,7 @@ public class MNISTExperiments {
 		long accumulatedTimePVCTotal = 0;
 
 		/* Read correct labels. */
-		File file = new File(labelFile);
+		File file = new File(subject.getLabelFilePath());
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st;
 		Integer[] labels = new Integer[60000];
@@ -360,7 +455,7 @@ public class MNISTExperiments {
 		while ((st = br.readLine()) != null) {
 			labels[index] = Integer.valueOf(st);
 			index++;
-			if (index == stopAfter) {
+			if (stopAfter != null && index == stopAfter) {
 				break;
 			}
 		}
@@ -371,14 +466,14 @@ public class MNISTExperiments {
 		if (useF1Selection) {
 			expertIDs = f1SelectedExperts;
 		} else {
-			expertIDs = new int[DNNtCombined.NUMBER_OF_EXPERTS];
-			for (int i = 0; i < DNNtCombined.NUMBER_OF_EXPERTS; i++) {
+			expertIDs = new int[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
 				expertIDs[i] = i;
 			}
 		}
 
 		/* Read input files and execute model. */
-		file = new File(inputFile);
+		file = new File(subject.getInputFilePath());
 		br = new BufferedReader(new FileReader(file));
 		int count = 0;
 
@@ -410,15 +505,15 @@ public class MNISTExperiments {
 
 			// Run combination.
 			long startTimeCombinationNetwork = System.currentTimeMillis();
-			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs, optimized);
+			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs, true);
 			long timeCombinationNetwork = System.currentTimeMillis() - startTimeCombinationNetwork;
 			accumulatedTimeCombinedNetwork += timeCombinationNetwork;
 
 			// Combine NAIVE.
 			long startTimeCombinationNAIVE = System.currentTimeMillis();
-			int origLabelNAIVE = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsNAIVE = DNNtCombined.collectExpertClaims(expertIDs, result);
-			DNNtCombined.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
+			int origLabelNAIVE = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1));
+			List<Integer> expertClaimsNAIVE = MNIST0_DNNt_Combined.collectExpertClaims(expertIDs, result);
+			MNIST0_DNNt_Combined.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
 			long timeNAIVE = System.currentTimeMillis() - startTimeCombinationNAIVE;
 			accumulatedTimeNAIVE += timeNAIVE;
 			accumulatedTimeNAIVETotal += (timeNAIVE + timeCombinationNetwork);
@@ -426,9 +521,9 @@ public class MNISTExperiments {
 
 			// Combine PREC.
 			long startTimeCombinationPREC = System.currentTimeMillis();
-			int origLabelPREC = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsPREC = DNNtCombined.collectExpertClaims(expertIDs, result);
-			DNNtCombined.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, trainPrecision);
+			int origLabelPREC = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1));
+			List<Integer> expertClaimsPREC = MNIST0_DNNt_Combined.collectExpertClaims(expertIDs, result);
+			MNIST0_DNNt_Combined.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, subject.getTrainPrecision());
 			long timePREC = System.currentTimeMillis() - startTimeCombinationPREC;
 			accumulatedTimePREC += timePREC;
 			accumulatedTimePRECTotal += (timePREC + timeCombinationNetwork);
@@ -436,9 +531,9 @@ public class MNISTExperiments {
 
 			// Combine VOTES.
 			long startTimeCombinationVOTES = System.currentTimeMillis();
-			int origLabelVOTES = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsVOTES = DNNtCombined.collectExpertClaims(expertIDs, result);
-			DNNtCombined.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs);
+			int origLabelVOTES = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1));
+			List<Integer> expertClaimsVOTES = MNIST0_DNNt_Combined.collectExpertClaims(expertIDs, result);
+			MNIST0_DNNt_Combined.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs);
 			long timeVOTES = System.currentTimeMillis() - startTimeCombinationVOTES;
 			accumulatedTimeVOTES += timeVOTES;
 			accumulatedTimeVOTESTotal += (timeVOTES + timeCombinationNetwork);
@@ -446,9 +541,9 @@ public class MNISTExperiments {
 
 			// Combine CONF.
 			long startTimeCombinationCONF = System.currentTimeMillis();
-			int origLabelCONF = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsCONF = DNNtCombined.collectExpertClaims(expertIDs, result);
-			DNNtCombined.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
+			int origLabelCONF = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1));
+			List<Integer> expertClaimsCONF = MNIST0_DNNt_Combined.collectExpertClaims(expertIDs, result);
+			MNIST0_DNNt_Combined.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
 			long timeCONF = System.currentTimeMillis() - startTimeCombinationCONF;
 			accumulatedTimeCONF += timeCONF;
 			accumulatedTimeCONFTotal += (timeCONF + timeCombinationNetwork);
@@ -456,9 +551,10 @@ public class MNISTExperiments {
 
 			// Combine PVC.
 			long startTimeCombinationPVC = System.currentTimeMillis();
-			int origLabelPVC = DNNtCombined.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsPVC = DNNtCombined.collectExpertClaims(expertIDs, result);
-			DNNtCombined.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, trainPrecision, expertIDs);
+			int origLabelPVC = MNIST0_DNNt_Combined.selectLabelWithMaxConfidence(result.get(-1));
+			List<Integer> expertClaimsPVC = MNIST0_DNNt_Combined.collectExpertClaims(expertIDs, result);
+			MNIST0_DNNt_Combined.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, subject.getTrainPrecision(),
+					expertIDs);
 			long timePVC = System.currentTimeMillis() - startTimeCombinationPVC;
 			accumulatedTimePVC += timePVC;
 			accumulatedTimePVCTotal += (timePVC + timeCombinationNetwork);
@@ -467,7 +563,7 @@ public class MNISTExperiments {
 			System.out.println();
 			count++;
 
-			if (count == stopAfter) {
+			if (stopAfter != null && count == stopAfter) {
 				break;
 			}
 
@@ -501,12 +597,16 @@ public class MNISTExperiments {
 
 	public static void main(String[] args) {
 		try {
-			runExperiment();
-//			runCombinationOverheadExperiment();
+			long startTime = System.currentTimeMillis();
+			runExperiment(SUBJECT.POISONED_LAST_LAYER_ExpD_TEST, MNIST0_DNNt_Combined.COMBINATION_METHOD.ALL);
+//			runExperiment(SUBJECT.POISONED_LAST_LAYER_ExpD_TRAINING, DNNtCombined.COMBINATION_METHOD.ALL, 60000, true, new int[] { 6, 8, 9 });
+//			runCombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, false, new int[] { 6, 8, 9 });
+			long totalRuntime = System.currentTimeMillis() - startTime;
+			System.out.println();
+			System.out.println("Total Runtime: " + totalRuntime + " ms");
 		} catch (NumberFormatException | IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

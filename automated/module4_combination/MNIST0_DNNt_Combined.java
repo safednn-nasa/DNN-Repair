@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 /**
  * DNNt program that takes repaired weights as input (currently as z3 output).
  */
-public class DNNtCombined {
+public class MNIST0_DNNt_Combined {
 
 	/*
 	 * *****************************************************************************
@@ -21,7 +21,7 @@ public class DNNtCombined {
 	private InternalData internal;
 	private Object weight_delta;
 
-	public DNNtCombined(InternalData internal, Object repaired_weight_deltas) throws IOException {
+	public MNIST0_DNNt_Combined(InternalData internal, Object repaired_weight_deltas) throws IOException {
 		this.internal = internal;
 		this.weight_delta = repaired_weight_deltas;
 	}
