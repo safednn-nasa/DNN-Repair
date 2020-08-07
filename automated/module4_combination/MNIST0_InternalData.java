@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class InternalData {
+public class MNIST0_InternalData {
 
 	public Double[][][][] weights0;
 	public Double[][][][] weights2;
@@ -12,18 +12,10 @@ public class InternalData {
 	public Double[] biases6;
 	public Double[] biases8;
 
-	public InternalData(String PATH, String weights0file, String weights2file, String weights6file, String weights8file,
+	public MNIST0_InternalData(String path, String weights0file, String weights2file, String weights6file, String weights8file,
 			String bias0file, String bias2file, String bias6file, String bias8file)
 			throws NumberFormatException, IOException {
 
-		String path = null;
-		if (PATH == null) {
-//    	    path = "C:\\Users\\dgopinat\\eclipse-workspace\\mnist_example\\mnist_example\\data\\";
-			path = "/Users/yannic/repositories/DNN-Repair/experiments/pattern-based-repair/";
-			throw new RuntimeException("");
-		} else {
-			path = PATH;
-		}
 		File file = new File(path + "/" + weights0file);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st;

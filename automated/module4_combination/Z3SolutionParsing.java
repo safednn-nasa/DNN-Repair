@@ -9,8 +9,9 @@ import java.util.regex.Pattern;
  * I/O Operations - reading weights from Z3
  */
 public class Z3SolutionParsing {
-	
-	public static Object loadRepairedWeights(String path, int repairedLayerId, int numberOfExperts) throws IOException {
+
+	public static Object loadRepairedWeights(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
+			throws IOException {
 
 		if (repairedLayerId == 0) {
 
@@ -18,7 +19,7 @@ public class Z3SolutionParsing {
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 2) {
-			
+
 //			/* DUMMY implementation */
 //			double[][][][][] weight_delta = new double[numberOfExperts+2][3][3][2][4];
 //			Random r = new Random();
@@ -39,19 +40,19 @@ public class Z3SolutionParsing {
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 6) {
-			
+
 			/*
 			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
 			 * first 10 slots
 			 */
-			double[][][] weight_delta = new double[numberOfExperts+2][576][128];
+			double[][][] weight_delta = new double[numberOfExperts + 2][576][128];
 
 			ArrayList<Integer> num0 = new ArrayList<Integer>();
 			ArrayList<Integer> num1 = new ArrayList<Integer>();
 			ArrayList<Double> num2 = new ArrayList<Double>();
 
 			/* Read deltas for experts 0..9 */
-			for (int expertId = 0; expertId < numberOfExperts; expertId++) {
+			for (int expertId : expertIDs) {
 				loadDeltasFromZ3File_divya(path, expertId, num0, num1, num2);
 				for (int i = 0; i < num1.size(); i++) {
 					weight_delta[expertId][num1.get(i)][num0.get(i)] = num2.get(i);
@@ -72,10 +73,10 @@ public class Z3SolutionParsing {
 			for (int i = 0; i < 128; i++) {
 				for (int I = 0; I < 576; I++) {
 					double sum = 0.0;
-					for (int expertId = 0; expertId < numberOfExperts; expertId++) {
+					for (int expertId : expertIDs) {
 						sum += weight_delta[expertId][I][i];
 					}
-					weight_delta[numberOfExperts + 1][I][i] = sum / numberOfExperts;
+					weight_delta[numberOfExperts + 1][I][i] = sum / expertIDs.length;
 				}
 			}
 
@@ -85,14 +86,14 @@ public class Z3SolutionParsing {
 			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
 			 * first 10 slots
 			 */
-			double[][][] weight_delta = new double[numberOfExperts+2][128][10];
+			double[][][] weight_delta = new double[numberOfExperts + 2][128][10];
 
 			ArrayList<Integer> num0 = new ArrayList<Integer>();
 			ArrayList<Integer> num1 = new ArrayList<Integer>();
 			ArrayList<Double> num2 = new ArrayList<Double>();
 
 			/* Read deltas for experts 0..9 */
-			for (int expertId = 0; expertId < numberOfExperts; expertId++) {
+			for (int expertId : expertIDs) {
 				loadDeltasFromZ3File_usman(path, expertId, num0, num1, num2);
 				for (int i = 0; i < num0.size(); i++) {
 					weight_delta[expertId][num0.get(i)][expertId] = num2.get(i);
@@ -114,10 +115,10 @@ public class Z3SolutionParsing {
 			for (int i = 0; i < 10; i++) {
 				for (int I = 0; I < 128; I++) {
 					double sum = 0.0;
-					for (int expertId = 0; expertId < numberOfExperts; expertId++) {
+					for (int expertId : expertIDs) {
 						sum += weight_delta[expertId][I][i];
 					}
-					weight_delta[numberOfExperts + 1][I][i] = sum / numberOfExperts;
+					weight_delta[numberOfExperts + 1][I][i] = sum / expertIDs.length;
 				}
 			}
 
@@ -307,6 +308,5 @@ public class Z3SolutionParsing {
 			throw new RuntimeException("Error during z3 output parsing.", e);
 		}
 	}
-
 
 }

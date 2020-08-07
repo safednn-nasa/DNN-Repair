@@ -1,9 +1,9 @@
 
 
-public class MNIST0_DNNtOriginal
+public class MNIST0_DNNt_Original
 {
 
-  private InternalData internal;
+  private MNIST0_InternalData internal;
 
   // weights0: shape is 3x3x1x2
   // biases0: shape is 2
@@ -14,7 +14,7 @@ public class MNIST0_DNNtOriginal
   // weights8: shape is 128
   // biases8: shape is 10
 
-  public MNIST0_DNNtOriginal(InternalData internal) {
+  public MNIST0_DNNt_Original(MNIST0_InternalData internal) {
     this.internal = internal;
   }
 

@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * DNNt program that takes repaired weights as input (currently as z3 output).
  */
-public class MNIST0_DNNt_Combined {
+public class CIFAR_DNNt_Combined {
 
 	/*
 	 * *****************************************************************************
@@ -15,10 +15,10 @@ public class MNIST0_DNNt_Combined {
 
 	public final static int NUMBER_OF_EXPERTS = 10;
 
-	private MNIST0_InternalData internal;
+	private CIFAR_InternalData internal;
 	private Object weight_delta;
 
-	public MNIST0_DNNt_Combined(MNIST0_InternalData internal, Object repaired_weight_deltas) throws IOException {
+	public CIFAR_DNNt_Combined(CIFAR_InternalData internal, Object repaired_weight_deltas) throws IOException {
 		this.internal = internal;
 		this.weight_delta = repaired_weight_deltas;
 	}
@@ -30,14 +30,14 @@ public class MNIST0_DNNt_Combined {
 		/*
 		 * Store the original calculation as dummy expert on position -1.
 		 */
-		double[][][] layer0_orig = new double[26][26][2];
-		for (int i = 0; i < 26; i++)
-			for (int j = 0; j < 26; j++)
-				for (int k = 0; k < 2; k++) {
+		double[][][] layer0_orig = new double[30][30][32];
+		for (int i = 0; i < 30; i++)
+			for (int j = 0; j < 30; j++)
+				for (int k = 0; k < 32; k++) {
 					layer0_orig[i][j][k] = internal.biases0[k];
 					for (int I = 0; I < 3; I++)
 						for (int J = 0; J < 3; J++)
-							for (int K = 0; K < 1; K++)
+							for (int K = 0; K < 3; K++)
 								layer0_orig[i][j][k] += internal.weights0[I][J][K][k] * input[i + I][j + J][K];
 				}
 		layer0_perExpert.put(-1, layer0_orig);
