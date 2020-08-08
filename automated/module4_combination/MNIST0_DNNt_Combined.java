@@ -49,7 +49,7 @@ public class MNIST0_DNNt_Combined {
 			 * with the adjusted weights for each expert.
 			 */
 
-			double[][][][] delta_layer0_perExpert = (double[][][][]) weight_delta;
+			double[][][][][] delta_layer0_perExpert = (double[][][][][]) weight_delta;
 
 			for (int expertId : expertIDs) {
 				double[][][] layer0 = new double[26][26][2];
@@ -61,7 +61,7 @@ public class MNIST0_DNNt_Combined {
 								for (int J = 0; J < 3; J++)
 									for (int K = 0; K < 1; K++)
 										layer0[i][j][k] += (internal.weights0[I][J][K][k]
-												+ delta_layer0_perExpert[expertId][i][j][k]) * input[i + I][j + J][K];
+												+ delta_layer0_perExpert[expertId][I][J][K][k]) * input[i + I][j + J][K];
 						}
 
 				layer0_perExpert.put(expertId, layer0);
@@ -79,7 +79,7 @@ public class MNIST0_DNNt_Combined {
 									for (int J = 0; J < 3; J++)
 										for (int K = 0; K < 1; K++)
 											layer0[i][j][k] += (internal.weights0[I][J][K][k]
-													+ delta_layer0_perExpert[expertId][i][j][k])
+													+ delta_layer0_perExpert[expertId][I][J][K][k])
 													* input[i + I][j + J][K];
 							}
 
@@ -136,7 +136,7 @@ public class MNIST0_DNNt_Combined {
 
 							}
 
-				layer1_perExpert.put(expertId, layer0);
+				layer1_perExpert.put(expertId, layer1);
 			}
 
 			if (!optimized) {
@@ -156,7 +156,7 @@ public class MNIST0_DNNt_Combined {
 
 								}
 
-					layer1_perExpert.put(expertId, layer0);
+					layer1_perExpert.put(expertId, layer1);
 				}
 			}
 		}
@@ -395,7 +395,7 @@ public class MNIST0_DNNt_Combined {
 										layer4[i][j][k] = layer3[I][J][k];
 						}
 
-				layer4_perExpert.put(expertId, layer3);
+				layer4_perExpert.put(expertId, layer4);
 			}
 
 			if (!optimized) {
@@ -414,7 +414,7 @@ public class MNIST0_DNNt_Combined {
 											layer4[i][j][k] = layer3[I][J][k];
 							}
 
-					layer4_perExpert.put(expertId, layer3);
+					layer4_perExpert.put(expertId, layer4);
 				}
 			}
 		}

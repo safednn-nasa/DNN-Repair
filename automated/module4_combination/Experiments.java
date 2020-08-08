@@ -24,14 +24,14 @@ public class Experiments {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		LOW_QUALITY_PATTERN_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
 				new int[] { 6, 8, 9 }),
 
 		LOW_QUALITY_PATTERN_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
-				"/mnist_train_labels.txt", "/mnist_train.txt",
+				"/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
@@ -40,70 +40,70 @@ public class Experiments {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		LOW_QUALITY_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8",
-				8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpA",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
 						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
 						0.8386951292844257, 0.4046511627906977 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpA", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				"/usman/ExpA", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
 						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
 						0.8386951292844257, 0.4046511627906977 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpB",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
 						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
 						0.8386538763956597, 0.5247171996080876 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpB", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				"/usman/ExpB", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
 						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
 						0.8386538763956597, 0.5247171996080876 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpC",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
 						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
 						0.9010673888800382, 0.7257415786827551 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpC", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				"/usman/ExpC", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
 						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
 						0.9010673888800382, 0.7257415786827551 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpD",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt",
+				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
 						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
 						0.9221577930065015, 0.7257415786827551 },
 				new int[] {}),
 
 		LOW_QUALITY_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpD", 8, "/mnist_train_labels.txt", "/mnist_train.txt",
+				"/usman/ExpD", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
 						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
 						0.9221577930065015, 0.7257415786827551 },
@@ -112,84 +112,84 @@ public class Experiments {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		POISONED_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpA_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpA", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				"/usman/ExpA", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpB_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpB", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				"/usman/ExpB", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpC_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpC", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				"/usman/ExpC", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
 		POISONED_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt",
+				"/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] { 7 }),
 
 		POISONED_LAST_LAYER_ExpD_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpD", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt",
+				"/usman/ExpD", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] { 7 }),
 
 		POISONED_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt",
+				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
@@ -198,20 +198,20 @@ public class Experiments {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		CIFAR_LAST_LAYER_ORIGINAL_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "", -1,
-				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", new double[] {}, new int[] {}),
+				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {}, new int[] {}),
 
 		CIFAR_LAST_LAYER_ORIGINAL_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "", -1,
-				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", new double[] {}, new int[] {}),
+				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {}, new int[] {}),
 
 		CIFAR_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 8,
-				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt",
+				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] {}),
 
 		CIFAR_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 8,
-				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt",
+				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
@@ -224,16 +224,18 @@ public class Experiments {
 		private int repairedLayerId;
 		String inputFilePath;
 		String labelFilePath;
+		boolean needsNormalization;
 		double[] trainPrecision;
 		int[] f1SelectedExperts;
 
 		SUBJECT(String projectPath, String repairPath, int repairedLayerId, String labelFilePath, String inputFilePath,
-				double[] trainPrecision, int[] f1SelectedExperts) {
+				boolean needsNormalization, double[] trainPrecision, int[] f1SelectedExperts) {
 			this.projectPath = projectPath;
 			this.repairPath = projectPath + repairPath;
 			this.repairedLayerId = repairedLayerId;
 			this.labelFilePath = projectPath + labelFilePath;
 			this.inputFilePath = projectPath + inputFilePath;
+			this.needsNormalization = needsNormalization;
 			this.trainPrecision = trainPrecision;
 			this.f1SelectedExperts = f1SelectedExperts;
 		}
@@ -252,6 +254,10 @@ public class Experiments {
 
 		public String getLabelFilePath() {
 			return labelFilePath;
+		}
+
+		public boolean needsNormalization() {
+			return needsNormalization;
 		}
 
 		public String getInputFilePath() {
@@ -383,7 +389,11 @@ public class Experiments {
 						for (int k = 0; k < 1; k++) {
 							Double val = Double.valueOf(values[index]);
 							index++;
-							input[i][j][k] = (double) (val);
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
 						}
 			}
 
@@ -637,7 +647,11 @@ public class Experiments {
 						for (int k = 0; k < 1; k++) {
 							Double val = Double.valueOf(values[index]);
 							index++;
-							input[i][j][k] = (double) (val);
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
 						}
 			}
 
@@ -789,7 +803,12 @@ public class Experiments {
 						for (int k = 0; k < 3; k++) {
 							Double val = Double.valueOf(values[index]);
 							index++;
-							input[i][j][k] = (double) (val / 255.0);
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
+
 						}
 			}
 
@@ -907,8 +926,11 @@ public class Experiments {
 						for (int k = 0; k < 1; k++) {
 							Double val = Double.valueOf(values[index]);
 							index++;
-							// input[i][j][k] = (double)(val/255.0);
-							input[i][j][k] = (double) (val);
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
 						}
 			}
 
@@ -1038,8 +1060,8 @@ public class Experiments {
 		try {
 			long startTime = System.currentTimeMillis();
 //			runMNIST0Experiment(SUBJECT.LOW_QUALITY_PATTERN_TRAINING, ExpertCombination.COMBINATION_METHOD.ALL);
-			runMNIST0Experiment(SUBJECT.POISONED_LAST_LAYER_ExpC_TEST, ExpertCombination.COMBINATION_METHOD.ALL,
-					60000, false);
+			runMNIST0Experiment(SUBJECT.POISONED_LAST_LAYER_ExpC_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 60000,
+					false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, false,
 //					new int[] { 6, 8, 9 });
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_ORIGINAL_TRAINING, 60000);
