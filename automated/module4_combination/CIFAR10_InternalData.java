@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class CIFAR_InternalData {
+public class CIFAR10_InternalData {
 
 	public Double[][][][] weights0;
 	public Double[][][][] weights2;
@@ -16,7 +16,7 @@ public class CIFAR_InternalData {
 	public Double[] biases11;
 	public Double[] biases13;
 
-	public CIFAR_InternalData(String path, String weights0file, String weights2file, String weights5file, String weights7file,
+	public CIFAR10_InternalData(String path, String weights0file, String weights2file, String weights5file, String weights7file,
 			String weights11file, String weights13file, String bias0file, String bias2file, String bias5file,
 			String bias7file, String bias11file, String bias13file) throws NumberFormatException, IOException {
 

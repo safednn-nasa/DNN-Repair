@@ -203,14 +203,14 @@ public class Experiments {
 		CIFAR_LAST_LAYER_ORIGINAL_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "", -1,
 				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {}, new int[] {}),
 
-		CIFAR_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 8,
+		CIFAR_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 13,
 				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] {}),
 
-		CIFAR_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 8,
+		CIFAR_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 13,
 				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
@@ -322,8 +322,8 @@ public class Experiments {
 
 		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getRepairPath(), repairedLayerId,
-				expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
+				repairedLayerId, expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 
 		/* Initialize analytics */
@@ -596,8 +596,8 @@ public class Experiments {
 
 		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getRepairPath(), repairedLayerId,
-				expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
+				repairedLayerId, expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 		MNIST0_DNNt_Original origModel = new MNIST0_DNNt_Original(data);
 
@@ -762,10 +762,10 @@ public class Experiments {
 
 		System.out.println("PATH:" + subject.getProjectPath());
 
-		CIFAR_InternalData data = new CIFAR_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
+		CIFAR10_InternalData data = new CIFAR10_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights5.txt", "weights7.txt", "weights11.txt", "weights13.txt", "biases0.txt", "biases2.txt",
 				"biases5.txt", "biases7.txt", "biases11.txt", "biases13.txt");
-		CIFAR_DNNt_Original model = new CIFAR_DNNt_Original(data);
+		CIFAR10_DNNt_Original model = new CIFAR10_DNNt_Original(data);
 
 		/* Initialize analytics */
 		int passCounter = 0;
@@ -845,30 +845,35 @@ public class Experiments {
 
 	}
 
-	public static void runCIFARExperiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod,
-			Integer stopAfter, boolean useF1Selection, int[] f1SelectedExperts)
+	public static void runCIFAR10Experiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod)
 			throws NumberFormatException, IOException {
+		runCIFAR10Experiment(subject, combMethod, null, false);
+	}
+
+	public static void runCIFAR10Experiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod,
+			Integer stopAfter, boolean useF1Selection) throws NumberFormatException, IOException {
 
 		int repairedLayerId = subject.getRepairedLayerId(); // {0 | 2 | 6 | 8}
 
 		/* Prepare the experts. */
 		int[] expertIDs;
 		if (useF1Selection) {
-			expertIDs = f1SelectedExperts;
+			expertIDs = subject.getF1SelectedExperts();
 		} else {
-			expertIDs = new int[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
-			for (int i = 0; i < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
+			expertIDs = new int[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
 				expertIDs[i] = i;
 			}
 		}
 
 		System.out.println("PATH:" + subject.getProjectPath());
 
-		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
-				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights(subject.getRepairPath(), repairedLayerId,
-				expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
-		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
+		CIFAR10_InternalData data = new CIFAR10_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
+				"weights5.txt", "weights7.txt", "weights11.txt", "weights13.txt", "biases0.txt", "biases2.txt",
+				"biases5.txt", "biases7.txt", "biases11.txt", "biases13.txt");
+		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_CIFAR10(subject.getRepairPath(),
+				repairedLayerId, expertIDs, CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS);
+		CIFAR10_DNNt_Combined model = new CIFAR10_DNNt_Combined(data, repaired_weight_deltas);
 
 		/* Initialize analytics */
 		Map<Object, Integer> passCounter = new HashMap<>();
@@ -883,7 +888,7 @@ public class Experiments {
 			passCounter.put(x, 0);
 			failCounter.put(x, 0);
 		}
-		for (int x = 0; x < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS + 2; x++) {
+		for (int x = 0; x < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS + 2; x++) {
 			passCounter.put(x, 0);
 			failCounter.put(x, 0);
 			targetedPassCounter.put(x, 0);
@@ -918,12 +923,12 @@ public class Experiments {
 			// System.out.println("INPUT:" + st);
 
 			String[] values = st.split(",");
-			double[][][] input = new double[28][28][1];
+			double[][][] input = new double[32][32][3];
 			index = 0;
 			while (index < values.length) {
-				for (int i = 0; i < 28; i++)
-					for (int j = 0; j < 28; j++)
-						for (int k = 0; k < 1; k++) {
+				for (int i = 0; i < 32; i++)
+					for (int j = 0; j < 32; j++)
+						for (int k = 0; k < 3; k++) {
 							Double val = Double.valueOf(values[index]);
 							index++;
 							if (subject.needsNormalization()) {
@@ -931,6 +936,7 @@ public class Experiments {
 							} else {
 								input[i][j][k] = (double) val;
 							}
+
 						}
 			}
 
@@ -944,7 +950,7 @@ public class Experiments {
 			// Determine final decisions by experts.
 			Map<ExpertCombination.COMBINATION_METHOD, Integer> results = ExpertCombination.combineExperts(combMethod,
 					result, origLabel, subject.getTrainPrecision(), expertIDs, false,
-					MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+					CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS);
 
 			// Print results and collect analytics.
 			System.out.print(count + "; IDEAL: " + correctLabel + "; ");
@@ -964,7 +970,7 @@ public class Experiments {
 
 			// Collect results for experts. Accuracy is only interesting for targeted
 			// repair. Precision is wanted for all experts.
-			for (int expertId = 0; expertId < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
+			for (int expertId = 0; expertId < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
 				int label = ExpertCombination.selectLabelWithMaxConfidence(result.get(expertId));
 				boolean passed = (label == correctLabel);
 				if (passed) {
@@ -1027,8 +1033,8 @@ public class Experiments {
 
 			System.out.println(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
 		}
-		double[] prec = new double[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
-		for (int expertId = 0; expertId < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
+		double[] prec = new double[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
+		for (int expertId = 0; expertId < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
 			int pass = passCounter.get(expertId);
 			int fail = failCounter.get(expertId);
 			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
@@ -1060,14 +1066,13 @@ public class Experiments {
 		try {
 			long startTime = System.currentTimeMillis();
 //			runMNIST0Experiment(SUBJECT.LOW_QUALITY_PATTERN_TRAINING, ExpertCombination.COMBINATION_METHOD.ALL);
-			runMNIST0Experiment(SUBJECT.POISONED_LAST_LAYER_ExpC_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 60000,
-					false);
+//			runMNIST0Experiment(SUBJECT.POISONED_LAST_LAYER_ExpC_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 60000,
+//					false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, false,
 //					new int[] { 6, 8, 9 });
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_ORIGINAL_TRAINING, 60000);
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_TRAINING, 60000);
-//			runCIFARExperiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10, false,
-//					new int[] { 6, 8, 9 });
+			runCIFAR10Experiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false);
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
 			System.out.println("Total Runtime: " + totalRuntime + " ms");

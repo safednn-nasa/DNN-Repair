@@ -1,6 +1,6 @@
-public class CIFAR_DNNt_Original {
+public class CIFAR10_DNNt_Original {
 
-	private CIFAR_InternalData internal;
+	private CIFAR10_InternalData internal;
 
 	// weights0: shape is 3x3x3x32
 	// biases0: shape is 32
@@ -15,7 +15,7 @@ public class CIFAR_DNNt_Original {
 	// weights13: shape is 512
 	// biases13: shape is 10
 
-	public CIFAR_DNNt_Original(CIFAR_InternalData internal) {
+	public CIFAR10_DNNt_Original(CIFAR10_InternalData internal) {
 		this.internal = internal;
 	}
 

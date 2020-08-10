@@ -9,34 +9,38 @@ import java.util.regex.Pattern;
  * I/O Operations - reading weights from Z3
  */
 public class Z3SolutionParsing {
+	
+	public static Object loadRepairedWeights_CIFAR10(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
+			throws IOException {
+		
+		if (repairedLayerId == 0) {
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else if (repairedLayerId == 2) {
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else if (repairedLayerId == 5) {
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else if (repairedLayerId == 7) {
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else if (repairedLayerId == 11) {
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else if (repairedLayerId == 13) {
+			return new double[numberOfExperts + 2][512][10];
+//			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+		} else {
+			throw new RuntimeException("Layer " + repairedLayerId + " cannot be repaired!");
+		}
+		
+	}
 
-	public static Object loadRepairedWeights(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
+	public static Object loadRepairedWeights_MNIST0(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
 			throws IOException {
 
 		if (repairedLayerId == 0) {
 
-//			double[][][][][] weight_delta = new double[numberOfExperts+2][3][3][1][2];
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 2) {
 
-//			/* DUMMY implementation */
-//			double[][][][][] weight_delta = new double[numberOfExperts+2][3][3][2][4];
-//			Random r = new Random();
-//			for (int expertId=0; expertId<numberOfExperts+2; expertId++) {
-//				for (int i=0; i<3; i++) {
-//					for (int j=0; j<3; j++) {
-//						for (int k=0; k<2; k++) {
-//							for (int l=0; l<4; l++) {
-//								weight_delta[expertId][i][j][k][l] = r.nextDouble(); 
-//								System.out.println(expertId + ":" + i + ":" + j + ":" + k + ":" + l + " -> "
-//										+ weight_delta[expertId][i][j][k][l]);
-//							}
-//						}
-//					}
-//				}
-//			}
-//			return weight_delta;
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 
 		} else if (repairedLayerId == 6) {
