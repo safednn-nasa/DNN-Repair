@@ -23,15 +23,15 @@ public class Experiments {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		LOW_QUALITY_PATTERN_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_PATTERN_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/divya/layer6",
+				"label", 6, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
 				new int[] { 6, 8, 9 }),
 
-		LOW_QUALITY_PATTERN_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/divya/layer6", 6,
-				"/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_PATTERN_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/divya/layer6",
+				"label", 6, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
@@ -39,71 +39,71 @@ public class Experiments {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		LOW_QUALITY_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_LAST_LAYER_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/layer8",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/layer8",
-				8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_LAST_LAYER_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/layer8",
+				"label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpA",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/ExpA",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
 						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
 						0.8386951292844257, 0.4046511627906977 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpA", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality",
+				"/usman/ExpA", "label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9544933704370601, 0.7040612865988036, 0.2524199553239017, 0.33208040529498284,
 						0.39791652388458637, 0.3175711352302728, 0.8814053390610617, 0.8993692239988265,
 						0.8386951292844257, 0.4046511627906977 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpB",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpB_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/ExpB",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
 						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
 						0.8386538763956597, 0.5247171996080876 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpB", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality",
+				"/usman/ExpB", "label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9156458365638084, 0.9106679415380412, 0.562788906009245, 0.6444893187373791,
 						0.5581665216129968, 0.6281117895725693, 0.9350566459230892, 0.9185229481237853,
 						0.8386538763956597, 0.5247171996080876 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpC",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpC_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/ExpC",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
 						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
 						0.9010673888800382, 0.7257415786827551 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpC", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality",
+				"/usman/ExpC", "label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.841407808492448, 0.9379556382813712, 0.9494325767690254, 0.6368750663411528,
 						0.7353535353535353, 0.7935308343409916, 0.8278192313107138, 0.9191318566968931,
 						0.9010673888800382, 0.7257415786827551 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality", "/usman/ExpD",
-				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpD_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/ExpD",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
 						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
 						0.9221577930065015, 0.7257415786827551 },
 				new int[] {}),
 
-		LOW_QUALITY_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_low_quality",
-				"/usman/ExpD", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
+		LOW_QUALITY_LAST_LAYER_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality",
+				"/usman/ExpD", "label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9658736669401149, 0.9321693448702101, 0.8903286978508217, 0.9058468755235383,
 						0.6448184233835252, 0.826530612244898, 0.9033451518421458, 0.9191318566968931,
 						0.9221577930065015, 0.7257415786827551 },
@@ -111,85 +111,85 @@ public class Experiments {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		POISONED_LAST_LAYER_ExpA_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		POISONED_LAST_LAYER_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpA",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpA_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpA", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
+		POISONED_LAST_LAYER_ExpA_POISONED_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned",
+				"/usman/ExpA", "label", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpA_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpA", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
+		POISONED_LAST_LAYER_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpA",
+				"label", 8, "/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9564160725858717, 0.8183695784230348, 0.9087283325663446, 0.8839259901705695,
 						0.9368625546381739, 0.7205705905879216, 0.9756622516556291, 0.917679800790977,
 						0.9291553133514986, 0.896787943370376 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpB_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		POISONED_LAST_LAYER_ExpB_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpB",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpB_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpB", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
+		POISONED_LAST_LAYER_ExpB_POISONED_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned",
+				"/usman/ExpB", "label", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpB_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpB", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
+		POISONED_LAST_LAYER_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpB",
+				"label", 8, "/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.7458417338709677, 0.8056917374148033, 0.9329767149150409, 0.8909462020702726,
 						0.9306069876026405, 0.8545224541429475, 0.8876844323998796, 0.917679800790977,
 						0.9247294716740929, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpC_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		POISONED_LAST_LAYER_ExpC_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpC",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpC_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpC", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
+		POISONED_LAST_LAYER_ExpC_POISONED_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned",
+				"/usman/ExpC", "label", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpC_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpC", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
+		POISONED_LAST_LAYER_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpC",
+				"label", 8, "/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9287172240540116, 0.9037017167381974, 0.8927980754773718, 0.8785570566254671,
 						0.9361943319838056, 0.8261733679865464, 0.9714944801449992, 0.917679800790977,
 						0.9285714285714286, 0.8858214553638409 },
 				new int[] {}),
 
-		POISONED_LAST_LAYER_ExpD_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
-				"/mnist_test_labels.txt", "/mnist_test.txt", false,
+		POISONED_LAST_LAYER_ExpD_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpD",
+				"label", 8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] { 7 }),
 
-		POISONED_LAST_LAYER_ExpD_POISONED_TEST("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned",
-				"/usman/ExpD", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
+		POISONED_LAST_LAYER_ExpD_POISONED_TEST("/Users/yannic/experiments/nnrepair/mnist_poisoned",
+				"/usman/ExpD", "label", 8, "/poisoned_mnist_test_label_csv.txt", "/poisoned_mnist_test_csv.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] { 7 }),
 
-		POISONED_LAST_LAYER_ExpD_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/mnist_poisoned", "/usman/ExpD", 8,
-				"/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
+		POISONED_LAST_LAYER_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/mnist_poisoned", "/usman/ExpD",
+				"label", 8, "/poisoned_mnist_train_label_csv.txt", "/poisoned_mnist_train_csv.txt", false,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
@@ -197,20 +197,218 @@ public class Experiments {
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		CIFAR_LAST_LAYER_ORIGINAL_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "", -1,
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpA", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpA", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpB_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpB", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpB", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpC_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpC", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpC", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpD_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpD", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_1_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.1_ExpD", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.1.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpA", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpA", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpB", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpB", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpC", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpC", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpD", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.05_ExpD", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.05.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpA", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpA", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpB_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpB", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpB", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpC_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpC", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpC", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TEST("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpD", "solution", 8, "/mnist_test_label_csv.txt", "/mnist_test_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+
+		ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/mnist_adv",
+				"/usman/eps.01_ExpD", "solution", 8, "/mnist_adv_val_label.txt", "/mnist_val_csv_fgsm_epsilon0.01.txt",
+				true,
+				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
+						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
+						0.9499427449697366, 0.8569770815201625 },
+				new int[] {}),
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		CIFAR_LAST_LAYER_ORIGINAL_TEST("/Users/yannic/experiments/nnrepair/cifar", "", "label", -1,
 				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {}, new int[] {}),
 
-		CIFAR_LAST_LAYER_ORIGINAL_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "", -1,
+		CIFAR_LAST_LAYER_ORIGINAL_TRAINING("/Users/yannic/experiments/nnrepair/cifar", "", "label", -1,
 				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {}, new int[] {}),
 
-		CIFAR_LAST_LAYER_TEST("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 13,
+		CIFAR_LAST_LAYER_TEST("/Users/yannic/experiments/nnrepair/cifar", "/usman/ExpD", "label", 13,
 				"/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
 				new int[] {}),
 
-		CIFAR_LAST_LAYER_TRAINING("/Users/yannic/Desktop/NNRepair_experiments/cifar", "/usman/ExpD", 13,
+		CIFAR_LAST_LAYER_TRAINING("/Users/yannic/experiments/nnrepair/cifar", "/usman/ExpD", "label", 13,
 				"/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true,
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
@@ -221,6 +419,7 @@ public class Experiments {
 
 		private String projectPath;
 		private String repairPath;
+		private String solutionFileNamePrefix;
 		private int repairedLayerId;
 		String inputFilePath;
 		String labelFilePath;
@@ -228,10 +427,12 @@ public class Experiments {
 		double[] trainPrecision;
 		int[] f1SelectedExperts;
 
-		SUBJECT(String projectPath, String repairPath, int repairedLayerId, String labelFilePath, String inputFilePath,
-				boolean needsNormalization, double[] trainPrecision, int[] f1SelectedExperts) {
+		SUBJECT(String projectPath, String repairPath, String solutionFileNamePrefix, int repairedLayerId,
+				String labelFilePath, String inputFilePath, boolean needsNormalization, double[] trainPrecision,
+				int[] f1SelectedExperts) {
 			this.projectPath = projectPath;
 			this.repairPath = projectPath + repairPath;
+			this.solutionFileNamePrefix = solutionFileNamePrefix;
 			this.repairedLayerId = repairedLayerId;
 			this.labelFilePath = projectPath + labelFilePath;
 			this.inputFilePath = projectPath + inputFilePath;
@@ -246,6 +447,10 @@ public class Experiments {
 
 		public String getRepairPath() {
 			return repairPath;
+		}
+
+		public String getSolutionFileNamePrefix() {
+			return solutionFileNamePrefix;
 		}
 
 		public int getRepairedLayerId() {
@@ -323,7 +528,8 @@ public class Experiments {
 		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
 		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
-				repairedLayerId, expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 
 		/* Initialize analytics */
@@ -520,8 +726,11 @@ public class Experiments {
 
 			System.out.println(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
 		}
+		
 		double[] prec = new double[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
 		List<Integer> f1Experts = new ArrayList<>();
+		StringBuilder bs = new StringBuilder();
+		
 		for (int expertId : expertIDs) {
 			int pass = passCounter.get(expertId);
 			int fail = failCounter.get(expertId);
@@ -561,14 +770,16 @@ public class Experiments {
 			double recall_O = ((double) TP_O) / (TP_O + FN_O);
 			double f1_O = 2 * precision_O * recall_O / (precision_O + recall_O);
 
-			System.out.println(id + ";;;;" + targetedAccuracy_O + ";" + targetedPass_O + ";" + targetedFail_O + ";"
+			bs.append(id + ";;;;" + targetedAccuracy_O + ";" + targetedPass_O + ";" + targetedFail_O + ";"
 					+ TP_O + ";" + TN_O + ";" + FP_O + ";" + FN_O + ";" + round(precision_O * 100.0, 2) + ";"
-					+ round(recall_O * 100.0, 2) + ";" + round(f1_O * 100.0, 2));
+					+ round(recall_O * 100.0, 2) + ";" + round(f1_O * 100.0, 2) + "\n");
 
 			if (f1 > f1_O) {
 				f1Experts.add(expertId);
 			}
 		}
+		
+		System.out.println(bs.toString());
 
 		System.out.println();
 		System.out.println("prec=" + Arrays.toString(prec));
@@ -597,7 +808,8 @@ public class Experiments {
 		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
 		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
-				repairedLayerId, expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 		MNIST0_DNNt_Original origModel = new MNIST0_DNNt_Original(data);
 
@@ -1066,13 +1278,13 @@ public class Experiments {
 		try {
 			long startTime = System.currentTimeMillis();
 //			runMNIST0Experiment(SUBJECT.LOW_QUALITY_PATTERN_TRAINING, ExpertCombination.COMBINATION_METHOD.ALL);
-//			runMNIST0Experiment(SUBJECT.POISONED_LAST_LAYER_ExpC_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 60000,
-//					false);
+			runMNIST0Experiment(SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST,
+					ExpertCombination.COMBINATION_METHOD.ALL, 60000, false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, false,
 //					new int[] { 6, 8, 9 });
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_ORIGINAL_TRAINING, 60000);
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_TRAINING, 60000);
-			runCIFAR10Experiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false);
+//			runCIFAR10Experiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false);
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
 			System.out.println("Total Runtime: " + totalRuntime + " ms");

@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
  * I/O Operations - reading weights from Z3
  */
 public class Z3SolutionParsing {
-	
-	public static Object loadRepairedWeights_CIFAR10(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
-			throws IOException {
-		
+
+	public static Object loadRepairedWeights_CIFAR10(String path, int repairedLayerId, int[] expertIDs,
+			int numberOfExperts) throws IOException {
+
 		if (repairedLayerId == 0) {
 			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
 		} else if (repairedLayerId == 2) {
@@ -29,11 +29,11 @@ public class Z3SolutionParsing {
 		} else {
 			throw new RuntimeException("Layer " + repairedLayerId + " cannot be repaired!");
 		}
-		
+
 	}
 
-	public static Object loadRepairedWeights_MNIST0(String path, int repairedLayerId, int[] expertIDs, int numberOfExperts)
-			throws IOException {
+	public static Object loadRepairedWeights_MNIST0(String path, String solutionFileNamePrefix, int repairedLayerId,
+			int[] expertIDs, int numberOfExperts) throws IOException {
 
 		if (repairedLayerId == 0) {
 
@@ -98,7 +98,7 @@ public class Z3SolutionParsing {
 
 			/* Read deltas for experts 0..9 */
 			for (int expertId : expertIDs) {
-				loadDeltasFromZ3File_usman(path, expertId, num0, num1, num2);
+				loadDeltasFromZ3File_usman(path, solutionFileNamePrefix, expertId, num0, num1, num2);
 				for (int i = 0; i < num0.size(); i++) {
 					weight_delta[expertId][num0.get(i)][expertId] = num2.get(i);
 					System.out.println(expertId + " : " + num0.get(i) + " : " + expertId + " -> "
@@ -134,8 +134,8 @@ public class Z3SolutionParsing {
 
 	}
 
-	public static void loadDeltasFromZ3File_usman(String path, int lab, ArrayList<Integer> num0,
-			ArrayList<Integer> num1, ArrayList<Double> num2) {
+	public static void loadDeltasFromZ3File_usman(String path, String solutionFileNamePrefix, int lab,
+			ArrayList<Integer> num0, ArrayList<Integer> num1, ArrayList<Double> num2) {
 
 		num0.clear();
 		num1.clear();
@@ -149,7 +149,7 @@ public class Z3SolutionParsing {
 		if (lab == 10) {
 			readfile = path + "/full.txt";
 		} else {
-			readfile = path + "/label" + lab + ".txt";
+			readfile = path + "/" + solutionFileNamePrefix + lab + ".txt";
 		}
 
 		try (FileReader frread = new FileReader(readfile); BufferedReader brread = new BufferedReader(frread)) {
