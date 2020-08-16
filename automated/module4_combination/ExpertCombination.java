@@ -245,8 +245,10 @@ public class ExpertCombination {
 		}
 
 		if (combMethod.equals(COMBINATION_METHOD.PREC) || combMethod.equals(COMBINATION_METHOD.ALL)) {
-			combinedResults.put(COMBINATION_METHOD.PREC,
-					combineExpertsByPrecision(expertClaims, origLabel, trainPrecision));
+			if (trainPrecision.length > 0) {
+				combinedResults.put(COMBINATION_METHOD.PREC,
+						combineExpertsByPrecision(expertClaims, origLabel, trainPrecision));	
+			}
 		}
 
 		if (combMethod.equals(COMBINATION_METHOD.CONF) || combMethod.equals(COMBINATION_METHOD.ALL)) {
@@ -259,8 +261,10 @@ public class ExpertCombination {
 		}
 
 		if (combMethod.equals(COMBINATION_METHOD.PVC) || combMethod.equals(COMBINATION_METHOD.ALL)) {
-			combinedResults.put(COMBINATION_METHOD.PVC, combineExpertsByPVC(result, expertClaims, origLabel,
-					trainPrecision, expertIDs, numberOfFinalLabels));
+			if (trainPrecision.length > 0) {
+				combinedResults.put(COMBINATION_METHOD.PVC, combineExpertsByPVC(result, expertClaims, origLabel,
+						trainPrecision, expertIDs, numberOfFinalLabels));
+			}
 		}
 
 		return combinedResults;
