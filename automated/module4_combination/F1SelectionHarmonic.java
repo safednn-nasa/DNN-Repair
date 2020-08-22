@@ -9,12 +9,12 @@ public class F1SelectionHarmonic {
 
 	public static void main(String[] args) {
 		
-		String resultsPath = "/Users/yannic/experiments/nnrepair/mnist_adv_results";
+		String resultsPath = "/Users/yannic/experiments/nnrepair/cifar_adv_results";
 		
-		String subject = "ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD";
+		String subject = "CIFAR_LAST_LAYER_Eps0_01_ExpA";
 		
 		String f1PathAdversarialTrainingFile = resultsPath + "/" + subject + "_ADV_TRAINING_prec_f1.csv";
-		String f1PathATrainingFile = resultsPath + "/" + subject + "_TRAINING_prec_f1.csv";
+		String f1PathTrainingFile = resultsPath + "/" + subject + "_TRAINING_prec_f1.csv";
 		
 		
 		double[] adv_train_f1_values = new double[10];
@@ -27,18 +27,21 @@ public class F1SelectionHarmonic {
 			while (line != null) {
 				if (line.startsWith("f1Experts=[")) {
 					System.out.println(line);
+					System.out.println();
 				}
 				if (line.startsWith("f1_values=[")) {
 					String[] values = line.substring(11, line.length()-1).split(",");
 					for (int i=0; i<10; i++) {
 						adv_train_f1_values[i] = Double.valueOf(values[i].trim());
 					}
+					System.out.println(line);
 				}
 				if (line.startsWith("f1_values_original=[")) {
 					String[] values = line.substring(20, line.length()-1).split(",");
 					for (int i=0; i<10; i++) {
 						adv_train_f1_values_original[i] = Double.valueOf(values[i].trim());
 					}
+					System.out.println(line);
 				}
 				line = reader.readLine();
 			}
@@ -51,7 +54,7 @@ public class F1SelectionHarmonic {
 		double[] train_f1_values_original  = new double[10];
 		
 		try {
-			reader = new BufferedReader(new FileReader(f1PathATrainingFile));
+			reader = new BufferedReader(new FileReader(f1PathTrainingFile));
 			String line = reader.readLine();
 			while (line != null) {
 				if (line.startsWith("f1_values=[")) {

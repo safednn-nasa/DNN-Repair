@@ -30,14 +30,14 @@ public class Experiments {
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
-				new int[] { 6, 8, 9 }, new int[] {}, null),
+				new int[] { 6, 8, 9 }, new int[] {}, "/Users/yannic/experiments/nnrepair/mnist_overhead_results"),
 
 		LOW_QUALITY_PATTERN_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/divya/layer6", "label",
 				6, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.970734126984127, 0.9848417298261257, 0.6285016977928692, 0.950096587250483,
 						0.6775396085740913, 0.914295509084676, 0.9900068917987594, 0.9570011025358324,
 						0.9746994437466355, 0.9322475570032573 },
-				new int[] { 6, 8, 9 }, new int[] {}, null),
+				new int[] { 6, 8, 9 }, new int[] {}, "/Users/yannic/experiments/nnrepair/mnist_overhead_results"),
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,14 +46,14 @@ public class Experiments {
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
-				new int[] {}, new int[] {}, null),
+				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/mnist_overhead_results"),
 
 		LOW_QUALITY_LAST_LAYER_TRAINING("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/layer8",
 				"label", 8, "/mnist_train_labels.txt", "/mnist_train.txt", false,
 				new double[] { 0.9346001583531275, 0.7040612865988036, 0.7582460225067909, 0.3880053650124545,
 						0.7409247229652274, 0.32622190080154284, 0.8278192313107138, 0.9191318566968931,
 						0.8989931276969794, 0.4081175647305808 },
-				new int[] {}, new int[] {}, null),
+				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/mnist_overhead_results"),
 
 		LOW_QUALITY_LAST_LAYER_ExpA_TEST("/Users/yannic/experiments/nnrepair/mnist_low_quality", "/usman/ExpA", "label",
 				8, "/mnist_test_labels.txt", "/mnist_test.txt", false,
@@ -461,7 +461,89 @@ public class Experiments {
 				new double[] { 0.9883939238777949, 0.9479328347678848, 0.9302873292510598, 0.8875980249782167,
 						0.9655978623914495, 0.8755776142392606, 0.9721260102259608, 0.9180832356389215,
 						0.9499427449697366, 0.8569770815201625 },
-				new int[] {}, new int[] {}, null);
+				new int[] {}, new int[] {}, null),
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpA",
+				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpA_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpA", "solution",
+				13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpA",
+				"solution", 13, "/cifar10_adv_labels.txt", "/cifar10_adv_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpA",
+				"solution", 13, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpB_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpB",
+				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpB_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpB", "solution",
+				13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpB",
+				"solution", 13, "/cifar10_adv_labels.txt", "/cifar10_adv_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpB",
+				"solution", 13, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpC_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpC",
+				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpC_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpC", "solution",
+				13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpC",
+				"solution", 13, "/cifar10_adv_labels.txt", "/cifar10_adv_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpC",
+				"solution", 13, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpD_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD",
+				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpD_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD", "solution",
+				13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD",
+				"solution", 13, "/cifar10_adv_labels.txt", "/cifar10_adv_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD",
+				"solution", 13, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results");
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -889,15 +971,15 @@ public class Experiments {
 
 	}
 
-	public static void runMNIST0CombinationOverheadExperiment(SUBJECT subject, Integer stopAfter,
-			boolean useF1Selection, int[] f1SelectedExperts) throws NumberFormatException, IOException {
+	public static void runMNIST0CombinationOverheadExperiment(SUBJECT subject, Integer stopAfter, int iterations,
+			boolean useF1Selection) throws NumberFormatException, IOException {
 
 		int repairedLayerId = subject.getRepairedLayerId();
 
 		/* Prepare the experts. */
 		int[] expertIDs;
 		if (useF1Selection) {
-			expertIDs = f1SelectedExperts;
+			expertIDs = subject.getF1SelectedExperts();
 		} else {
 			expertIDs = new int[MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS];
 			for (int i = 0; i < MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
@@ -909,25 +991,33 @@ public class Experiments {
 
 		MNIST0_InternalData data = new MNIST0_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
 				"weights6.txt", "weights8.txt", "biases0.txt", "biases2.txt", "biases6.txt", "biases8.txt");
-		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
-				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
-				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+//		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST0(subject.getRepairPath(),
+//				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+//				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+		double[][][] repaired_weight_deltas = new double[10 + 2][576][128];
+		for (int i=0; i<12; i++) {
+			for (int j=0; j<576; j++) {
+				for (int k=0; k<128; k++) {
+					repaired_weight_deltas[i][j][k] = 0.5;
+				}
+			}
+		}
 		MNIST0_DNNt_Combined model = new MNIST0_DNNt_Combined(data, repaired_weight_deltas);
 		MNIST0_DNNt_Original origModel = new MNIST0_DNNt_Original(data);
 
 		/* Initialize analytics */
-		long accumulatedTimeOriginal = 0;
-		long accumulatedTimeCombinedNetwork = 0;
-		long accumulatedTimeNAIVE = 0;
-		long accumulatedTimeNAIVETotal = 0;
-		long accumulatedTimePREC = 0;
-		long accumulatedTimePRECTotal = 0;
-		long accumulatedTimeVOTES = 0;
-		long accumulatedTimeVOTESTotal = 0;
-		long accumulatedTimeCONF = 0;
-		long accumulatedTimeCONFTotal = 0;
-		long accumulatedTimePVC = 0;
-		long accumulatedTimePVCTotal = 0;
+		double accumulatedTimeOriginal = 0;
+		double accumulatedTimeCombinedNetwork = 0;
+		double accumulatedTimeNAIVE = 0;
+		double accumulatedTimeNAIVETotal = 0;
+		double accumulatedTimePREC = 0;
+		double accumulatedTimePRECTotal = 0;
+		double accumulatedTimeVOTES = 0;
+		double accumulatedTimeVOTESTotal = 0;
+		double accumulatedTimeCONF = 0;
+		double accumulatedTimeCONFTotal = 0;
+		double accumulatedTimePVC = 0;
+		double accumulatedTimePVCTotal = 0;
 
 		/* Read correct labels. */
 		File file = new File(subject.getLabelFilePath());
@@ -943,6 +1033,8 @@ public class Experiments {
 			}
 		}
 		br.close();
+		
+		StringBuilder outStringBuilder = new StringBuilder();
 
 		/* Read input files and execute model. */
 		file = new File(subject.getInputFilePath());
@@ -973,68 +1065,80 @@ public class Experiments {
 
 			// Run original model.
 			long startTimeOriginal = System.currentTimeMillis();
-			origModel.run(input);
-			long timeOriginal = System.currentTimeMillis() - startTimeOriginal;
+			for (int i = 0; i < iterations; i++) {
+				origModel.run(input);
+			}
+			double timeOriginal = (System.currentTimeMillis() - startTimeOriginal) / (double) iterations;
 			accumulatedTimeOriginal += timeOriginal;
 			System.out.print("; ORIG=" + timeOriginal);
 
+			Map<Integer, double[]> result = new HashMap<>();
 			// Run combination.
 			long startTimeCombinationNetwork = System.currentTimeMillis();
-			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs, true);
-			long timeCombinationNetwork = System.currentTimeMillis() - startTimeCombinationNetwork;
+			for (int i = 0; i < iterations; i++) {
+				result = model.run(input, repairedLayerId, expertIDs, true);
+			}
+			double timeCombinationNetwork = (System.currentTimeMillis() - startTimeCombinationNetwork)
+					/ (double) iterations;
 			accumulatedTimeCombinedNetwork += timeCombinationNetwork;
 
 			// Combine NAIVE.
 			long startTimeCombinationNAIVE = System.currentTimeMillis();
-			int origLabelNAIVE = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsNAIVE = ExpertCombination.collectExpertClaims(expertIDs, result);
-			ExpertCombination.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
-			long timeNAIVE = System.currentTimeMillis() - startTimeCombinationNAIVE;
+			for (int i = 0; i < iterations; i++) {
+				int origLabelNAIVE = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsNAIVE = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
+			}
+			double timeNAIVE = (System.currentTimeMillis() - startTimeCombinationNAIVE) / (double) iterations;
 			accumulatedTimeNAIVE += timeNAIVE;
 			accumulatedTimeNAIVETotal += (timeNAIVE + timeCombinationNetwork);
 			System.out.print("; NAIVE=" + timeNAIVE + "; NAIVETotal=" + (timeNAIVE + timeCombinationNetwork));
 
-			// Combine PREC.
-			long startTimeCombinationPREC = System.currentTimeMillis();
-			int origLabelPREC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsPREC = ExpertCombination.collectExpertClaims(expertIDs, result);
-			ExpertCombination.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, subject.getTrainPrecision());
-			long timePREC = System.currentTimeMillis() - startTimeCombinationPREC;
-			accumulatedTimePREC += timePREC;
-			accumulatedTimePRECTotal += (timePREC + timeCombinationNetwork);
-			System.out.print("; PREC=" + timePREC + "; PRECTotal=" + (timePREC + timeCombinationNetwork));
-
+//			// Combine PREC.
+//			long startTimeCombinationPREC = System.currentTimeMillis();
+//			int origLabelPREC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+//			List<Integer> expertClaimsPREC = ExpertCombination.collectExpertClaims(expertIDs, result);
+//			ExpertCombination.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, subject.getTrainPrecision());
+//			long timePREC = System.currentTimeMillis() - startTimeCombinationPREC;
+//			accumulatedTimePREC += timePREC;
+//			accumulatedTimePRECTotal += (timePREC + timeCombinationNetwork);
+//			System.out.print("; PREC=" + timePREC + "; PRECTotal=" + (timePREC + timeCombinationNetwork));
+//
 			// Combine VOTES.
 			long startTimeCombinationVOTES = System.currentTimeMillis();
-			int origLabelVOTES = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsVOTES = ExpertCombination.collectExpertClaims(expertIDs, result);
-			ExpertCombination.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs,
-					MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
-			long timeVOTES = System.currentTimeMillis() - startTimeCombinationVOTES;
+			for (int i = 0; i < iterations; i++) {
+				int origLabelVOTES = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsVOTES = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs,
+						MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+			}
+			double timeVOTES = (System.currentTimeMillis() - startTimeCombinationVOTES) / (double) iterations;
 			accumulatedTimeVOTES += timeVOTES;
 			accumulatedTimeVOTESTotal += (timeVOTES + timeCombinationNetwork);
 			System.out.print("; VOTES=" + timeVOTES + "; VOTESTotal=" + (timeVOTES + timeCombinationNetwork));
 
 			// Combine CONF.
 			long startTimeCombinationCONF = System.currentTimeMillis();
-			int origLabelCONF = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsCONF = ExpertCombination.collectExpertClaims(expertIDs, result);
-			ExpertCombination.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
-			long timeCONF = System.currentTimeMillis() - startTimeCombinationCONF;
+			for (int i = 0; i < iterations; i++) {
+				int origLabelCONF = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsCONF = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
+			}
+			double timeCONF = (System.currentTimeMillis() - startTimeCombinationCONF) / (double) iterations;
 			accumulatedTimeCONF += timeCONF;
 			accumulatedTimeCONFTotal += (timeCONF + timeCombinationNetwork);
 			System.out.print("; CONF=" + timeCONF + "; CONFTotal=" + (timeCONF + timeCombinationNetwork));
 
-			// Combine PVC.
-			long startTimeCombinationPVC = System.currentTimeMillis();
-			int origLabelPVC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
-			List<Integer> expertClaimsPVC = ExpertCombination.collectExpertClaims(expertIDs, result);
-			ExpertCombination.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, subject.getTrainPrecision(),
-					expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
-			long timePVC = System.currentTimeMillis() - startTimeCombinationPVC;
-			accumulatedTimePVC += timePVC;
-			accumulatedTimePVCTotal += (timePVC + timeCombinationNetwork);
-			System.out.print("; PVC=" + timePVC + "; PVCTotal=" + (timePVC + timeCombinationNetwork));
+//			// Combine PVC.
+//			long startTimeCombinationPVC = System.currentTimeMillis();
+//			int origLabelPVC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+//			List<Integer> expertClaimsPVC = ExpertCombination.collectExpertClaims(expertIDs, result);
+//			ExpertCombination.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, subject.getTrainPrecision(),
+//					expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+//			long timePVC = System.currentTimeMillis() - startTimeCombinationPVC;
+//			accumulatedTimePVC += timePVC;
+//			accumulatedTimePVCTotal += (timePVC + timeCombinationNetwork);
+//			System.out.print("; PVC=" + timePVC + "; PVCTotal=" + (timePVC + timeCombinationNetwork));
 
 			System.out.println();
 			count++;
@@ -1049,25 +1153,34 @@ public class Experiments {
 
 		// Calculate and print average times.
 		System.out.println();
-		System.out.println("Average execution times after " + count + " inputs:");
-		System.out.println();
-		System.out.println("SUBJECT;AVG_TIME(ms)");
-		System.out.println("ORIG;" + ((double) accumulatedTimeOriginal / count));
-		System.out.println(";");
-		System.out.println("COMBINED_NETWORK;" + ((double) accumulatedTimeCombinedNetwork / count));
-		System.out.println(";");
-		System.out.println("NAIVE;" + ((double) accumulatedTimeNAIVE / count));
-		System.out.println("PREC;" + ((double) accumulatedTimePREC / count));
-		System.out.println("VOTES;" + ((double) accumulatedTimeVOTES / count));
-		System.out.println("CONF;" + ((double) accumulatedTimeCONF / count));
-		System.out.println("PVC;" + ((double) accumulatedTimePVC / count));
-		System.out.println(";");
-		System.out.println("NAIVETotal;" + ((double) accumulatedTimeNAIVETotal / count));
-		System.out.println("PRECTotal;" + ((double) accumulatedTimePRECTotal / count));
-		System.out.println("VOTESTotal;" + ((double) accumulatedTimeVOTESTotal / count));
-		System.out.println("CONFTotal;" + ((double) accumulatedTimeCONFTotal / count));
-		System.out.println("PVCTotal;" + ((double) accumulatedTimePVCTotal / count));
-		System.out.println();
+		outStringBuilder.append("Average execution times after " + count + " inputs with " + iterations + " iterations.; \n");
+		outStringBuilder.append("\n");
+		outStringBuilder.append("\n");
+		outStringBuilder.append("SUBJECT;AVG_TIME(ms)" + "\n");
+		outStringBuilder.append("ORIG;" + ((double) accumulatedTimeOriginal / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("COMBINED_NETWORK;" + ((double) accumulatedTimeCombinedNetwork / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("NAIVE;" + ((double) accumulatedTimeNAIVE / count) + "\n");
+//		outStringBuilder.append("PREC;" + ((double) accumulatedTimePREC / count) + "\n");
+		outStringBuilder.append("VOTES;" + ((double) accumulatedTimeVOTES / count) + "\n");
+		outStringBuilder.append("CONF;" + ((double) accumulatedTimeCONF / count) + "\n");
+//		outStringBuilder.append("PVC;" + ((double) accumulatedTimePVC / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("NAIVETotal;" + ((double) accumulatedTimeNAIVETotal / count) + "\n");
+//		outStringBuilder.append("PRECTotal;" + ((double) accumulatedTimePRECTotal / count) + "\n");
+		outStringBuilder.append("VOTESTotal;" + ((double) accumulatedTimeVOTESTotal / count) + "\n");
+		outStringBuilder.append("CONFTotal;" + ((double) accumulatedTimeCONFTotal / count) + "\n");
+//		outStringBuilder.append("PVCTotal;" + ((double) accumulatedTimePVCTotal / count) + "\n");
+		outStringBuilder.append("\n" + "\n");
+		System.out.println(outStringBuilder.toString());
+		
+		if (subject.getOutputPath() != null) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + "_overhead.csv"));
+			writer.write(outStringBuilder.toString());
+			writer.close();
+		}
 
 	}
 
@@ -1161,11 +1274,16 @@ public class Experiments {
 
 	public static void runCIFAR10Experiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod)
 			throws NumberFormatException, IOException {
-		runCIFAR10Experiment(subject, combMethod, null, false);
+		runCIFAR10Experiment(subject, combMethod, null, false, false);
 	}
 
 	public static void runCIFAR10Experiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod,
-			Integer stopAfter, boolean useF1Selection) throws NumberFormatException, IOException {
+			Integer stopAfter, boolean useF1Selection, boolean useF1HarmonicSelection)
+			throws NumberFormatException, IOException {
+
+		if (useF1Selection && useF1HarmonicSelection) {
+			throw new RuntimeException("You can use both: f1 selection and f1-harmonic selection.");
+		}
 
 		int repairedLayerId = subject.getRepairedLayerId(); // {0 | 2 | 6 | 8}
 
@@ -1173,6 +1291,8 @@ public class Experiments {
 		int[] expertIDs;
 		if (useF1Selection) {
 			expertIDs = subject.getF1SelectedExperts();
+		} else if (useF1HarmonicSelection) {
+			expertIDs = subject.getF1HarmonicSelectedExperts();
 		} else {
 			expertIDs = new int[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
 			for (int i = 0; i < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
@@ -1186,7 +1306,8 @@ public class Experiments {
 				"weights5.txt", "weights7.txt", "weights11.txt", "weights13.txt", "biases0.txt", "biases2.txt",
 				"biases5.txt", "biases7.txt", "biases11.txt", "biases13.txt");
 		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_CIFAR10(subject.getRepairPath(),
-				repairedLayerId, expertIDs, CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS);
+				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+				CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS);
 		CIFAR10_DNNt_Combined model = new CIFAR10_DNNt_Combined(data, repaired_weight_deltas);
 
 		/* Initialize analytics */
@@ -1211,6 +1332,13 @@ public class Experiments {
 			TNCounter.put(x, 0);
 			FPCounter.put(x, 0);
 			FNCounter.put(x, 0);
+			String id = "ORIG_L" + x;
+			targetedPassCounter.put(id, 0);
+			targetedFailCounter.put(id, 0);
+			TPCounter.put(id, 0);
+			TNCounter.put(id, 0);
+			FPCounter.put(id, 0);
+			FNCounter.put(id, 0);
 		}
 
 		/* Read correct labels. */
@@ -1284,7 +1412,7 @@ public class Experiments {
 
 			// Collect results for experts. Accuracy is only interesting for targeted
 			// repair. Precision is wanted for all experts.
-			for (int expertId = 0; expertId < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
+			for (int expertId : expertIDs) {
 				int label = ExpertCombination.selectLabelWithMaxConfidence(result.get(expertId));
 				boolean passed = (label == correctLabel);
 				if (passed) {
@@ -1312,6 +1440,36 @@ public class Experiments {
 						TNCounter.put(expertId, TNCounter.get(expertId) + 1);
 					}
 				}
+
+			}
+
+			for (int expertId : expertIDs) {
+				// Also collect results for original model specific for labels.
+				boolean passed = origLabel == correctLabel;
+				String id = "ORIG_L" + expertId;
+				if (passed) {
+					if (correctLabel == expertId) {
+						TPCounter.put(id, TPCounter.get(id) + 1);
+						targetedPassCounter.put(id, targetedPassCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					} else {
+						TNCounter.put(id, TNCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					}
+
+				} else {
+					if (correctLabel == expertId) {
+						FNCounter.put(id, FNCounter.get(id) + 1);
+						targetedFailCounter.put(id, targetedFailCounter.get(id) + 1);
+						System.out.print(id + ": " + "FAIL" + " " + origLabel + "; ");
+					} else if (origLabel == expertId) {
+						FPCounter.put(id, FPCounter.get(id) + 1);
+						System.out.print(id + ": " + "FAIL" + " " + origLabel + "; ");
+					} else {
+						TNCounter.put(id, TNCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					}
+				}
 			}
 
 			System.out.println();
@@ -1325,9 +1483,13 @@ public class Experiments {
 
 		br.close();
 
+		StringBuilder outStringBuilder = new StringBuilder();
+
 		// Calculate and print accuracy.
 		System.out.println();
 		System.out.println("COMBINATION;ACCURACY;PASS;FAIL;TAR-ACC;TAR-PASS;TAR-FAIL;TP;TN;FP;FN;PREC;RECALL;F1");
+		outStringBuilder
+				.append("COMBINATION;ACCURACY;PASS;FAIL;TAR-ACC;TAR-PASS;TAR-FAIL;TP;TN;FP;FN;PREC;RECALL;F1\n");
 		if (combMethod.equals(ExpertCombination.COMBINATION_METHOD.ALL)) {
 			for (ExpertCombination.COMBINATION_METHOD combinationMethod : ExpertCombination.COMBINATION_METHOD
 					.values()) {
@@ -1339,6 +1501,8 @@ public class Experiments {
 				double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
 
 				System.out.println(combinationMethod + ";" + accuracy + ";" + pass + ";" + fail + ";;;;;;;;;;");
+				outStringBuilder
+						.append(combinationMethod + ";" + accuracy + ";" + pass + ";" + fail + ";;;;;;;;;;" + "\n");
 			}
 		} else {
 			int pass = passCounter.get(combMethod);
@@ -1346,9 +1510,16 @@ public class Experiments {
 			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
 
 			System.out.println(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
+			outStringBuilder.append(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
 		}
+
 		double[] prec = new double[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
-		for (int expertId = 0; expertId < CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS; expertId++) {
+		double[] f1_values = new double[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
+		double[] f1_values_original = new double[CIFAR10_DNNt_Combined.NUMBER_OF_EXPERTS];
+		List<Integer> f1Experts = new ArrayList<>();
+		StringBuilder bs = new StringBuilder();
+
+		for (int expertId : expertIDs) {
 			int pass = passCounter.get(expertId);
 			int fail = failCounter.get(expertId);
 			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
@@ -1370,9 +1541,62 @@ public class Experiments {
 			System.out.println("L" + expertId + ";" + accuracy + ";" + pass + ";" + fail + ";" + targetedAccuracy + ";"
 					+ targetedPass + ";" + targetedFail + ";" + TP + ";" + TN + ";" + FP + ";" + FN + ";"
 					+ round(precision * 100.0, 2) + ";" + round(recall * 100.0, 2) + ";" + round(f1 * 100.0, 2));
+			outStringBuilder.append("L" + expertId + ";" + accuracy + ";" + pass + ";" + fail + ";" + targetedAccuracy
+					+ ";" + targetedPass + ";" + targetedFail + ";" + TP + ";" + TN + ";" + FP + ";" + FN + ";"
+					+ round(precision * 100.0, 2) + ";" + round(recall * 100.0, 2) + ";" + round(f1 * 100.0, 2) + "\n");
+
+			String id = "ORIG_L" + expertId;
+
+			int targetedPass_O = targetedPassCounter.get(id);
+			int targetedFail_O = targetedFailCounter.get(id);
+			double targetedAccuracy_O = round((((double) targetedPass_O) / (targetedPass_O + targetedFail_O)) * 100.0,
+					2);
+
+			int TP_O = TPCounter.get(id);
+			int TN_O = TNCounter.get(id);
+			int FP_O = FPCounter.get(id);
+			int FN_O = FNCounter.get(id);
+
+			double precision_O = ((double) TP_O) / (TP_O + FP_O);
+			double recall_O = ((double) TP_O) / (TP_O + FN_O);
+			double f1_O = 2 * precision_O * recall_O / (precision_O + recall_O);
+
+			bs.append(id + ";;;;" + targetedAccuracy_O + ";" + targetedPass_O + ";" + targetedFail_O + ";" + TP_O + ";"
+					+ TN_O + ";" + FP_O + ";" + FN_O + ";" + round(precision_O * 100.0, 2) + ";"
+					+ round(recall_O * 100.0, 2) + ";" + round(f1_O * 100.0, 2) + "\n");
+
+			if (f1 > f1_O) {
+				f1Experts.add(expertId);
+			}
+
+			f1_values[expertId] = f1;
+			f1_values_original[expertId] = f1_O;
 		}
+
+		System.out.println(bs.toString());
+		outStringBuilder.append(bs.toString());
+
 		System.out.println();
+		outStringBuilder.append("\n");
 		System.out.println("prec=" + Arrays.toString(prec));
+		System.out.println("f1Experts=" + Arrays.toString(f1Experts.toArray()));
+		System.out.println("f1_values=" + Arrays.toString(f1_values));
+		System.out.println("f1_values_original=" + Arrays.toString(f1_values_original));
+
+		if (subject.getOutputPath() != null) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + (useF1HarmonicSelection ? "_f1har" : "") + ".csv"));
+			writer.write(outStringBuilder.toString());
+			writer.close();
+
+			writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + (useF1HarmonicSelection ? "_f1har" : "") + "_prec_f1.csv"));
+			writer.write("prec=" + Arrays.toString(prec) + "\n");
+			writer.write("f1Experts=" + Arrays.toString(f1Experts.toArray()) + "\n");
+			writer.write("f1_values=" + Arrays.toString(f1_values) + "\n");
+			writer.write("f1_values_original=" + Arrays.toString(f1_values_original) + "\n");
+			writer.close();
+		}
 
 	}
 
@@ -1447,103 +1671,106 @@ public class Experiments {
 //				runMNIST0Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
 //			}
 
-			SUBJECT[] f1_subjects = { SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TRAINING,
+//			runMNIST0Experiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 60000,
+//					false, false);
 
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TRAINING, };
-
-			for (SUBJECT subject : f1_subjects) {
-				runMNIST0Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
-			}
-
-			SUBJECT[] f1_harmonic_subjects = { SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TRAINING,
-
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TRAINING,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST,
-					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TRAINING, };
-
-			for (SUBJECT subject : f1_harmonic_subjects) {
-				runMNIST0Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
-			}
+//			SUBJECT[] f1_subjects = { SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TRAINING, };
+//
+//			for (SUBJECT subject : f1_subjects) {
+//				runMNIST0Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
+//			}
+//
+//			SUBJECT[] f1_harmonic_subjects = { SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpA_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpB_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpC_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_10_ExpD_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpD_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpA_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpB_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpC_TRAINING,
+//
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_ADV_TRAINING,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TEST,
+//					SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_05_ExpD_TRAINING, };
+//
+//			for (SUBJECT subject : f1_harmonic_subjects) {
+//				runMNIST0Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
+//			}
 
 //			runMNIST0Experiment(SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TEST,
 //					ExpertCombination.COMBINATION_METHOD.ALL, 60000, false);
@@ -1553,8 +1780,98 @@ public class Experiments {
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_TRAINING, 60000);
 //			runCIFAR10Experiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false);
 
-			runMNIST0Experiment(SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TEST,
-					ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+//			runMNIST0Experiment(SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TEST,
+//					ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+
+//			SUBJECT[] subjects = {
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
+//			};
+//			for (SUBJECT subject : subjects) {
+//				if (subject.toString().endsWith("_ADV_TRAINING")) { // For adversarial training only consider first 10000
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false, false);	
+//				} else {
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+//				}
+//			}
+
+//			SUBJECT[] f1_subjects = {
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
+//			};
+//			for (SUBJECT subject : f1_subjects) {
+//				if (subject.toString().endsWith("_ADV_TRAINING")) { // For adversarial training only consider first 10000
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 10000, true, false);	
+//				} else {
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
+//				}
+//			}
+//			
+//			SUBJECT[] f1_harmonic_subjects = {
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpA_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpB_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpC_ADV_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TEST,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TRAINING,
+//					SUBJECT.CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TEST,
+//			};
+//			for (SUBJECT subject : f1_harmonic_subjects) {
+//				if (subject.toString().endsWith("_ADV_TRAINING")) { // For adversarial training only consider first 10000
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false, true);	
+//				} else {
+//					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
+//				}
+//			}
+			
+			// LOW_QUALITY_PATTERN_TEST
+			// LOW_QUALITY_PATTERN_TRAINING
+			
+			// LOW_QUALITY_LAST_LAYER_TEST
+			// LOW_QUALITY_LAST_LAYER_TRAINING
+			
+			int numberOfInputs = 10000; // 10000
+			int iterations = 1000;
+			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
+			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
+			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
