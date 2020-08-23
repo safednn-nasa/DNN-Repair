@@ -556,13 +556,13 @@ public class Experiments {
 				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
 
 		POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
-				"solution", 13, "/poisoned_cifar_test_label_csv.txt", "/poisoned_cifar_test_csv.txt", false,
+				"solution", 13, "/poisoned_cifar_test_label_csv.txt", "/poisoned_cifar_test_csv.txt", true,
 				new double[] {}, new int[] {}, new int[] {},
 				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
 
 		POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING("/Users/yannic/experiments/nnrepair/cifar_poisoned",
 				"/usman/ExpA", "solution", 13, "/poisoned_cifar_train_label_csv.txt", "/poisoned_cifar_train_csv.txt",
-				false, new double[] {}, new int[] {}, new int[] {},
+				true, new double[] {}, new int[] {}, new int[] {},
 				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results");
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1895,10 +1895,10 @@ public class Experiments {
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
 
 			SUBJECT[] subjects = { 
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
 			};
 			
 			for (SUBJECT subject : subjects) {
