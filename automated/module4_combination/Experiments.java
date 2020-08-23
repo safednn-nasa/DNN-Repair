@@ -543,7 +543,27 @@ public class Experiments {
 		CIFAR_LAST_LAYER_Eps0_01_ExpD_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD",
 				"solution", 13, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
 				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-				"/Users/yannic/experiments/nnrepair/cifar_adv_results");
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results"),
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		POISONED_CIFAR_LAST_LAYER_ExpA_TEST("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
+				"solution", 13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
+				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
+
+		POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
+				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
+				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
+
+		POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
+				"solution", 13, "/poisoned_cifar_test_label_csv.txt", "/poisoned_cifar_test_csv.txt", false,
+				new double[] {}, new int[] {}, new int[] {},
+				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
+
+		POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING("/Users/yannic/experiments/nnrepair/cifar_poisoned",
+				"/usman/ExpA", "solution", 13, "/poisoned_cifar_train_label_csv.txt", "/poisoned_cifar_train_csv.txt",
+				false, new double[] {}, new int[] {}, new int[] {},
+				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results");
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -995,9 +1015,9 @@ public class Experiments {
 //				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
 //				MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 		double[][][] repaired_weight_deltas = new double[10 + 2][576][128];
-		for (int i=0; i<12; i++) {
-			for (int j=0; j<576; j++) {
-				for (int k=0; k<128; k++) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 576; j++) {
+				for (int k = 0; k < 128; k++) {
 					repaired_weight_deltas[i][j][k] = 0.5;
 				}
 			}
@@ -1033,7 +1053,7 @@ public class Experiments {
 			}
 		}
 		br.close();
-		
+
 		StringBuilder outStringBuilder = new StringBuilder();
 
 		/* Read input files and execute model. */
@@ -1153,7 +1173,8 @@ public class Experiments {
 
 		// Calculate and print average times.
 		System.out.println();
-		outStringBuilder.append("Average execution times after " + count + " inputs with " + iterations + " iterations.; \n");
+		outStringBuilder
+				.append("Average execution times after " + count + " inputs with " + iterations + " iterations.; \n");
 		outStringBuilder.append("\n");
 		outStringBuilder.append("\n");
 		outStringBuilder.append("SUBJECT;AVG_TIME(ms)" + "\n");
@@ -1174,7 +1195,7 @@ public class Experiments {
 //		outStringBuilder.append("PVCTotal;" + ((double) accumulatedTimePVCTotal / count) + "\n");
 		outStringBuilder.append("\n" + "\n");
 		System.out.println(outStringBuilder.toString());
-		
+
 		if (subject.getOutputPath() != null) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
 					+ (useF1Selection ? "_f1" : "") + "_overhead.csv"));
@@ -1860,18 +1881,49 @@ public class Experiments {
 //					runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
 //				}
 //			}
-			
+
 			// LOW_QUALITY_PATTERN_TEST
 			// LOW_QUALITY_PATTERN_TRAINING
-			
+
 			// LOW_QUALITY_LAST_LAYER_TEST
 			// LOW_QUALITY_LAST_LAYER_TRAINING
+
+//			int numberOfInputs = 10000; // 10000
+//			int iterations = 1000;
+//			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
+//			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
+//			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
+
+			SUBJECT[] subjects = { 
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+			};
 			
-			int numberOfInputs = 10000; // 10000
-			int iterations = 1000;
-			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
-			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
-			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
+			for (SUBJECT subject : subjects) {
+				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+			}
+
+//			SUBJECT[] f1_subjects = {
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//			};
+//			for (SUBJECT subject : f1_subjects) {
+//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
+//			}
+//
+//			SUBJECT[] f1_harmonic_subjects = { 
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//			};
+//			for (SUBJECT subject : f1_harmonic_subjects) {
+//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
+//			}
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
