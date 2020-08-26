@@ -1893,10 +1893,12 @@ public class Experiments {
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			SUBJECT[] subjects = { 
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
 					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
 					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
 			};
@@ -1905,25 +1907,25 @@ public class Experiments {
 				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
 			}
 
-//			SUBJECT[] f1_subjects = {
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
-//			};
-//			for (SUBJECT subject : f1_subjects) {
-//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
-//			}
-//
-//			SUBJECT[] f1_harmonic_subjects = { 
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
-//			};
-//			for (SUBJECT subject : f1_harmonic_subjects) {
-//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
-//			}
+			SUBJECT[] f1_subjects = {
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+			};
+			for (SUBJECT subject : f1_subjects) {
+				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
+			}
+
+			SUBJECT[] f1_harmonic_subjects = { 
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+			};
+			for (SUBJECT subject : f1_harmonic_subjects) {
+				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
+			}
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
