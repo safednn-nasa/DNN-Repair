@@ -1030,14 +1030,27 @@ public class Experiments {
 		double accumulatedTimeCombinedNetwork = 0;
 		double accumulatedTimeNAIVE = 0;
 		double accumulatedTimeNAIVETotal = 0;
-		double accumulatedTimePREC = 0;
-		double accumulatedTimePRECTotal = 0;
+//		double accumulatedTimePREC = 0;
+//		double accumulatedTimePRECTotal = 0;
 		double accumulatedTimeVOTES = 0;
 		double accumulatedTimeVOTESTotal = 0;
 		double accumulatedTimeCONF = 0;
 		double accumulatedTimeCONFTotal = 0;
-		double accumulatedTimePVC = 0;
-		double accumulatedTimePVCTotal = 0;
+//		double accumulatedTimePVC = 0;
+//		double accumulatedTimePVCTotal = 0;
+		
+		double[] collectedTimeOriginal = new double[stopAfter];
+		double[] collectedTimeCombinedNetwork = new double[stopAfter];
+		double[] collectedTimeNAIVE = new double[stopAfter];
+		double[] collectedTimeNAIVETotal = new double[stopAfter];
+//		double[] collectedTimePREC = new double[stopAfter];
+//		double[] collectedTimePRECTotal = new double[stopAfter];
+		double[] collectedTimeVOTES = new double[stopAfter];
+		double[] collectedTimeVOTESTotal = new double[stopAfter];
+		double[] collectedTimeCONF = new double[stopAfter];
+		double[] collectedTimeCONFTotal = new double[stopAfter];
+//		double[] collectedTimePVC = new double[stopAfter];
+//		double[] collectedTimePVCTotal = new double[stopAfter];
 
 		/* Read correct labels. */
 		File file = new File(subject.getLabelFilePath());
@@ -1084,78 +1097,86 @@ public class Experiments {
 			System.out.print(count);
 
 			// Run original model.
-			long startTimeOriginal = System.currentTimeMillis();
+			long startTimeOriginal = System.nanoTime();
 			for (int i = 0; i < iterations; i++) {
 				origModel.run(input);
 			}
-			double timeOriginal = (System.currentTimeMillis() - startTimeOriginal) / (double) iterations;
+			double timeOriginal = (System.nanoTime() - startTimeOriginal) / (double) iterations;
 			accumulatedTimeOriginal += timeOriginal;
+			collectedTimeOriginal[count] = timeOriginal;
 			System.out.print("; ORIG=" + timeOriginal);
 
 			Map<Integer, double[]> result = new HashMap<>();
 			// Run combination.
-			long startTimeCombinationNetwork = System.currentTimeMillis();
+			long startTimeCombinationNetwork = System.nanoTime();
 			for (int i = 0; i < iterations; i++) {
 				result = model.run(input, repairedLayerId, expertIDs, true);
 			}
-			double timeCombinationNetwork = (System.currentTimeMillis() - startTimeCombinationNetwork)
+			double timeCombinationNetwork = (System.nanoTime() - startTimeCombinationNetwork)
 					/ (double) iterations;
 			accumulatedTimeCombinedNetwork += timeCombinationNetwork;
+			collectedTimeCombinedNetwork[count] = timeCombinationNetwork;
 
 			// Combine NAIVE.
-			long startTimeCombinationNAIVE = System.currentTimeMillis();
+			long startTimeCombinationNAIVE = System.nanoTime();
 			for (int i = 0; i < iterations; i++) {
 				int origLabelNAIVE = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
 				List<Integer> expertClaimsNAIVE = ExpertCombination.collectExpertClaims(expertIDs, result);
 				ExpertCombination.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
 			}
-			double timeNAIVE = (System.currentTimeMillis() - startTimeCombinationNAIVE) / (double) iterations;
+			double timeNAIVE = (System.nanoTime() - startTimeCombinationNAIVE) / (double) iterations;
 			accumulatedTimeNAIVE += timeNAIVE;
 			accumulatedTimeNAIVETotal += (timeNAIVE + timeCombinationNetwork);
+			collectedTimeNAIVE[count] = timeNAIVE;
+			collectedTimeNAIVETotal[count] = timeNAIVE + timeCombinationNetwork;
 			System.out.print("; NAIVE=" + timeNAIVE + "; NAIVETotal=" + (timeNAIVE + timeCombinationNetwork));
 
 //			// Combine PREC.
-//			long startTimeCombinationPREC = System.currentTimeMillis();
+//			long startTimeCombinationPREC = System.nanoTime();
 //			int origLabelPREC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
 //			List<Integer> expertClaimsPREC = ExpertCombination.collectExpertClaims(expertIDs, result);
 //			ExpertCombination.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, subject.getTrainPrecision());
-//			long timePREC = System.currentTimeMillis() - startTimeCombinationPREC;
+//			long timePREC = System.nanoTime() - startTimeCombinationPREC;
 //			accumulatedTimePREC += timePREC;
 //			accumulatedTimePRECTotal += (timePREC + timeCombinationNetwork);
 //			System.out.print("; PREC=" + timePREC + "; PRECTotal=" + (timePREC + timeCombinationNetwork));
 //
 			// Combine VOTES.
-			long startTimeCombinationVOTES = System.currentTimeMillis();
+			long startTimeCombinationVOTES = System.nanoTime();
 			for (int i = 0; i < iterations; i++) {
 				int origLabelVOTES = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
 				List<Integer> expertClaimsVOTES = ExpertCombination.collectExpertClaims(expertIDs, result);
 				ExpertCombination.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs,
 						MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
 			}
-			double timeVOTES = (System.currentTimeMillis() - startTimeCombinationVOTES) / (double) iterations;
+			double timeVOTES = (System.nanoTime() - startTimeCombinationVOTES) / (double) iterations;
 			accumulatedTimeVOTES += timeVOTES;
 			accumulatedTimeVOTESTotal += (timeVOTES + timeCombinationNetwork);
+			collectedTimeVOTES[count] = timeVOTES;
+			collectedTimeVOTESTotal[count] = timeVOTES + timeCombinationNetwork;
 			System.out.print("; VOTES=" + timeVOTES + "; VOTESTotal=" + (timeVOTES + timeCombinationNetwork));
 
 			// Combine CONF.
-			long startTimeCombinationCONF = System.currentTimeMillis();
+			long startTimeCombinationCONF = System.nanoTime();
 			for (int i = 0; i < iterations; i++) {
 				int origLabelCONF = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
 				List<Integer> expertClaimsCONF = ExpertCombination.collectExpertClaims(expertIDs, result);
 				ExpertCombination.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
 			}
-			double timeCONF = (System.currentTimeMillis() - startTimeCombinationCONF) / (double) iterations;
+			double timeCONF = (System.nanoTime() - startTimeCombinationCONF) / (double) iterations;
 			accumulatedTimeCONF += timeCONF;
 			accumulatedTimeCONFTotal += (timeCONF + timeCombinationNetwork);
+			collectedTimeCONF[count] = timeCONF;
+			collectedTimeCONFTotal[count] = timeCONF + timeCombinationNetwork;
 			System.out.print("; CONF=" + timeCONF + "; CONFTotal=" + (timeCONF + timeCombinationNetwork));
 
 //			// Combine PVC.
-//			long startTimeCombinationPVC = System.currentTimeMillis();
+//			long startTimeCombinationPVC = System.nanoTime();
 //			int origLabelPVC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
 //			List<Integer> expertClaimsPVC = ExpertCombination.collectExpertClaims(expertIDs, result);
 //			ExpertCombination.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, subject.getTrainPrecision(),
 //					expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
-//			long timePVC = System.currentTimeMillis() - startTimeCombinationPVC;
+//			long timePVC = System.nanoTime() - startTimeCombinationPVC;
 //			accumulatedTimePVC += timePVC;
 //			accumulatedTimePVCTotal += (timePVC + timeCombinationNetwork);
 //			System.out.print("; PVC=" + timePVC + "; PVCTotal=" + (timePVC + timeCombinationNetwork));
@@ -1177,7 +1198,7 @@ public class Experiments {
 				.append("Average execution times after " + count + " inputs with " + iterations + " iterations.; \n");
 		outStringBuilder.append("\n");
 		outStringBuilder.append("\n");
-		outStringBuilder.append("SUBJECT;AVG_TIME(ms)" + "\n");
+		outStringBuilder.append("SUBJECT;AVG_TIME(ns)" + "\n");
 		outStringBuilder.append("ORIG;" + ((double) accumulatedTimeOriginal / count) + "\n");
 		outStringBuilder.append(";" + "\n");
 		outStringBuilder.append("COMBINED_NETWORK;" + ((double) accumulatedTimeCombinedNetwork / count) + "\n");
@@ -1193,6 +1214,19 @@ public class Experiments {
 		outStringBuilder.append("VOTESTotal;" + ((double) accumulatedTimeVOTESTotal / count) + "\n");
 		outStringBuilder.append("CONFTotal;" + ((double) accumulatedTimeCONFTotal / count) + "\n");
 //		outStringBuilder.append("PVCTotal;" + ((double) accumulatedTimePVCTotal / count) + "\n");
+		outStringBuilder.append("\n" + "\n");
+		outStringBuilder.append("ORIG=" + Arrays.toString(collectedTimeOriginal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("COMBINED_NETWORK=" + Arrays.toString(collectedTimeCombinedNetwork) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("NAIVE=" + Arrays.toString(collectedTimeNAIVE) + "\n");
+		outStringBuilder.append("NAIVETotal=" + Arrays.toString(collectedTimeNAIVETotal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("VOTES=" + Arrays.toString(collectedTimeVOTES) + "\n");
+		outStringBuilder.append("VOTESTotal=" + Arrays.toString(collectedTimeVOTESTotal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("CONF=" + Arrays.toString(collectedTimeCONF) + "\n");
+		outStringBuilder.append("CONFTotal=" + Arrays.toString(collectedTimeCONFTotal) + "\n");
 		outStringBuilder.append("\n" + "\n");
 		System.out.println(outStringBuilder.toString());
 
@@ -1888,44 +1922,44 @@ public class Experiments {
 			// LOW_QUALITY_LAST_LAYER_TEST
 			// LOW_QUALITY_LAST_LAYER_TRAINING
 
-//			int numberOfInputs = 10000; // 10000
-//			int iterations = 1000;
+			int numberOfInputs = 10000; // 10000
+			int iterations = 1; // 1000;
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
-//			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
+			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			SUBJECT[] subjects = { 
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
-			};
-			
-			for (SUBJECT subject : subjects) {
-				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
-			}
-
-			SUBJECT[] f1_subjects = {
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
-			};
-			for (SUBJECT subject : f1_subjects) {
-				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
-			}
-
-			SUBJECT[] f1_harmonic_subjects = { 
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
-					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
-			};
-			for (SUBJECT subject : f1_harmonic_subjects) {
-				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
-			}
+//			SUBJECT[] subjects = { 
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//			};
+//			
+//			for (SUBJECT subject : subjects) {
+//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+//			}
+//
+//			SUBJECT[] f1_subjects = {
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//			};
+//			for (SUBJECT subject : f1_subjects) {
+//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, true, false);
+//			}
+//
+//			SUBJECT[] f1_harmonic_subjects = { 
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TEST,
+//					SUBJECT.POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING,
+//			};
+//			for (SUBJECT subject : f1_harmonic_subjects) {
+//				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
+//			}
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
