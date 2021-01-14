@@ -173,6 +173,110 @@ public class Z3SolutionParsing {
 		}
 
 	}
+	
+	public static Object loadRepairedWeights_MNIST1(String path, String solutionFileNamePrefix, int repairedLayerId,
+			int[] expertIDs, int numberOfExperts) throws IOException {
+		
+		// TODO
+
+		if (repairedLayerId == 0) {
+
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+
+		} else if (repairedLayerId == 2) {
+
+			throw new RuntimeException("Layer " + repairedLayerId + " not supported yet!"); // TODO
+
+		} else if (repairedLayerId == 5) {
+
+			/*
+			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
+			 * first 10 slots
+			 */
+			double[][][] weight_delta = new double[numberOfExperts + 2][400][100];
+
+			ArrayList<Integer> num0 = new ArrayList<Integer>();
+			ArrayList<Integer> num1 = new ArrayList<Integer>();
+			ArrayList<Double> num2 = new ArrayList<Double>();
+
+			/* Read deltas for experts 0..9 */
+			for (int expertId : expertIDs) {
+				loadDeltasFromZ3File_divya(path, expertId, num0, num1, num2);
+				for (int i = 0; i < num1.size(); i++) {
+					weight_delta[expertId][num1.get(i)][num0.get(i)] = num2.get(i);
+					System.out.println(expertId + " : " + num1.get(i) + " : " + num0.get(i) + " -> "
+							+ weight_delta[expertId][num1.get(i)][num0.get(i)]);
+				}
+			}
+
+			/* Read deltas for full repair. */
+			loadDeltasFromZ3File_divya(path, numberOfExperts, num0, num1, num2);
+			for (int i = 0; i < num1.size(); i++) {
+				weight_delta[10][num1.get(i)][num0.get(i)] = num2.get(i);
+				System.out.println(numberOfExperts + " : " + num1.get(i) + " : " + num0.get(i) + " -> "
+						+ weight_delta[numberOfExperts][num1.get(i)][num0.get(i)]);
+			}
+
+			/* Calculate average deltas for experts. */
+			for (int i = 0; i < 100; i++) {
+				for (int I = 0; I < 400; I++) {
+					double sum = 0.0;
+					for (int expertId : expertIDs) {
+						sum += weight_delta[expertId][I][i];
+					}
+					weight_delta[numberOfExperts + 1][I][i] = sum / expertIDs.length;
+				}
+			}
+
+			return weight_delta;
+		} else if (repairedLayerId == 6) {
+			/*
+			 * 10 slots for experts, 1 slot for full repair, 1 slot for average weights of
+			 * first 10 slots
+			 */
+			double[][][] weight_delta = new double[numberOfExperts + 2][100][10];
+
+			ArrayList<Integer> num0 = new ArrayList<Integer>();
+			ArrayList<Integer> num1 = new ArrayList<Integer>();
+			ArrayList<Double> num2 = new ArrayList<Double>();
+
+			/* Read deltas for experts 0..9 */
+			for (int expertId : expertIDs) {
+				loadDeltasFromZ3File_usman(path, solutionFileNamePrefix, expertId, num0, num1, num2);
+				for (int i = 0; i < num0.size(); i++) {
+					weight_delta[expertId][num0.get(i)][expertId] = num2.get(i);
+					System.out.println(expertId + " : " + num0.get(i) + " : " + expertId + " -> "
+							+ weight_delta[expertId][num0.get(i)][expertId]);
+				}
+			}
+
+			/* Read deltas for full repair. */
+//			loadDeltasFromZ3File_usman(path, NUMBER_OF_EXPERTS, num0, num1, num2);
+//			for (int i = 0; i < num0.size(); i++) {
+//				weight_delta[10][num0.get(i)][num0.get(i)] = num2.get(i);
+//				System.out.println(NUMBER_OF_EXPERTS + " : " + num0.get(i) + " : " + NUMBER_OF_EXPERTS + " -> "
+//						+ weight_delta[NUMBER_OF_EXPERTS][num0.get(i)][NUMBER_OF_EXPERTS]);
+//				
+//			}
+
+			/* Calculate average deltas for experts. */
+			for (int i = 0; i < 10; i++) {
+				for (int I = 0; I < 100; I++) {
+					double sum = 0.0;
+					for (int expertId : expertIDs) {
+						sum += weight_delta[expertId][I][i];
+					}
+					weight_delta[numberOfExperts + 1][I][i] = sum / expertIDs.length;
+				}
+			}
+
+			return weight_delta;
+
+		} else {
+			throw new RuntimeException("Layer " + repairedLayerId + " cannot be repaired!");
+		}
+
+	}
 
 	public static void loadDeltasFromZ3File_usman(String path, String solutionFileNamePrefix, int lab,
 			ArrayList<Integer> num0, ArrayList<Integer> num1, ArrayList<Double> num2) {

@@ -548,8 +548,8 @@ public class Experiments {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		POISONED_CIFAR_LAST_LAYER_ExpA_TEST("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
-				"solution", 13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {},
-				new int[] {}, new int[] {}, "/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
+				"solution", 13, "/cifar_test_label_csv.txt", "/cifar_test_csv.txt", true, new double[] {}, new int[] {},
+				new int[] {}, "/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
 
 		POISONED_CIFAR_LAST_LAYER_ExpA_TRAINING("/Users/yannic/experiments/nnrepair/cifar_poisoned", "/usman/ExpA",
 				"solution", 13, "/cifar_train_label_csv.txt", "/cifar_train_csv.txt", true, new double[] {},
@@ -563,7 +563,13 @@ public class Experiments {
 		POISONED_CIFAR_LAST_LAYER_ExpA_POISONED_TRAINING("/Users/yannic/experiments/nnrepair/cifar_poisoned",
 				"/usman/ExpA", "solution", 13, "/poisoned_cifar_train_label_csv.txt", "/poisoned_cifar_train_csv.txt",
 				true, new double[] {}, new int[] {}, new int[] {},
-				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results");
+				"/Users/yannic/experiments/nnrepair/cifar_poisoned_results"),
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		MNIST1_TEST("/Users/yannic/experiments/nnrepair/mnist1", "/divya/layer5", "label", 5, "/mnist_test_labels.txt",
+				"/mnist_test.txt", false, new double[] {}, new int[] {}, new int[] {},
+				"/Users/yannic/experiments/nnrepair/mnist1_results");
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -991,6 +997,446 @@ public class Experiments {
 
 	}
 
+	public static void runMNIST1Experiment(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod,
+			Integer stopAfter, boolean useF1Selection, boolean useF1HarmonicSelection)
+			throws NumberFormatException, IOException {
+
+		if (useF1Selection && useF1HarmonicSelection) {
+			throw new RuntimeException("You can use both: f1 selection and f1-harmonic selection.");
+		}
+
+		int repairedLayerId = subject.getRepairedLayerId(); // {0 | 2 | 5 | 6}
+
+		System.out.println("PATH:" + subject.getProjectPath());
+
+		/* Prepare the experts. */
+		int[] expertIDs;
+		if (useF1Selection) {
+			expertIDs = subject.getF1SelectedExperts();
+		} else if (useF1HarmonicSelection) {
+			expertIDs = subject.getF1HarmonicSelectedExperts();
+		} else {
+			expertIDs = new int[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
+				expertIDs[i] = i;
+			}
+		}
+
+		MNIST1_InternalData data = new MNIST1_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
+				"weights5.txt", "weights6.txt", "biases0.txt", "biases2.txt", "biases5.txt", "biases6.txt");
+//		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST1(subject.getRepairPath(),
+//				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+//				MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS);
+		double[][][] repaired_weight_deltas = new double[10 + 2][400][100];
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 400; j++) {
+				for (int k = 0; k < 100; k++) {
+					repaired_weight_deltas[i][j][k] = 0.5;
+				}
+			}
+		}
+
+		MNIST1_DNNt_Combined model = new MNIST1_DNNt_Combined(data, repaired_weight_deltas);
+
+		/* Initialize analytics */
+		Map<Object, Integer> passCounter = new HashMap<>();
+		Map<Object, Integer> failCounter = new HashMap<>();
+		Map<Object, Integer> targetedPassCounter = new HashMap<>();
+		Map<Object, Integer> targetedFailCounter = new HashMap<>();
+		Map<Object, Integer> TPCounter = new HashMap<>();
+		Map<Object, Integer> TNCounter = new HashMap<>();
+		Map<Object, Integer> FPCounter = new HashMap<>();
+		Map<Object, Integer> FNCounter = new HashMap<>();
+		for (ExpertCombination.COMBINATION_METHOD x : ExpertCombination.COMBINATION_METHOD.values()) {
+			passCounter.put(x, 0);
+			failCounter.put(x, 0);
+		}
+		for (int x = 0; x < MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS + 2; x++) {
+			passCounter.put(x, 0);
+			failCounter.put(x, 0);
+			targetedPassCounter.put(x, 0);
+			targetedFailCounter.put(x, 0);
+			TPCounter.put(x, 0);
+			TNCounter.put(x, 0);
+			FPCounter.put(x, 0);
+			FNCounter.put(x, 0);
+			String id = "ORIG_L" + x;
+			targetedPassCounter.put(id, 0);
+			targetedFailCounter.put(id, 0);
+			TPCounter.put(id, 0);
+			TNCounter.put(id, 0);
+			FPCounter.put(id, 0);
+			FNCounter.put(id, 0);
+		}
+
+		/* Read correct labels. */
+		File file = new File(subject.getLabelFilePath());
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String st;
+		Integer[] labels = new Integer[60000];
+		int index = 0;
+		while ((st = br.readLine()) != null) {
+			labels[index] = Integer.valueOf(st);
+			index++;
+			if (stopAfter != null && index == stopAfter) {
+				break;
+			}
+		}
+		br.close();
+
+		/* Read input files and execute model. */
+		file = new File(subject.getInputFilePath());
+		br = new BufferedReader(new FileReader(file));
+		int count = 0;
+
+		while ((st = br.readLine()) != null) {
+			// System.out.println("INPUT:" + st);
+
+			String[] values = st.split(",");
+			double[][][] input = new double[28][28][1];
+			index = 0;
+			while (index < values.length) {
+				for (int i = 0; i < 28; i++)
+					for (int j = 0; j < 28; j++)
+						for (int k = 0; k < 1; k++) {
+							Double val = Double.valueOf(values[index]);
+							index++;
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
+						}
+			}
+
+			Map<Integer, double[]> result = model.run(input, repairedLayerId, expertIDs);
+
+			int correctLabel = labels[count];
+
+			// Extract original decision.
+			int origLabel = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1)); /* ORIG */
+
+			// Determine final decisions by experts.
+			Map<ExpertCombination.COMBINATION_METHOD, Integer> results = ExpertCombination.combineExperts(combMethod,
+					result, origLabel, subject.getTrainPrecision(), expertIDs, false,
+					MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS);
+
+			// Print results and collect analytics.
+			System.out.print(count + "; IDEAL: " + correctLabel + "; ");
+			for (Entry<ExpertCombination.COMBINATION_METHOD, Integer> combinedResult : results.entrySet()) {
+				ExpertCombination.COMBINATION_METHOD currentCombinationMethod = combinedResult.getKey();
+				int label = combinedResult.getValue();
+
+				boolean passed = (label == correctLabel);
+				if (passed) {
+					passCounter.put(currentCombinationMethod, passCounter.get(currentCombinationMethod) + 1);
+				} else {
+					failCounter.put(currentCombinationMethod, failCounter.get(currentCombinationMethod) + 1);
+				}
+
+				System.out.print(currentCombinationMethod + ": " + (passed ? "PASS" : "FAIL") + " " + label + "; ");
+			}
+
+			// Collect results for experts. Accuracy is only interesting for targeted
+			// repair. Precision is wanted for all experts.
+			for (int expertId : expertIDs) {
+				int label = ExpertCombination.selectLabelWithMaxConfidence(result.get(expertId));
+				boolean passed = (label == correctLabel);
+				if (passed) {
+					passCounter.put(expertId, passCounter.get(expertId) + 1);
+					if (correctLabel == expertId) {
+						TPCounter.put(expertId, TPCounter.get(expertId) + 1);
+
+						targetedPassCounter.put(expertId, targetedPassCounter.get(expertId) + 1); // only for local
+																									// expert
+						System.out.print("ExpertL" + expertId + ": " + "PASS" + " " + label + "; ");
+					} else {
+						TNCounter.put(expertId, TNCounter.get(expertId) + 1);
+					}
+				} else {
+					failCounter.put(expertId, failCounter.get(expertId) + 1);
+					if (correctLabel == expertId) {
+						FNCounter.put(expertId, FNCounter.get(expertId) + 1);
+
+						targetedFailCounter.put(expertId, targetedFailCounter.get(expertId) + 1); // only for local
+																									// expert
+						System.out.print("ExpertL" + expertId + ": " + "FAIL" + " " + label + "; ");
+					} else if (label == expertId) {
+						FPCounter.put(expertId, FPCounter.get(expertId) + 1);
+					} else {
+						TNCounter.put(expertId, TNCounter.get(expertId) + 1);
+					}
+				}
+
+			}
+
+			for (int expertId : expertIDs) {
+				// Also collect results for original model specific for labels.
+				boolean passed = origLabel == correctLabel;
+				String id = "ORIG_L" + expertId;
+				if (passed) {
+					if (correctLabel == expertId) {
+						TPCounter.put(id, TPCounter.get(id) + 1);
+						targetedPassCounter.put(id, targetedPassCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					} else {
+						TNCounter.put(id, TNCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					}
+
+				} else {
+					if (correctLabel == expertId) {
+						FNCounter.put(id, FNCounter.get(id) + 1);
+						targetedFailCounter.put(id, targetedFailCounter.get(id) + 1);
+						System.out.print(id + ": " + "FAIL" + " " + origLabel + "; ");
+					} else if (origLabel == expertId) {
+						FPCounter.put(id, FPCounter.get(id) + 1);
+						System.out.print(id + ": " + "FAIL" + " " + origLabel + "; ");
+					} else {
+						TNCounter.put(id, TNCounter.get(id) + 1);
+						System.out.print(id + ": " + "PASS" + " " + origLabel + "; ");
+					}
+				}
+			}
+
+			System.out.println();
+			count++;
+
+			if (stopAfter != null && count == stopAfter) {
+				break;
+			}
+
+		}
+
+		br.close();
+
+		StringBuilder outStringBuilder = new StringBuilder();
+
+		// Calculate and print accuracy.
+		System.out.println();
+		System.out.println("COMBINATION;ACCURACY;PASS;FAIL;TAR-ACC;TAR-PASS;TAR-FAIL;TP;TN;FP;FN;PREC;RECALL;F1");
+		outStringBuilder
+				.append("COMBINATION;ACCURACY;PASS;FAIL;TAR-ACC;TAR-PASS;TAR-FAIL;TP;TN;FP;FN;PREC;RECALL;F1\n");
+		if (combMethod.equals(ExpertCombination.COMBINATION_METHOD.ALL)) {
+			for (ExpertCombination.COMBINATION_METHOD combinationMethod : ExpertCombination.COMBINATION_METHOD
+					.values()) {
+				if (combinationMethod.equals(ExpertCombination.COMBINATION_METHOD.ALL)) {
+					continue;
+				}
+				int pass = passCounter.get(combinationMethod);
+				int fail = failCounter.get(combinationMethod);
+				double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
+
+				System.out.println(combinationMethod + ";" + accuracy + ";" + pass + ";" + fail + ";;;;;;;;;;");
+				outStringBuilder
+						.append(combinationMethod + ";" + accuracy + ";" + pass + ";" + fail + ";;;;;;;;;;" + "\n");
+			}
+		} else {
+			int pass = passCounter.get(combMethod);
+			int fail = failCounter.get(combMethod);
+			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
+
+			System.out.println(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
+			outStringBuilder.append(combMethod + ";" + accuracy + ";" + pass + ";" + fail);
+		}
+
+		double[] prec = new double[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+		double[] f1_values = new double[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+		double[] f1_values_original = new double[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+		List<Integer> f1Experts = new ArrayList<>();
+		StringBuilder bs = new StringBuilder();
+
+		for (int expertId : expertIDs) {
+			int pass = passCounter.get(expertId);
+			int fail = failCounter.get(expertId);
+			double accuracy = round((((double) pass) / (pass + fail)) * 100.0, 2);
+
+			int targetedPass = targetedPassCounter.get(expertId);
+			int targetedFail = targetedFailCounter.get(expertId);
+			double targetedAccuracy = round((((double) targetedPass) / (targetedPass + targetedFail)) * 100.0, 2);
+
+			int TP = TPCounter.get(expertId);
+			int TN = TNCounter.get(expertId);
+			int FP = FPCounter.get(expertId);
+			int FN = FNCounter.get(expertId);
+			double precision = ((double) TP) / (TP + FP);
+			prec[expertId] = precision;
+
+			double recall = ((double) TP) / (TP + FN);
+			double f1 = 2 * precision * recall / (precision + recall);
+
+			System.out.println("L" + expertId + ";" + accuracy + ";" + pass + ";" + fail + ";" + targetedAccuracy + ";"
+					+ targetedPass + ";" + targetedFail + ";" + TP + ";" + TN + ";" + FP + ";" + FN + ";"
+					+ round(precision * 100.0, 2) + ";" + round(recall * 100.0, 2) + ";" + round(f1 * 100.0, 2));
+			outStringBuilder.append("L" + expertId + ";" + accuracy + ";" + pass + ";" + fail + ";" + targetedAccuracy
+					+ ";" + targetedPass + ";" + targetedFail + ";" + TP + ";" + TN + ";" + FP + ";" + FN + ";"
+					+ round(precision * 100.0, 2) + ";" + round(recall * 100.0, 2) + ";" + round(f1 * 100.0, 2) + "\n");
+
+			String id = "ORIG_L" + expertId;
+
+			int targetedPass_O = targetedPassCounter.get(id);
+			int targetedFail_O = targetedFailCounter.get(id);
+			double targetedAccuracy_O = round((((double) targetedPass_O) / (targetedPass_O + targetedFail_O)) * 100.0,
+					2);
+
+			int TP_O = TPCounter.get(id);
+			int TN_O = TNCounter.get(id);
+			int FP_O = FPCounter.get(id);
+			int FN_O = FNCounter.get(id);
+
+			double precision_O = ((double) TP_O) / (TP_O + FP_O);
+			double recall_O = ((double) TP_O) / (TP_O + FN_O);
+			double f1_O = 2 * precision_O * recall_O / (precision_O + recall_O);
+
+			bs.append(id + ";;;;" + targetedAccuracy_O + ";" + targetedPass_O + ";" + targetedFail_O + ";" + TP_O + ";"
+					+ TN_O + ";" + FP_O + ";" + FN_O + ";" + round(precision_O * 100.0, 2) + ";"
+					+ round(recall_O * 100.0, 2) + ";" + round(f1_O * 100.0, 2) + "\n");
+
+			if (f1 > f1_O) {
+				f1Experts.add(expertId);
+			}
+
+			f1_values[expertId] = f1;
+			f1_values_original[expertId] = f1_O;
+		}
+
+		System.out.println(bs.toString());
+		outStringBuilder.append(bs.toString());
+
+		System.out.println();
+		outStringBuilder.append("\n");
+		System.out.println("prec=" + Arrays.toString(prec));
+		System.out.println("f1Experts=" + Arrays.toString(f1Experts.toArray()));
+		System.out.println("f1_values=" + Arrays.toString(f1_values));
+		System.out.println("f1_values_original=" + Arrays.toString(f1_values_original));
+
+		if (subject.getOutputPath() != null) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + (useF1HarmonicSelection ? "_f1har" : "") + ".csv"));
+			writer.write(outStringBuilder.toString());
+			writer.close();
+
+			writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + (useF1HarmonicSelection ? "_f1har" : "") + "_prec_f1.csv"));
+			writer.write("prec=" + Arrays.toString(prec) + "\n");
+			writer.write("f1Experts=" + Arrays.toString(f1Experts.toArray()) + "\n");
+			writer.write("f1_values=" + Arrays.toString(f1_values) + "\n");
+			writer.write("f1_values_original=" + Arrays.toString(f1_values_original) + "\n");
+			writer.close();
+		}
+
+	}
+	
+	public static void testMNIST1(SUBJECT subject, ExpertCombination.COMBINATION_METHOD combMethod,
+			Integer stopAfter, boolean useF1Selection, boolean useF1HarmonicSelection)
+			throws NumberFormatException, IOException {
+
+		if (useF1Selection && useF1HarmonicSelection) {
+			throw new RuntimeException("You can use both: f1 selection and f1-harmonic selection.");
+		}
+
+		int repairedLayerId = subject.getRepairedLayerId(); // {0 | 2 | 5 | 6}
+
+		System.out.println("PATH:" + subject.getProjectPath());
+
+		/* Prepare the experts. */
+		int[] expertIDs;
+		if (useF1Selection) {
+			expertIDs = subject.getF1SelectedExperts();
+		} else if (useF1HarmonicSelection) {
+			expertIDs = subject.getF1HarmonicSelectedExperts();
+		} else {
+			expertIDs = new int[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
+				expertIDs[i] = i;
+			}
+		}
+
+		MNIST1_InternalData data = new MNIST1_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
+				"weights5.txt", "weights6.txt", "biases0.txt", "biases2.txt", "biases5.txt", "biases6.txt");
+//		Object repaired_weight_deltas = Z3SolutionParsing.loadRepairedWeights_MNIST1(subject.getRepairPath(),
+//				subject.getSolutionFileNamePrefix(), repairedLayerId, expertIDs,
+//				MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS);
+		double[][][] repaired_weight_deltas = new double[10 + 2][400][100];
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 400; j++) {
+				for (int k = 0; k < 100; k++) {
+					repaired_weight_deltas[i][j][k] = 0.5;
+				}
+			}
+		}
+
+		MNIST1_DNNt_Combined combined_model = new MNIST1_DNNt_Combined(data, repaired_weight_deltas);
+		MNIST1_DNNt_Original original_model = new MNIST1_DNNt_Original(data);
+
+		/* Read correct labels. */
+		File file = new File(subject.getLabelFilePath());
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String st;
+		Integer[] labels = new Integer[60000];
+		int index = 0;
+		while ((st = br.readLine()) != null) {
+			labels[index] = Integer.valueOf(st);
+			index++;
+			if (stopAfter != null && index == stopAfter) {
+				break;
+			}
+		}
+		br.close();
+
+		/* Read input files and execute model. */
+		file = new File(subject.getInputFilePath());
+		br = new BufferedReader(new FileReader(file));
+		int count = 0;
+
+		while ((st = br.readLine()) != null) {
+			// System.out.println("INPUT:" + st);
+
+			String[] values = st.split(",");
+			double[][][] input = new double[28][28][1];
+			index = 0;
+			while (index < values.length) {
+				for (int i = 0; i < 28; i++)
+					for (int j = 0; j < 28; j++)
+						for (int k = 0; k < 1; k++) {
+							Double val = Double.valueOf(values[index]);
+							index++;
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
+						}
+			}
+
+			Map<Integer, double[]> result_combined = combined_model.run(input, repairedLayerId, expertIDs);
+			int origresult_combined_orig = ExpertCombination.selectLabelWithMaxConfidence(result_combined.get(-1));
+			
+			int result_original = original_model.run(input);
+
+			int correctLabel = labels[count];
+			
+			if (result_original != origresult_combined_orig) {
+				br.close();
+				throw new RuntimeException("FAIL!");
+			} else {
+				System.out.println(count + "; Original: " + result_original + "; Combined_Original: " + origresult_combined_orig + "; Correct: " + correctLabel);
+			}
+
+
+			count++;
+
+			if (stopAfter != null && count == stopAfter) {
+				break;
+			}
+
+		}
+		
+		br.close();
+		
+
+	}
+
 	public static void runMNIST0CombinationOverheadExperiment(SUBJECT subject, Integer stopAfter, int iterations,
 			boolean useF1Selection) throws NumberFormatException, IOException {
 
@@ -1038,7 +1484,7 @@ public class Experiments {
 		double accumulatedTimeCONFTotal = 0;
 //		double accumulatedTimePVC = 0;
 //		double accumulatedTimePVCTotal = 0;
-		
+
 		double[] collectedTimeOriginal = new double[stopAfter];
 		double[] collectedTimeCombinedNetwork = new double[stopAfter];
 		double[] collectedTimeNAIVE = new double[stopAfter];
@@ -1112,8 +1558,251 @@ public class Experiments {
 			for (int i = 0; i < iterations; i++) {
 				result = model.run(input, repairedLayerId, expertIDs, true);
 			}
-			double timeCombinationNetwork = (System.nanoTime() - startTimeCombinationNetwork)
-					/ (double) iterations;
+			double timeCombinationNetwork = (System.nanoTime() - startTimeCombinationNetwork) / (double) iterations;
+			accumulatedTimeCombinedNetwork += timeCombinationNetwork;
+			collectedTimeCombinedNetwork[count] = timeCombinationNetwork;
+
+			// Combine NAIVE.
+			long startTimeCombinationNAIVE = System.nanoTime();
+			for (int i = 0; i < iterations; i++) {
+				int origLabelNAIVE = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsNAIVE = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByNaive(expertClaimsNAIVE, origLabelNAIVE);
+			}
+			double timeNAIVE = (System.nanoTime() - startTimeCombinationNAIVE) / (double) iterations;
+			accumulatedTimeNAIVE += timeNAIVE;
+			accumulatedTimeNAIVETotal += (timeNAIVE + timeCombinationNetwork);
+			collectedTimeNAIVE[count] = timeNAIVE;
+			collectedTimeNAIVETotal[count] = timeNAIVE + timeCombinationNetwork;
+			System.out.print("; NAIVE=" + timeNAIVE + "; NAIVETotal=" + (timeNAIVE + timeCombinationNetwork));
+
+//			// Combine PREC.
+//			long startTimeCombinationPREC = System.nanoTime();
+//			int origLabelPREC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+//			List<Integer> expertClaimsPREC = ExpertCombination.collectExpertClaims(expertIDs, result);
+//			ExpertCombination.combineExpertsByPrecision(expertClaimsPREC, origLabelPREC, subject.getTrainPrecision());
+//			long timePREC = System.nanoTime() - startTimeCombinationPREC;
+//			accumulatedTimePREC += timePREC;
+//			accumulatedTimePRECTotal += (timePREC + timeCombinationNetwork);
+//			System.out.print("; PREC=" + timePREC + "; PRECTotal=" + (timePREC + timeCombinationNetwork));
+//
+			// Combine VOTES.
+			long startTimeCombinationVOTES = System.nanoTime();
+			for (int i = 0; i < iterations; i++) {
+				int origLabelVOTES = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsVOTES = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByVotes(result, expertClaimsVOTES, origLabelVOTES, expertIDs,
+						MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+			}
+			double timeVOTES = (System.nanoTime() - startTimeCombinationVOTES) / (double) iterations;
+			accumulatedTimeVOTES += timeVOTES;
+			accumulatedTimeVOTESTotal += (timeVOTES + timeCombinationNetwork);
+			collectedTimeVOTES[count] = timeVOTES;
+			collectedTimeVOTESTotal[count] = timeVOTES + timeCombinationNetwork;
+			System.out.print("; VOTES=" + timeVOTES + "; VOTESTotal=" + (timeVOTES + timeCombinationNetwork));
+
+			// Combine CONF.
+			long startTimeCombinationCONF = System.nanoTime();
+			for (int i = 0; i < iterations; i++) {
+				int origLabelCONF = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+				List<Integer> expertClaimsCONF = ExpertCombination.collectExpertClaims(expertIDs, result);
+				ExpertCombination.combineExpertsByConfidence(result, expertClaimsCONF, origLabelCONF);
+			}
+			double timeCONF = (System.nanoTime() - startTimeCombinationCONF) / (double) iterations;
+			accumulatedTimeCONF += timeCONF;
+			accumulatedTimeCONFTotal += (timeCONF + timeCombinationNetwork);
+			collectedTimeCONF[count] = timeCONF;
+			collectedTimeCONFTotal[count] = timeCONF + timeCombinationNetwork;
+			System.out.print("; CONF=" + timeCONF + "; CONFTotal=" + (timeCONF + timeCombinationNetwork));
+
+//			// Combine PVC.
+//			long startTimeCombinationPVC = System.nanoTime();
+//			int origLabelPVC = ExpertCombination.selectLabelWithMaxConfidence(result.get(-1));
+//			List<Integer> expertClaimsPVC = ExpertCombination.collectExpertClaims(expertIDs, result);
+//			ExpertCombination.combineExpertsByPVC(result, expertClaimsPVC, origLabelPVC, subject.getTrainPrecision(),
+//					expertIDs, MNIST0_DNNt_Combined.NUMBER_OF_EXPERTS);
+//			long timePVC = System.nanoTime() - startTimeCombinationPVC;
+//			accumulatedTimePVC += timePVC;
+//			accumulatedTimePVCTotal += (timePVC + timeCombinationNetwork);
+//			System.out.print("; PVC=" + timePVC + "; PVCTotal=" + (timePVC + timeCombinationNetwork));
+
+			System.out.println();
+			count++;
+
+			if (stopAfter != null && count == stopAfter) {
+				break;
+			}
+
+		}
+
+		br.close();
+
+		// Calculate and print average times.
+		System.out.println();
+		outStringBuilder
+				.append("Average execution times after " + count + " inputs with " + iterations + " iterations.; \n");
+		outStringBuilder.append("\n");
+		outStringBuilder.append("\n");
+		outStringBuilder.append("SUBJECT;AVG_TIME(ns)" + "\n");
+		outStringBuilder.append("ORIG;" + ((double) accumulatedTimeOriginal / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("COMBINED_NETWORK;" + ((double) accumulatedTimeCombinedNetwork / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("NAIVE;" + ((double) accumulatedTimeNAIVE / count) + "\n");
+//		outStringBuilder.append("PREC;" + ((double) accumulatedTimePREC / count) + "\n");
+		outStringBuilder.append("VOTES;" + ((double) accumulatedTimeVOTES / count) + "\n");
+		outStringBuilder.append("CONF;" + ((double) accumulatedTimeCONF / count) + "\n");
+//		outStringBuilder.append("PVC;" + ((double) accumulatedTimePVC / count) + "\n");
+		outStringBuilder.append(";" + "\n");
+		outStringBuilder.append("NAIVETotal;" + ((double) accumulatedTimeNAIVETotal / count) + "\n");
+//		outStringBuilder.append("PRECTotal;" + ((double) accumulatedTimePRECTotal / count) + "\n");
+		outStringBuilder.append("VOTESTotal;" + ((double) accumulatedTimeVOTESTotal / count) + "\n");
+		outStringBuilder.append("CONFTotal;" + ((double) accumulatedTimeCONFTotal / count) + "\n");
+//		outStringBuilder.append("PVCTotal;" + ((double) accumulatedTimePVCTotal / count) + "\n");
+		outStringBuilder.append("\n" + "\n");
+		outStringBuilder.append("ORIG=" + Arrays.toString(collectedTimeOriginal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("COMBINED_NETWORK=" + Arrays.toString(collectedTimeCombinedNetwork) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("NAIVE=" + Arrays.toString(collectedTimeNAIVE) + "\n");
+		outStringBuilder.append("NAIVETotal=" + Arrays.toString(collectedTimeNAIVETotal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("VOTES=" + Arrays.toString(collectedTimeVOTES) + "\n");
+		outStringBuilder.append("VOTESTotal=" + Arrays.toString(collectedTimeVOTESTotal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+//		outStringBuilder.append("CONF=" + Arrays.toString(collectedTimeCONF) + "\n");
+		outStringBuilder.append("CONFTotal=" + Arrays.toString(collectedTimeCONFTotal) + "\n");
+		outStringBuilder.append("\n" + "\n");
+		System.out.println(outStringBuilder.toString());
+
+		if (subject.getOutputPath() != null) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(subject.getOutputPath() + "/" + subject.toString()
+					+ (useF1Selection ? "_f1" : "") + "_overhead.csv"));
+			writer.write(outStringBuilder.toString());
+			writer.close();
+		}
+
+	}
+
+	public static void runMNIST1CombinationOverheadExperiment(SUBJECT subject, Integer stopAfter, int iterations,
+			boolean useF1Selection) throws NumberFormatException, IOException {
+
+		int repairedLayerId = subject.getRepairedLayerId();
+
+		/* Prepare the experts. */
+		int[] expertIDs;
+		if (useF1Selection) {
+			expertIDs = subject.getF1SelectedExperts();
+		} else {
+			expertIDs = new int[MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS];
+			for (int i = 0; i < MNIST1_DNNt_Combined.NUMBER_OF_EXPERTS; i++) {
+				expertIDs[i] = i;
+			}
+		}
+
+		System.out.println("PATH:" + subject.getProjectPath());
+
+		MNIST1_InternalData data = new MNIST1_InternalData(subject.getProjectPath(), "weights0.txt", "weights2.txt",
+				"weights5.txt", "weights6.txt", "biases0.txt", "biases2.txt", "biases5.txt", "biases6.txt");
+		double[][][] repaired_weight_deltas = new double[10 + 2][400][100];
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 400; j++) {
+				for (int k = 0; k < 100; k++) {
+					repaired_weight_deltas[i][j][k] = 0.5;
+				}
+			}
+		}
+		MNIST1_DNNt_Combined model = new MNIST1_DNNt_Combined(data, repaired_weight_deltas);
+		MNIST1_DNNt_Original origModel = new MNIST1_DNNt_Original(data);
+
+		/* Initialize analytics */
+		double accumulatedTimeOriginal = 0;
+		double accumulatedTimeCombinedNetwork = 0;
+		double accumulatedTimeNAIVE = 0;
+		double accumulatedTimeNAIVETotal = 0;
+//		double accumulatedTimePREC = 0;
+//		double accumulatedTimePRECTotal = 0;
+		double accumulatedTimeVOTES = 0;
+		double accumulatedTimeVOTESTotal = 0;
+		double accumulatedTimeCONF = 0;
+		double accumulatedTimeCONFTotal = 0;
+//		double accumulatedTimePVC = 0;
+//		double accumulatedTimePVCTotal = 0;
+
+		double[] collectedTimeOriginal = new double[stopAfter];
+		double[] collectedTimeCombinedNetwork = new double[stopAfter];
+		double[] collectedTimeNAIVE = new double[stopAfter];
+		double[] collectedTimeNAIVETotal = new double[stopAfter];
+//		double[] collectedTimePREC = new double[stopAfter];
+//		double[] collectedTimePRECTotal = new double[stopAfter];
+		double[] collectedTimeVOTES = new double[stopAfter];
+		double[] collectedTimeVOTESTotal = new double[stopAfter];
+		double[] collectedTimeCONF = new double[stopAfter];
+		double[] collectedTimeCONFTotal = new double[stopAfter];
+//		double[] collectedTimePVC = new double[stopAfter];
+//		double[] collectedTimePVCTotal = new double[stopAfter];
+
+		/* Read correct labels. */
+		File file = new File(subject.getLabelFilePath());
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String st;
+		Integer[] labels = new Integer[60000];
+		int index = 0;
+		while ((st = br.readLine()) != null) {
+			labels[index] = Integer.valueOf(st);
+			index++;
+			if (stopAfter != null && index == stopAfter) {
+				break;
+			}
+		}
+		br.close();
+
+		StringBuilder outStringBuilder = new StringBuilder();
+
+		/* Read input files and execute model. */
+		file = new File(subject.getInputFilePath());
+		br = new BufferedReader(new FileReader(file));
+		int count = 0;
+
+		while ((st = br.readLine()) != null) {
+			// System.out.println("INPUT:" + st);
+
+			String[] values = st.split(",");
+			double[][][] input = new double[28][28][1];
+			index = 0;
+			while (index < values.length) {
+				for (int i = 0; i < 28; i++)
+					for (int j = 0; j < 28; j++)
+						for (int k = 0; k < 1; k++) {
+							Double val = Double.valueOf(values[index]);
+							index++;
+							if (subject.needsNormalization()) {
+								input[i][j][k] = (double) (val / 255.0);
+							} else {
+								input[i][j][k] = (double) val;
+							}
+						}
+			}
+
+			System.out.print(count);
+
+			// Run original model.
+			long startTimeOriginal = System.nanoTime();
+			for (int i = 0; i < iterations; i++) {
+				origModel.run(input);
+			}
+			double timeOriginal = (System.nanoTime() - startTimeOriginal) / (double) iterations;
+			accumulatedTimeOriginal += timeOriginal;
+			collectedTimeOriginal[count] = timeOriginal;
+			System.out.print("; ORIG=" + timeOriginal);
+
+			Map<Integer, double[]> result = new HashMap<>();
+			// Run combination.
+			long startTimeCombinationNetwork = System.nanoTime();
+			for (int i = 0; i < iterations; i++) {
+				result = model.run(input, repairedLayerId, expertIDs, true);
+			}
+			double timeCombinationNetwork = (System.nanoTime() - startTimeCombinationNetwork) / (double) iterations;
 			accumulatedTimeCombinedNetwork += timeCombinationNetwork;
 			collectedTimeCombinedNetwork[count] = timeCombinationNetwork;
 
@@ -1922,12 +2611,12 @@ public class Experiments {
 			// LOW_QUALITY_LAST_LAYER_TEST
 			// LOW_QUALITY_LAST_LAYER_TRAINING
 
-			int numberOfInputs = 10000; // 10000
-			int iterations = 1; // 1000;
+//			int numberOfInputs = 10000; // 10000
+//			int iterations = 1; // 1000;
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, numberOfInputs, iterations, false);
 //			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, false);
-			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
-			
+//			runMNIST0CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_PATTERN_TEST, numberOfInputs, iterations, true);
+
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //			SUBJECT[] subjects = { 
@@ -1960,6 +2649,17 @@ public class Experiments {
 //			for (SUBJECT subject : f1_harmonic_subjects) {
 //				runCIFAR10Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, true);
 //			}
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			SUBJECT[] subjects = { SUBJECT.MNIST1_TEST };
+
+			for (SUBJECT subject : subjects) {
+//				runMNIST1Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+				testMNIST1(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+			}
+
+//			runMNIST1CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, 1, false);
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();

@@ -16,7 +16,7 @@ public class MNIST0_DNNt_Original {
 		this.internal = internal;
 	}
 
-	// the DNN input is of shap 28x28x1
+	// the DNN input is of shape 28x28x1
 	int run(double[][][] input) {
 
 		// layer 0: conv2d_1
