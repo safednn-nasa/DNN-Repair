@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepgfplotslibrary{statistics}
+\usepackage{xspace} % to get the spacing after macros right
+\begin{document}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\begin{tikzpicture}
+  \begin{axis} [
+        %title={Time Comparison (n=4779 files)},
+        height=5.0cm, width=10.0cm,
+        xmajorgrids=true,
+        xmin=0, xmax=6800000,
+        ytick={1, 2, 3, 4},
+        yticklabels={layer6-F1, layer6, layer8, original},
+        legend style={at={(0.5,-0.2)}, anchor=north, legend columns=-1},
+        ymin=0,ymax=5,
+        xlabel= {time in nanosec},
+        /pgfplots/boxplot/box extend=0.3
+    ]
+    \addplot+ [ % original
+    color=blue,
+    line width=0.7pt,
+    boxplot prepared={
+      median=540975.5,
+      upper quartile=665475.5,
+      lower quartile=463103.5,
+      upper whisker=966704.0,
+      lower whisker=426619.0,
+      draw position=4,
+    },
+    ] coordinates {};
+    \addplot+ [ % layer8
+    color=blue,
+    line width=0.7pt,
+    boxplot prepared={
+      median=565166.5,
+      upper quartile=718459.0,
+      lower quartile=482177.0,
+      upper whisker=1072512.0,
+      lower whisker=460516.0,
+      draw position=3
+    },
+    ] coordinates {};
+    \addplot+ [ % layer6
+    color=blue,
+    line width=0.7pt,
+    boxplot prepared={
+      median=4325426.5,
+      upper quartile=5133450.5,
+      lower quartile=4090746.75,
+      upper whisker=6695822.0,
+      lower whisker=3506508.0,
+      draw position=2
+    },
+    ] coordinates {};
+    \addplot+ [ % layer6-F1
+    color=blue,
+    line width=0.7pt,
+    boxplot prepared={
+      median=1636188.0,
+      upper quartile=2056055.75,
+      lower quartile=1463637.0,
+      upper whisker=2943381.0,
+      lower whisker=1311865.0,
+      draw position=1
+    },
+    ] coordinates {};
+  \end{axis}
+\end{tikzpicture}
+\end{document}

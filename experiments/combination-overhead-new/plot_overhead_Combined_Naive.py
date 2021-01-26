@@ -73,4 +73,43 @@ if __name__ == '__main__':
     ax.set_xlabel('Repair Location (Naive Strategy)')
     bp = ax.boxplot(data, showfliers=False)
     plt.xticks([1, 2, 3, 4], ['original', 'layer8', 'layer6', 'layer6-F1'])
-    plt.show()
+
+    print("original:")
+    print("lower_whisker=" + str(bp['whiskers'][0].get_ydata()[1]))
+    print("lower_quartile=" + str(bp['boxes'][0].get_ydata()[1]))
+    print("median=" + str(bp['medians'][0].get_ydata()[1]))
+    print("upper_quartile=" + str(bp['boxes'][0].get_ydata()[2]))
+    print("upper_whisker=" + str(bp['whiskers'][1].get_ydata()[1]))
+
+    print()
+
+    print("layer8:")
+    print("lower_whisker=" + str(bp['whiskers'][2].get_ydata()[1]))
+    print("lower_quartile=" + str(bp['boxes'][1].get_ydata()[1]))
+    print("median=" + str(bp['medians'][1].get_ydata()[1]))
+    print("upper_quartile=" + str(bp['boxes'][1].get_ydata()[2]))
+    print("upper_whisker=" + str(bp['whiskers'][3].get_ydata()[1]))
+
+    print()
+
+    print("layer6:")
+    print("lower_whisker=" + str(bp['whiskers'][4].get_ydata()[1]))
+    print("lower_quartile=" + str(bp['boxes'][2].get_ydata()[1]))
+    print("median=" + str(bp['medians'][2].get_ydata()[1]))
+    print("upper_quartile=" + str(bp['boxes'][2].get_ydata()[2]))
+    print("upper_whisker=" + str(bp['whiskers'][5].get_ydata()[1]))
+
+    print()
+
+    print("layer6-F1:")
+    print("lower_whisker=" + str(bp['whiskers'][6].get_ydata()[1]))
+    print("lower_quartile=" + str(bp['boxes'][3].get_ydata()[1]))
+    print("median=" + str(bp['medians'][3].get_ydata()[1]))
+    print("upper_quartile=" + str(bp['boxes'][3].get_ydata()[2]))
+    print("upper_whisker=" + str(bp['whiskers'][7].get_ydata()[1]))
+
+    print()
+
+
+
+    #plt.show()
