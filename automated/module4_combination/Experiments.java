@@ -569,8 +569,15 @@ public class Experiments {
 
 		MNIST1_TEST("/Users/yannic/experiments/nnrepair/mnist1", "/divya/layer5", "label", 5, "/mnist_test_labels.txt",
 				"/mnist_test.txt", false, new double[] {}, new int[] {}, new int[] {},
-				"/Users/yannic/experiments/nnrepair/mnist1_results");
+				"/Users/yannic/experiments/nnrepair/mnist1_results"),
 
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+		CIFAR_LAYER_11_Eps0_01_ExpD_ADV_TEST("/Users/yannic/experiments/nnrepair/cifar_adv", "/usman/ExpD",
+				"solution", 11, "/cifar10_adv_val_labels.txt", "/cifar10_adv_val_csv_fgsm_epsilon0.01.txt", false,
+				new double[] {}, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+				"/Users/yannic/experiments/nnrepair/cifar_adv_results");
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		private String projectPath;
@@ -2523,6 +2530,8 @@ public class Experiments {
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_ORIGINAL_TRAINING, 60000);
 //			runOriginalCIFARDNN(SUBJECT.CIFAR_LAST_LAYER_TRAINING, 60000);
 //			runCIFAR10Experiment(SUBJECT.CIFAR_LAST_LAYER_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 10000, false);
+			runCIFAR10Experiment(SUBJECT.CIFAR_LAYER_11_Eps0_01_ExpD_ADV_TEST, ExpertCombination.COMBINATION_METHOD.ALL, 100, false, false);
+			
 
 //			runMNIST0Experiment(SUBJECT.ADVERSARIAL_LAST_LAYER_Eps0_01_ExpA_TEST,
 //					ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
@@ -2652,14 +2661,14 @@ public class Experiments {
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			SUBJECT[] subjects = { SUBJECT.MNIST1_TEST };
-
-			for (SUBJECT subject : subjects) {
-//				runMNIST1Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
-				testMNIST1(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
-			}
-
-//			runMNIST1CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, 1, false);
+//			SUBJECT[] subjects = { SUBJECT.MNIST1_TEST };
+//
+//			for (SUBJECT subject : subjects) {
+////				runMNIST1Experiment(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+//				testMNIST1(subject, ExpertCombination.COMBINATION_METHOD.ALL, 60000, false, false);
+//			}
+//
+////			runMNIST1CombinationOverheadExperiment(SUBJECT.LOW_QUALITY_LAST_LAYER_TEST, 60000, 1, false);
 
 			long totalRuntime = System.currentTimeMillis() - startTime;
 			System.out.println();
@@ -2667,6 +2676,7 @@ public class Experiments {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }
