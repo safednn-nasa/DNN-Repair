@@ -34,21 +34,20 @@ public class Z3SolutionParsing {
 
 			/* Read deltas for experts 0..9 */
 			for (int expertId : expertIDs) {
-				loadDeltasFromZ3File_usman(path, solutionFileNamePrefix, expertId, num0, num1, num2);
-				for (int i = 0; i < num0.size(); i++) {
-					weight_delta[expertId][num0.get(i)][expertId] = num2.get(i);
-					System.out.println(expertId + " : " + num0.get(i) + " : " + expertId + " -> "
-							+ weight_delta[expertId][num0.get(i)][expertId]);
+				loadDeltasFromZ3File_divya(path, expertId, num0, num1, num2);
+				for (int i = 0; i < num1.size(); i++) {
+					weight_delta[expertId][num1.get(i)][num0.get(i)] = num2.get(i);
+					System.out.println(expertId + " : " + num1.get(i) + " : " + num0.get(i) + " -> "
+							+ weight_delta[expertId][num1.get(i)][num0.get(i)]);
 				}
 			}
 
-			/* Read deltas for full repair. */
-//			loadDeltasFromZ3File_usman(path, NUMBER_OF_EXPERTS, num0, num1, num2);
-//			for (int i = 0; i < num0.size(); i++) {
-//				weight_delta[10][num0.get(i)][num0.get(i)] = num2.get(i);
-//				System.out.println(NUMBER_OF_EXPERTS + " : " + num0.get(i) + " : " + NUMBER_OF_EXPERTS + " -> "
-//						+ weight_delta[NUMBER_OF_EXPERTS][num0.get(i)][NUMBER_OF_EXPERTS]);
-//				
+//			/* Read deltas for full repair. */
+//			loadDeltasFromZ3File_divya(path, numberOfExperts, num0, num1, num2);
+//			for (int i = 0; i < num1.size(); i++) {
+//				weight_delta[10][num1.get(i)][num0.get(i)] = num2.get(i);
+//				System.out.println(numberOfExperts + " : " + num1.get(i) + " : " + num0.get(i) + " -> "
+//						+ weight_delta[numberOfExperts][num1.get(i)][num0.get(i)]);
 //			}
 
 			/* Calculate average deltas for experts. */
